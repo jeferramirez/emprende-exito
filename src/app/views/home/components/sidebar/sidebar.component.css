@@ -1,0 +1,10 @@
+.sidebar-logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo .sidebar-logo img {
+  width: 8em;
+  display: flex;
+  align-self: center;
+}
