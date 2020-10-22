@@ -12,19 +12,19 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Usuario</label>
-                  <input type="email" class="form-control" />
+                  <input type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Nombre</label>
-                  <input type="email" class="form-control" />
+                  <input type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Apellido</label>
-                  <input type="email" class="form-control" />
+                  <input type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Celular</label>
-                  <input type="email" class="form-control" />
+                  <input type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
@@ -97,6 +97,34 @@
                   </select>
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Rol</label>
+                  <select
+                    class="form-control selectpicker"
+                    data-style="btn btn-link"
+                    id="exampleFormControlSelect1"
+                  >
+                    <option>x</option>
+                    <option>y</option>
+                    <option>z</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Contraseña</label>
+                  <input type="password" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Confirmar contraseña</label>
+                  <input type="password" class="form-control" />
+                </div>
+              </div>
             </div>
 
             <button type="submit" class="btn btn-primary pull-right">
@@ -110,58 +138,12 @@
     <div class="col-md-4">
       <div class="card card-profile">
         <div class="card-avatar">
-            <img class="img" src="../../../assets/imagenPerfil.jpg" />
+          <img class="img" src="../../../assets/imagenPerfil.jpg" />
         </div>
         <div class="card-body">
-          <h6 class="card-category text-gray">Rol</h6>
-          <h4 class="card-title">Nombre perfil</h4>
-          <p class="card-description">informacion</p>
-          <a href="javascript:;" class="btn btn-primary btn-round">Más</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header card-header-info">
-          <h4 class="card-title">Contraseña</h4>
-          <p class="card-category">Seguridad de cuenta</p>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Contraseña actual</label>
-                  <input type="password" class="form-control" />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Contraseña nueva</label>
-                  <input type="password" class="form-control" />
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating"
-                    >Confirmar nueva contraseña</label
-                  >
-                  <input type="password" class="form-control" />
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary pull-right">
-              Actualizar contraseña
-            </button>
-            <div class="clearfix"></div>
-          </form>
+          <span class="btn btn-primary btn-file">
+            Añadir foto de perfil<input type="file" />
+          </span>
         </div>
       </div>
     </div>

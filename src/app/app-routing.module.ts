@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CreacionUsuarioComponent } from './modules/creacion-usuario/creacion-usuario.component';
 import { GestionPerfilComponent } from './modules/gestion-perfil/gestion-perfil.component';
 import { GestionUsuariosComponent } from './modules/gestion-usuarios/gestion-usuarios.component';
 import { HomeComponent } from './views/home/home.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, children: [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
     { path: 'gestion-perfil', component: GestionPerfilComponent  },
+    { path: 'creacion-usuario', component: CreacionUsuarioComponent  },
 
   ] },
 ];

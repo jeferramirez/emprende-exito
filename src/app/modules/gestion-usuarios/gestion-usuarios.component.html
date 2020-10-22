@@ -7,51 +7,202 @@
           <p class="card-category">Información de usuarios</p>
         </div>
         <div class="card-body table-responsive">
-          <table class="table table-hover">
-            <thead class="text-info" style="text-align: center;">
-              <th>ID</th>
-              <th>Usuario</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Email</th>
-              <th>Teléfono</th>
-              <th>Celular</th>
-              <th>Pais</th>
-              <th>Ciudad</th>
-              <th>Rol</th>
-              <th>Estado</th>
-              <th>Fecha de creación</th>
-              <th>Acciones</th>
-            </thead>
-            <tbody>
-              <tr style="text-align: center;">
-                <td>1</td>
-                <td>Juanc80</td>
-                <td>Juan Camilo</td>
-                <td>Osorio</td>
-                <td>JuanC80@gmail.com</td>
-                <td>3689541</td>
-                <td>3136849875</td>
-                <td>Colombia</td>
-                <td>Cali</td>
-                <td>Mentor</td>
-                <td>Activo</td>
-                <td>20/10/2020</td>
-                <td class="td-actions text-right">
-                  <button type="button" rel="tooltip" title="Eliminar usuario" class="btn btn-primary btn-link btn-sm">
-                    <i class="material-icons">edit</i>
-                  </button>
-                  <button type="button" rel="tooltip" title="Editar usuario" class="btn btn-danger btn-link btn-sm">
-                    <i class="material-icons">close</i>
-                  </button>
-                </td>
-              </tr>             
-              
-            </tbody>
-          </table>
+          <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input> -->
+          </mat-form-field>
+
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+              </ng-container>
+
+              <!-- Progress Column -->
+              <ng-container matColumnDef="progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+                <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+              </ng-container>
+
+              <!-- Color Column -->
+              <ng-container matColumnDef="color">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+                <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- Modal -->
+<div
+class="modal fade"
+id="modalUserUpdate"
+tabindex="-1"
+role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title font-weight-bold" id="modal">
+        Actualización de usuario
+      </h4>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Usuario</label>
+              <input type="text" class="form-control" id="txtUsuario" name="txtUsuario"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Nombre</label>
+              <input type="text" class="form-control" id="txtNombre" name="txtNombre" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Apellidos</label>
+              <input type="text" class="form-control" id="txtApellidos" name="txtApellidos" />
+            </div>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating">Fecha de nacimiento</label>
+              <input type="date" class="form-control" id="dtFecNac" name="dtFecNac" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="sexo">Sexo</label>
+              <select
+                class="form-control selectpicker"
+                data-style="btn btn-link"
+                id="sexo"
+              >
+                <option>Masculino</option>
+                <option>Femenino</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating" id="txtEmail" name="txtEmail">Email</label>
+              <input type="email" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating" id="txtTelefono" name="txtTelefono">Telefono</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="bmd-label-floating" id="txtCelular" name="txtCelular">Celular</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="ciudades">Ciudad</label>
+              <select
+                class="form-control selectpicker"
+                data-style="btn btn-link"
+                id="ciudades"
+              >
+                <option>Bogotá</option>
+                <option>Medellín</option>
+                <option>Cali</option>
+                <option>Barranquilla</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="paises">Pais</label>
+              <select
+                class="form-control selectpicker"
+                data-style="btn btn-link"
+                id="paises"
+              >
+                <option value="1 ">Colombia</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="rol">Rol</label>
+              <select
+                class="form-control selectpicker"
+                data-style="btn btn-link"
+                id="rol"
+              >
+                <option>x</option>
+                <option>y</option>
+                <option>z</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-dismiss="modal"
+      >
+        Cerrar
+      </button>
+      <button type="button" class="btn btn-primary">
+        Guardar cambios
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
