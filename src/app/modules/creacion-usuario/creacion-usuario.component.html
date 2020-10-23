@@ -7,24 +7,24 @@
           <p class="card-category">Información personal</p>
         </div>
         <div class="card-body">
-          <form>
+          <form [formGroup]="userForm">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Usuario</label>
-                  <input type="text" class="form-control" />
+                  <label class="bmd-label-floating">Nick</label>
+                  <input formControlName="nick" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Nombre</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="nombre" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Apellido</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="apellido" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -33,26 +33,26 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Fecha de nacimiento</label>
-                  <input type="date" class="form-control" />
+                  <input formControlName="fechaNacimiento"  type="date" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Sexo</label>
-                  <select
+                  <select formControlName="sexo"
                     class="form-control selectpicker"
                     data-style="btn btn-link"
                     id="exampleFormControlSelect1"
                   >
-                    <option>Masculino</option>
-                    <option>Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
                   </select>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Email</label>
-                  <input type="email" class="form-control" />
+                  <input formControlName="email" type="email" class="form-control" />
                 </div>
               </div>
             </div>
@@ -60,25 +60,25 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Telefono</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="telefono" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Celular</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="celular" type="text" class="form-control" />
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Ciudad</label>
-                  <select
+                  <select formControlName="ciudad"
                     class="form-control selectpicker"
                     data-style="btn btn-link"
                     id="exampleFormControlSelect1"
                   >
-                    <option>x</option>
-                    <option>y</option>
+                    <option value="Cali">Cali</option>
+                    <option value="Medellin">Medellin</option>
                   </select>
                 </div>
               </div>
@@ -87,13 +87,13 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Pais</label>
-                  <select
+                  <select  formControlName="pais"
                     class="form-control selectpicker"
                     data-style="btn btn-link"
                     id="exampleFormControlSelect1"
                   >
-                    <option>x</option>
-                    <option>y</option>
+                    <option value="Colombia">Colombia</option>
+
                   </select>
                 </div>
               </div>
@@ -114,7 +114,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Contraseña</label>
-                  <input type="password" class="form-control" />
+                  <input formControlName="password" type="password" class="form-control" />
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary pull-right">
+            <button [disabled]="userForm.invalid" (click)="createUser()" class="btn btn-primary pull-right">
               Actualizar perfil
             </button>
             <div class="clearfix"></div>
