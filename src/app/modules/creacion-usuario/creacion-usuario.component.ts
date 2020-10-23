@@ -21,8 +21,6 @@ export class CreacionUsuarioComponent implements OnInit {
 
   }
 
-
-
   createForm(): void {
     this.userForm = this.fb.group({
      nick: [ '', [Validators.required]],
@@ -40,15 +38,12 @@ export class CreacionUsuarioComponent implements OnInit {
 
   }
 
-
   createUser(): void {
-
     this.userSrv.createUser(this.userForm.value).subscribe( resp => {
       console.log(resp);
       // mostrar una alerta de exito y resetear el form
       this.userForm.reset();
     });
-
 
   }
 }
