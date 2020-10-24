@@ -2,7 +2,7 @@
   <!-- <div class="navbar"><h1>Div1</h1></div> -->
   <div class="content">
     <div class="card">
-      <form>
+      <form [formGroup] = "loginForm">
         <div class="form-group">
           <img class="logoLogin" src="../../../assets/logoLogin.png" />
         </div>
@@ -10,12 +10,13 @@
           <label class="label-input" for="idUser"
             >Nombre de usuario o email</label
           >
-          <input type="text" id="idUser" name="idUser" autocomplete="on" />
+          <input formControlName="identifier" type="text" id="idUser" name="idUser" autocomplete="on" />
         </div>
 
         <div class="form-group">
           <label class="label-input" for="passUser">Constraseña</label>
           <input
+            formControlName="password"
             type="password"
             id="passUser"
             name="passUser"
@@ -24,7 +25,7 @@
         </div>
 
         <div class="form-group">
-          <button name="btnIngresar" id="btnIngresar" class="btnIngresar">
+          <button name="btnIngresar" id="btnIngresar" class="btnIngresar" (click)="validateLogin()">
             Ingresar
           </button>
         </div>

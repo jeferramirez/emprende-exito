@@ -10,12 +10,12 @@ export class SidebarComponent implements OnInit {
     {
       ruta: '/home/gestion-usuarios',
       icon: 'people_alt',
-      label: 'Gestionar usuario'
+      label: 'Gestionar usuario',
     },
     {
       ruta: '/home/creacion-usuario',
       icon: 'person_add',
-      label: 'Crear usuario'
+      label: 'Crear usuario',
     },
   ];
 

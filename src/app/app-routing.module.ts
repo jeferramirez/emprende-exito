@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreacionUsuarioComponent } from './modules/creacion-usuario/creacion-usuario.component';
@@ -13,8 +14,7 @@ const routes: Routes = [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
     { path: 'gestion-perfil', component: GestionPerfilComponent  },
     { path: 'creacion-usuario', component: CreacionUsuarioComponent  },
-
-  ] },
+  ], canActivate: [AuthGuard] },
 ];
 
 @NgModule({
