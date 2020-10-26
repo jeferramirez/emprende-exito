@@ -1,141 +1,300 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-9 col-md-12">
       <div class="card">
-        <div class="card-header card-header-info">
-          <h4 class="card-title">Perfil</h4>
-          <p class="card-category">Información personal</p>
+        <div class="card-header card-header-tabs card-header-info">
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <ul class="nav nav-tabs" data-tabs="tabs">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    href="#infoPersonal"
+                    data-toggle="tab"
+                  >
+                    <i class="material-icons">contacts</i> Información personal
+                    <div class="ripple-container"></div>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    name="continuar"
+                    id="continuar"
+                    href="#perfilEinteres"
+                    data-toggle="tab"
+                  >
+                    <i class="material-icons">psychology</i> Perfil e intereses
+                    <div class="ripple-container"></div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="card-body">
-          <form [formGroup]="userForm">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Nick</label>
-                  <input formControlName="username" type="text" class="form-control" />
+          <div class="tab-content">
+            <div class="tab-pane active" id="infoPersonal">
+              <form [formGroup]="userForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Nick</label>
+                      <input
+                        formControlName="username"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Nombre</label>
+                      <input
+                        formControlName="nombre"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Apellido</label>
+                      <input
+                        formControlName="apellido"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Nombre</label>
-                  <input formControlName="nombre" type="text" class="form-control" />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Apellido</label>
-                  <input formControlName="apellido" type="text" class="form-control" />
-                </div>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Fecha de nacimiento</label>
-                  <input formControlName="fechaNacimiento"  type="date" class="form-control" />
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating"
+                        >Fecha de nacimiento</label
+                      >
+                      <input
+                        formControlName="fechaNacimiento"
+                        type="date"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Sexo</label>
+                      <select
+                        formControlName="sexo"
+                        class="form-control selectpicker"
+                        data-style="btn btn-link"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Email</label>
+                      <input
+                        formControlName="email"
+                        type="email"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Sexo</label>
-                  <select formControlName="sexo"
-                    class="form-control selectpicker"
-                    data-style="btn btn-link"
-                    id="exampleFormControlSelect1"
-                  >
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                  </select>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Telefono</label>
+                      <input
+                        formControlName="telefono"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Celular</label>
+                      <input
+                        formControlName="celular"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Ciudad</label>
+                      <select
+                        formControlName="ciudad"
+                        class="form-control selectpicker"
+                        data-style="btn btn-link"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option value="Cali">Cali</option>
+                        <option value="Medellin">Medellin</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Email</label>
-                  <input formControlName="email" type="email" class="form-control" />
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Pais</label>
+                      <select
+                        formControlName="pais"
+                        class="form-control selectpicker"
+                        data-style="btn btn-link"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option value="Colombia">Colombia</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="exampleFormControlSelect1">Rol</label>
+                      <select
+                        class="form-control selectpicker"
+                        data-style="btn btn-link"
+                        id="exampleFormControlSelect1"
+                      >
+                        <option>x</option>
+                        <option>y</option>
+                        <option>z</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Contraseña</label>
+                      <input
+                        formControlName="password"
+                        type="password"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Telefono</label>
-                  <input formControlName="telefono" type="text" class="form-control" />
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating"
+                        >Confirmar contraseña</label
+                      >
+                      <input
+                        formControlName="confirmPassword"
+                        type="password"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Celular</label>
-                  <input formControlName="celular" type="text" class="form-control" />
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Ciudad</label>
-                  <select formControlName="ciudad"
-                    class="form-control selectpicker"
-                    data-style="btn btn-link"
-                    id="exampleFormControlSelect1"
-                  >
-                    <option value="Cali">Cali</option>
-                    <option value="Medellin">Medellin</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Pais</label>
-                  <select  formControlName="pais"
-                    class="form-control selectpicker"
-                    data-style="btn btn-link"
-                    id="exampleFormControlSelect1"
-                  >
-                    <option value="Colombia">Colombia</option>
 
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Rol</label>
-                  <select
-                    class="form-control selectpicker"
-                    data-style="btn btn-link"
-                    id="exampleFormControlSelect1"
-                  >
-                    <option>x</option>
-                    <option>y</option>
-                    <option>z</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Contraseña</label>
-                  <input formControlName="password" type="password" class="form-control" />
-                </div>
-              </div>
+                <a
+                  class="text-success pull-right"
+                  href="#"
+                  data-toggle="tab"
+                  (click)="handleSimulateClick()"
+                >
+                  Continuar<i class="material-icons">navigate_next</i>
+                </a>
+              </form>
             </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Confirmar contraseña</label>
-                  <input type="password" class="form-control" />
+            <div class="tab-pane" id="perfilEinteres">
+              <form [formGroup]="userForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Profesión</label>
+                      <input
+                        formControlName="profesion"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Ocupación</label>
+                      <input
+                        formControlName="ocupacion"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Tipo de proyecto</label>
+                      <input
+                        formControlName="tipo_proyecto"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <button [disabled]="userForm.invalid" (click)="createUser()" class="btn btn-primary pull-right">
-              Crear usuario
-            </button>
-            <div class="clearfix"></div>
-          </form>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="habilidades">Habilidades</label>
+                      <textarea
+                        class="form-control"
+                        formControlName="habilidad"
+                        id="habilidades"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="intereses">Interéses</label>
+                      <textarea
+                        class="form-control"
+                        formControlName="interes"
+                        id="intereses"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="habilidades">Acerca de</label>
+                      <textarea
+                        formControlName="acerca_de"
+                        class="form-control"
+                        id="habilidades"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <button
+                [disabled]="userForm.invalid"
+                (click)="createUser()"
+                class="btn btn-primary pull-right"
+              >
+                Crear usuario
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
           <img class="img" src="../../../assets/imagenPerfil.jpg" />

@@ -10,3 +10,14 @@ table {
 td, th {
   width: 25%;
 }
+
+.mat-header-cell, .mat-footer-cell, .mat-cell {
+  min-width: 120px;
+  text-align: left;
+}
+
+.table-users {
+  max-width: 100%;
+  overflow: auto;
+  max-height: 400px;
+}

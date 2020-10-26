@@ -2,7 +2,6 @@
   class="sidebar"
   data-color="blue"
   data-background-color="white"
-  data-image="../assets/img/sidebar-1.jpg"
 >
   <div class="logo">
     <a href="#" class="simple-text logo-normal">
@@ -13,7 +12,7 @@
   </div>
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <!-- <li
+      <li
         *ngFor="let menuItem of menuItems"
         class="nav-item"
         routerLinkActive="active"
@@ -22,81 +21,8 @@
           <i class="material-icons">{{ menuItem.icon }}</i>
           <p>{{ menuItem.label }}</p>
         </a>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#adminUsuarios">
-          <i class="material-icons">groups</i>
-          <p>
-            Usuario
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div style="margin-left: 10px" class="collapse" id="adminUsuarios">
-          <ul class="nav">
-            <li class="nav-item" [routerLinkActive]="'active'">
-              <a class="nav-link" [routerLink]="['/home/creacion-usuario']">
-                <i class="material-icons">person_add</i>
-                <p>Crear Usuario</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav">
-            <li class="nav-item" [routerLinkActive]="'active'">
-              <a class="nav-link" [routerLink]="['/home/gestion-usuarios']">
-                <i class="material-icons">people_alt</i>
-                <p>Gestionar usuario</p>
-              </a>
-            </li>
-          </ul>
-        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#adminProgramas">
-          <i class="material-icons">menu_book</i>
-          <p>
-            Programas
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div style="margin-left: 10px" class="collapse" id="adminProgramas">
-          <ul class="nav">
-            <li class="nav-item" [routerLinkActive]="'active'">
-              <a class="nav-link" [routerLink]="['']">
-                <i class="material-icons">style</i>
-                <p>Consultar programas</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav">
-            <li class="nav-item" [routerLinkActive]="'active'">
-              <a class="nav-link" [routerLink]="['']">
-                <i class="material-icons">library_books</i>
-                <p>Matriculas</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#adminReportes">
-          <i class="material-icons">pie_chart</i>
-          <p>
-            Reportes
-            <b class="caret"></b>
-          </p>
-        </a>
 
-        <div style="margin-left: 10px" class="collapse" id="adminReportes">
-          <ul class="nav">
-            <li class="nav-item" [routerLinkActive]="'active'">
-              <a class="nav-link" [routerLink]="['']">
-                <i class="material-icons">person_add</i>
-                <p>Reporte</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
     </ul>
   </div>
 </div>

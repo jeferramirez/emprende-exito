@@ -10,12 +10,17 @@ export class SidebarComponent implements OnInit {
     {
       ruta: '/home/gestion-usuarios',
       icon: 'people_alt',
-      label: 'Gestionar usuario',
+      label: 'Gestión usuario',
     },
     {
-      ruta: '/home/creacion-usuario',
-      icon: 'person_add',
-      label: 'Crear usuario',
+      ruta: '/home/consulta-programas',
+      icon: 'style',
+      label: 'Programas',
+    },
+    {
+      ruta: '/home/consulta-matriculas',
+      icon: 'library_books',
+      label: 'Matriculas',
     },
   ];
 
