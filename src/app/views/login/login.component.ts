@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit {
   validateLogin(): void {
     this.loginSrv.login(this.loginForm.value).subscribe(
       (resp) => {
+
+        console.log(resp);
         localStorage.setItem('user', JSON.stringify(resp));
         this.router.navigate(['/home']);
       },
