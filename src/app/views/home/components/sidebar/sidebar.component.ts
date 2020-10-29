@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
       label: 'Gestión usuario',
     },
     {
-      ruta: '/home/consulta-programas',
+      ruta: '/home/gestion-programas',
       icon: 'style',
       label: 'Programas',
     },
