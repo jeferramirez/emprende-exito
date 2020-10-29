@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       },
       (error) => {
+        console.log(error)
         Swal.fire({
           title: 'Error!',
           text: 'Email o contraseña incorrectos',

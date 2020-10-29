@@ -297,11 +297,11 @@
     <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
-          <img class="img" src="../../../assets/imagenPerfil.jpg" />
+          <img class="img" [src]=" previewimage || '../../../assets/imagenPerfil.jpg'" />
         </div>
         <div class="card-body">
           <span class="btn btn-primary btn-file">
-            Añadir foto de perfil<input type="file" />
+            Añadir foto de perfil<input type="file"  (change)="onFileSelect($event)" id="imageuser"/>
           </span>
         </div>
       </div>
