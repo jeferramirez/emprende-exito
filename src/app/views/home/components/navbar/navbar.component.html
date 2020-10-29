@@ -38,11 +38,10 @@
             class="dropdown-menu dropdown-menu-right"
             aria-labelledby="navbarDropdownProfile"
           >
-            <a class="dropdown-item"
-              href="/home/gestion-perfil"
+            <a class="dropdown-item" [routerLink]="['/home/gestion-perfil']"
               >Perfil</a
             >
-            <!-- [routerLink]="['/home/gestion-perfil']" -->
+            <!-- href="/home/gestion-perfil" -->
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logOut()">Cerrar sesión</a>
           </div>

@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h4 class="card-title">Programa</h4>
+        </div>
+        <div class="card-body table-responsive">
+          <div class="row my-3 mx-2">
+            <div class="col-md-10">
+              <form>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Nombre del programa</label>
+                      <input
+                        formControlName="nombre"
+                        type="text"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="desc">Descripción del programa</label>
+                      <textarea
+                        class="form-control"
+                        formControlName="descripcion"
+                        id="desc"
+                        rows="4"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-2">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <div class="card m-0 p-0">
+                    <img
+                      class="card-img-top"
+                      src="../../../assets/photo.png"
+                      alt="Card image cap"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <span class="btn btn-primary btn-file">
+                Añadir foto<input type="file" />
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary mx-auto mb-4">Crear programa</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 s">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 align-self-center">
+              <h4 class="card-title">Módulos</h4>
+            </div>
+            <div class="col-lg-6 col-md-6 s text-right align-self-center">
+              <a
+                title="Agregar modulo"
+                routerLink="../creacion-modulo"
+                class="btn btn-primary btn-fab btn-fab-mini btn-round m-0 p-0"
+              >
+                <i class="material-icons">note_add</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body table-responsive"></div>
+      </div>
+    </div>
+  </div>
+</div>
