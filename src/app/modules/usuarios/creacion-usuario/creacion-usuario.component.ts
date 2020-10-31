@@ -72,7 +72,7 @@ export class CreacionUsuarioComponent implements OnInit {
           formData.append('field', 'profile');
 
           return this.userSrv.uploadUserFile(formData).pipe(
-            switchMap( () => this.userSrv.createPerfilUser({ ...user, users_permissions_user: data.id }))
+            switchMap(() => this.userSrv.createPerfilUser({ ...user, users_permissions_user: data.id }))
           );
 
 
@@ -135,41 +135,36 @@ export class CreacionUsuarioComponent implements OnInit {
 
 
       console.log(this.file)
-      /*formData.append('files', this.file);
-      formData.append('ref', 'User');
-      formData.append('refId', '10');
-
-      this.userSrv.uploadUserFile(formData).subscribe(res => {
-
-        console.log('resp ', res)
-      }, err => console.log(err)) */
-
-    /*  this.userSrv.uploadUserFile(this.userFormData).subscribe(res => {
-
-        console.log('resp ', res)
-      }, err => console.log(err)) */
-
 
     }
   }
 
-  get userFormData(): FormData {
 
-    const formData: any = new FormData();
+filReader(file): Promise <any> {
+  return new Promise((resolve, reject) => {
+    const fr = new FileReader();
+    fr.onload = resolve;  // CHANGE to whatever function you want which would eventually call resolve
+    fr.readAsDataURL(file);
+  });
+}
 
-    formData.append('files.profile', JSON.stringify (this.file, this.file.name));
-    formData.append('data', this.userForm.value);
+get userFormData(): FormData {
+
+  const formData: any = new FormData();
+
+  formData.append('files.profile', JSON.stringify(this.file, this.file.name));
+  formData.append('data', this.userForm.value);
 
 
 
 
-   /* for (const key in this.userForm.value) {
-      if (Object.prototype.hasOwnProperty.call(this.userForm.value, key)) {
-        const element = this.userForm.value[key];
-        formData.append(key, element);
-      }
-    } */
-    // console.log(formData.get('data'));
-    return formData;
-  }
+  /* for (const key in this.userForm.value) {
+     if (Object.prototype.hasOwnProperty.call(this.userForm.value, key)) {
+       const element = this.userForm.value[key];
+       formData.append(key, element);
+     }
+   } */
+  // console.log(formData.get('data'));
+  return formData;
+}
 }

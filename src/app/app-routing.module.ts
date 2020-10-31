@@ -4,9 +4,9 @@ import { GestionProgramasComponent } from './modules/gestion-programas/gestion-p
 import { AuthGuard } from './services/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreacionUsuarioComponent } from './modules/creacion-usuario/creacion-usuario.component';
-import { GestionPerfilComponent } from './modules/gestion-perfil/gestion-perfil.component';
-import { GestionUsuariosComponent } from './modules/gestion-usuarios/gestion-usuarios.component';
+import { CreacionUsuarioComponent } from './modules/usuarios/creacion-usuario/creacion-usuario.component';
+import { GestionPerfilComponent } from './modules/usuarios/gestion-perfil/gestion-perfil.component';
+import { GestionUsuariosComponent } from './modules/usuarios/gestion-usuarios/gestion-usuarios.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-leccion.component';
