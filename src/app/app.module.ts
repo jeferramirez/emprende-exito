@@ -23,6 +23,7 @@ import { GestionProgramasComponent } from './modules/gestion-programas/gestion-p
 import { CreacionProgramaComponent } from './modules/creacion-programa/creacion-programa.component';
 import { CreacionModuloComponent } from './modules/creacion-modulo/creacion-modulo.component';
 import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-leccion.component';
+import { GestionMatriculasComponent } from './modules/gestion-matriculas/gestion-matriculas.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-le
     GestionProgramasComponent,
     CreacionProgramaComponent,
     CreacionModuloComponent,
-    CreacionLeccionComponent
+    CreacionLeccionComponent,
+    GestionMatriculasComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { GestionUsuariosComponent } from './modules/gestion-usuarios/gestion-usu
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-leccion.component';
+import { GestionMatriculasComponent } from './modules/gestion-matriculas/gestion-matriculas.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'creacion-programa', component: CreacionProgramaComponent  },
     { path: 'creacion-modulo', component: CreacionModuloComponent  },
     { path: 'creacion-leccion', component: CreacionLeccionComponent  },
+    { path: 'gestion-matriculas', component: GestionMatriculasComponent  },
   ], canActivate: [AuthGuard] },
 ];
 
@@ -31,4 +33,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 

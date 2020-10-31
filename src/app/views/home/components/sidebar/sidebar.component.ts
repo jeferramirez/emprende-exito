@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
       label: 'Programas',
     },
     {
-      ruta: '/home/consulta-matriculas',
+      ruta: '/home/gestion-matriculas',
       icon: 'library_books',
       label: 'Matriculas',
     },
