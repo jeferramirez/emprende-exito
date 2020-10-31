@@ -1,7 +1,7 @@
 <div class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster">
 
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-9">
       <div class="card">
         <div class="card-header card-header-info">
           <h4 class="card-title">Datos de usuario</h4>
@@ -57,8 +57,6 @@
 
             </div>
 
-
-
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
@@ -70,14 +68,14 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Fecha último seguimiento</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="fechaProximoSeguimiento" type="date" class="form-control" />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Fecha proximo seguimiento</label>
-                  <input type="text" class="form-control" />
+                  <label class="bmd-label-floating">Fecha próximo seguimiento</label>
+                  <input formControlName="fechaProximoSeguimiento" type="date" class="form-control" />
                 </div>
               </div>
 
@@ -125,14 +123,19 @@
 
             <div class="row">
               <div class="col-md-12">
-
                 <h3> Descripción seguimiento</h3>
               </div>
 
               <div class="col-md-8">
-
                 <div class="form-group">
                   <textarea class="form-control" formControlName="descripcion" id="desc" rows="4"></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Programar próximo seguimiento</label>
+                  <input formControlName="fechaProximoSeguimiento" type="date" class="form-control" />
                 </div>
               </div>
 
@@ -150,7 +153,7 @@
 
 
 
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
           <img class="img" src="../../../assets/imagenPerfil.jpg" />
@@ -168,7 +171,6 @@
           <h5 class="card-category text-gray">proyecto-interes </h5>
           <h4 class="card-title">Acerca de </h4>
           <h5 class="card-category text-gray">informacion acerca del emprendedor </h5>
-          <a href="javascript:;" class="">Más</a>
         </div>
       </div>
     </div>
