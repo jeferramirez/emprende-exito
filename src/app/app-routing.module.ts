@@ -16,6 +16,7 @@ import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/c
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
+import { CreacionActividadComponent } from './modules/programas/creacion-actividad/creacion-actividad.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
     { path: 'creacion-modulo', component: CreacionModuloComponent  },
     { path: 'creacion-leccion', component: CreacionLeccionComponent  },
     { path: 'gestion-matriculas', component: GestionMatriculasComponent  },
+    { path: 'creacion-actividad', component: CreacionActividadComponent  },
 
   ], canActivate: [AuthGuard] },
 ];
@@ -40,5 +42,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 
 

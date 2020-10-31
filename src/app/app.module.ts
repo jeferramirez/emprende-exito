@@ -23,6 +23,7 @@ import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/c
 import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
 import { DemoMaterialModule } from './material-module';
 import { GestionMatriculasComponent } from './modules/programas/gestion-matriculas/gestion-matriculas.component';
+import { CreacionActividadComponent } from './modules/programas/creacion-actividad/creacion-actividad.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { GestionMatriculasComponent } from './modules/programas/gestion-matricul
     CreacionLeccionComponent,
     UpdateUsuarioComponent,
     GestionMatriculasComponent,
+    CreacionActividadComponent,
   ],
   imports: [
     BrowserModule,

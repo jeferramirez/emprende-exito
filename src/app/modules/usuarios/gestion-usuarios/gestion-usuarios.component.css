@@ -11,6 +11,10 @@ td, th {
   width: 25%;
 }
 
+.mat-row:hover{
+  background: #19537c1f;
+  cursor: pointer;
+}
 .mat-header-cell, .mat-footer-cell, .mat-cell {
   min-width: 120px;
   text-align: left;
@@ -20,4 +24,26 @@ td, th {
   max-width: 100%;
   overflow: auto;
   max-height: 400px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width:  7px;   /* Tamaño del scroll en vertical */
+  height: 7px;    /* Tamaño del scroll en horizontal */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2770A4;
+  height: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #17517a;
 }
