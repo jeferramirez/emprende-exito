@@ -1,4 +1,3 @@
-import { GestionMatriculasComponent } from './modules/gestion-matriculas/gestion-matriculas.component';
 import { NotAuthGuard } from './services/guards/not-auth.guard';
 import { AuthGuard } from './services/guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -7,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreacionModuloComponent } from './modules/programas/creacion-modulo/creacion-modulo.component';
 import { CreacionProgramaComponent } from './modules/programas/creacion-programa/creacion-programa.component';
 import { GestionProgramasComponent } from './modules/programas/gestion-programas/gestion-programas.component';
+import { GestionMatriculasComponent } from './modules/programas/gestion-matriculas/gestion-matriculas.component';
 // users
 import { CreacionUsuarioComponent } from './modules/usuarios/creacion-usuario/creacion-usuario.component';
 import { GestionPerfilComponent } from './modules/usuarios/gestion-perfil/gestion-perfil.component';
@@ -16,6 +16,7 @@ import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/c
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
+
 
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'creacion-modulo', component: CreacionModuloComponent  },
     { path: 'creacion-leccion', component: CreacionLeccionComponent  },
     { path: 'gestion-matriculas', component: GestionMatriculasComponent  },
+
   ], canActivate: [AuthGuard] },
 ];
 

@@ -1,4 +1,3 @@
-import { GestionMatriculasComponent } from './modules/gestion-matriculas/gestion-matriculas.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -23,6 +22,7 @@ import { CreacionModuloComponent } from './modules/programas/creacion-modulo/cre
 import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/creacion-leccion.component';
 import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
 import { DemoMaterialModule } from './material-module';
+import { GestionMatriculasComponent } from './modules/programas/gestion-matriculas/gestion-matriculas.component';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { DemoMaterialModule } from './material-module';
     CreacionModuloComponent,
     CreacionLeccionComponent,
     UpdateUsuarioComponent,
-    GestionMatriculasComponent
+    GestionMatriculasComponent,
   ],
   imports: [
     BrowserModule,
