@@ -1,6 +1,6 @@
-import { environment } from './../../../environments/environment';
-import { GeneralService } from './../../services/general.service';
-import { ProgramsService } from './../../services/programs.service';
+import { environment } from './../../../../environments/environment';
+import { GeneralService } from './../../../services/general.service';
+import { ProgramsService } from './../../../services/programs.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

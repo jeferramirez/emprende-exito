@@ -1,16 +1,19 @@
 import { NotAuthGuard } from './services/guards/not-auth.guard';
-import { CreacionModuloComponent } from './modules/creacion-modulo/creacion-modulo.component';
-import { CreacionProgramaComponent } from './modules/creacion-programa/creacion-programa.component';
-import { GestionProgramasComponent } from './modules/gestion-programas/gestion-programas.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+// programas
+import { CreacionModuloComponent } from './modules/programas/creacion-modulo/creacion-modulo.component';
+import { CreacionProgramaComponent } from './modules/programas/creacion-programa/creacion-programa.component';
+import { GestionProgramasComponent } from './modules/programas/gestion-programas/gestion-programas.component';
+// users
 import { CreacionUsuarioComponent } from './modules/usuarios/creacion-usuario/creacion-usuario.component';
 import { GestionPerfilComponent } from './modules/usuarios/gestion-perfil/gestion-perfil.component';
 import { GestionUsuariosComponent } from './modules/usuarios/gestion-usuarios/gestion-usuarios.component';
-import { HomeComponent } from './views/home/home.component';
+import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/creacion-leccion.component';
+// pages
 import { LoginComponent } from './views/login/login.component';
-import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-leccion.component';
+import { HomeComponent } from './views/home/home.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },

@@ -19,10 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatInputModule} from '@angular/material/input';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { GestionProgramasComponent } from './modules/gestion-programas/gestion-programas.component';
-import { CreacionProgramaComponent } from './modules/creacion-programa/creacion-programa.component';
-import { CreacionModuloComponent } from './modules/creacion-modulo/creacion-modulo.component';
-import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-leccion.component';
+import { GestionProgramasComponent } from './modules/programas/gestion-programas/gestion-programas.component';
+import { CreacionProgramaComponent } from './modules/programas/creacion-programa/creacion-programa.component';
+import { CreacionModuloComponent } from './modules/programas/creacion-modulo/creacion-modulo.component';
+import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/creacion-leccion.component';
 
 @NgModule({
   declarations: [

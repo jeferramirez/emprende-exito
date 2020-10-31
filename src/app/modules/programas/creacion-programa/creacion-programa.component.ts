@@ -1,6 +1,6 @@
-import { GeneralService } from './../../services/general.service';
+import { GeneralService } from './../../../services/general.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProgramsService } from './../../services/programs.service';
+import { ProgramsService } from './../../../services/programs.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
