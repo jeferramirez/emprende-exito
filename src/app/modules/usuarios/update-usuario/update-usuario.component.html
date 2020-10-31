@@ -1,7 +1,7 @@
 <div class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster">
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card">
         <div class="card-header card-header-info">
           <h4 class="card-title">Datos de usuario</h4>
@@ -33,41 +33,142 @@
             </div>
 
             <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Correo electronico</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
 
-              <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
-                <!-- This is the tree node template for leaf nodes -->
-                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-                  <li class="mat-tree-node">
-                    <!-- use a disabled button to provide padding for tree leaf -->
-                    <button mat-icon-button disabled></button>
-                    <mat-checkbox class="checklist-leaf-node"> {{node.name}}</mat-checkbox>
-                  </li>
-                </mat-tree-node>
-                <!-- This is the tree node template for expandable nodes -->
-                <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-                  <li>
-                    <div class="mat-tree-node">
-                      <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
-                        <mat-icon class="mat-icon-rtl-mirror">
-                          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                        </mat-icon>
-                      </button>
-                      {{node.name}}
-                    </div>
-                    <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-                      <ng-container matTreeNodeOutlet></ng-container>
-                    </ul>
-                  </li>
-                </mat-nested-tree-node>
-              </mat-tree>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Teléfono</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Celular</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Programas </label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Fecha último seguimiento</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Fecha proximo seguimiento</label>
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <h3> Seguimientos</h3>
+              </div>
+
+              <div class="col-md-12">
+                <div class="card mt-0">
+
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td class="text-center">
+                          <span class="material-icons">visibility</span>
+                        </td>
+                        <td>21-10-2020</td>
+                        <td>Jefferson Ramirez</td>
+                      </tr>
+                      <tr>
+                        <td class="text-center">
+                          <span class="material-icons">visibility</span>
+                        </td>
+                        <td>22-10-2020</td>
+                        <td>Miguel Castrillón</td>
+                      </tr>
+                      <tr>
+                        <td class="text-center">
+                          <span class="material-icons">visibility</span>
+                        </td>
+                        <td>23-10-2020</td>
+                        <td>James Rodriguez</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <h3> Descripción seguimiento</h3>
+              </div>
+
+              <div class="col-md-8">
+
+                <div class="form-group">
+                  <textarea class="form-control" formControlName="descripcion" id="desc" rows="4"></textarea>
+                </div>
+              </div>
+
 
             </div>
 
             <button type="submit" class="btn btn-primary pull-right">
-              Actualizar contraseña
+              Actualizar
             </button>
             <div class="clearfix"></div>
           </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-2">
+      <div class="card card-profile">
+        <div class="card-avatar">
+          <img class="img" src="../../../assets/imagenPerfil.jpg" />
+        </div>
+        <div class="card-body">
+          <h4 class="card-category text-gray">Emprendedor</h4>
+          <h4 class="card-title">Juan</h4>
+          <h5 class="card-category text-gray">Profesión: </h5>
+          <h5 class="card-category text-gray">Ocupación: </h5>
+          <h4 class="card-title">Habilidades</h4>
+          <h5 class="card-category text-gray">Habilidad </h5>
+          <h4 class="card-title">Intereses</h4>
+          <h5 class="card-category text-gray">Interse-interes </h5>
+          <h4 class="card-title">Tipo de proyecto </h4>
+          <h5 class="card-category text-gray">proyecto-interes </h5>
+          <h4 class="card-title">Acerca de </h4>
+          <h5 class="card-category text-gray">informacion acerca del emprendedor </h5>
+          <a href="javascript:;" class="">Más</a>
         </div>
       </div>
     </div>

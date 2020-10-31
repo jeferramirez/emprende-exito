@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
   { path: 'home', component: HomeComponent, children: [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
-    { path: 'actualizar-usuario', component: UpdateUsuarioComponent },
+    { path: 'actualizar-usuario/:id', component: UpdateUsuarioComponent },
     { path: 'gestion-perfil', component: GestionPerfilComponent  },
     { path: 'creacion-usuario', component: CreacionUsuarioComponent  },
     { path: 'gestion-programas', component: GestionProgramasComponent  },

@@ -116,8 +116,7 @@
                   <button
                     type="button"
                     title="Editar usuario"
-                    data-toggle="modal"
-                    data-target="#modalUserUpdate"
+                    (click)="navigateUser(row)"
                     class="btn btn-warning btn-fab btn-fab-mini btn-round"
                   >
                     <i class="material-icons">edit</i>
@@ -135,7 +134,7 @@
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="navigateUser(row)"></tr>
             </table>
           </div>
           <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

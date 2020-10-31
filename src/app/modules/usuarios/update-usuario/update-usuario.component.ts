@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {NestedTreeControl} from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
+import { ActivatedRoute, Router } from '@angular/router';
 
 /**
  * Food data with nested structure.
@@ -50,13 +51,20 @@ export class UpdateUsuarioComponent implements OnInit {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<FoodNode>();
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.dataSource.data = TREE_DATA;
   }
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   ngOnInit(): void {
+
+    console.log( this.route.snapshot)
+
   }
+
+
+
+
 
 }

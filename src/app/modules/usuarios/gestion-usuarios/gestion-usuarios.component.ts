@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -31,7 +32,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userSrv: UsersService) {
+  constructor(private userSrv: UsersService, private router: Router) {
     // this.dataSource = new MatTableDataSource();
   }
 
@@ -81,5 +82,10 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     this.userSrv.getUsers().subscribe((users) => {
       this.dataSource = new MatTableDataSource(users);
     });
+  }
+
+  navigateUser(item): void {
+    console.log(item)
+    this.router.navigate(['home/actualizar-usuario/', item.id])
   }
 }
