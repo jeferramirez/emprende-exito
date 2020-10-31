@@ -8,7 +8,7 @@
         <div class="card-body table-responsive">
           <div class="row my-3 mx-2">
             <div class="col-md-10">
-              <form>
+              <form [formGroup]="programForm">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
@@ -42,7 +42,7 @@
                   <div class="card m-0 p-0">
                     <img
                       class="card-img-top"
-                      src="../../../assets/photo.png"
+                      [src]=" previewimage || '../../../assets/photo.png'"
                       alt="Card image cap"
                     />
                   </div>
@@ -50,12 +50,12 @@
               </div>
 
               <span class="btn btn-primary btn-file">
-                Añadir foto<input type="file" />
+                Añadir foto<input type="file" (change)="onFileSelect($event)"/>
               </span>
             </div>
           </div>
         </div>
-        <button class="btn btn-primary mx-auto mb-4">Crear programa</button>
+        <button class="btn btn-primary mx-auto mb-4" [disabled]="programForm.invalid" (click)="createProgram()">Crear programa</button>
       </div>
     </div>
   </div>
@@ -78,7 +78,9 @@
             </div>
           </div>
         </div>
-        <div class="card-body table-responsive"></div>
+        <div class="card-body table-responsive">
+          <h3 class="text-center mt-2">Sin módulos</h3>
+        </div>
       </div>
     </div>
   </div>

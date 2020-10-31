@@ -1,3 +1,4 @@
+import { NotAuthGuard } from './services/guards/not-auth.guard';
 import { CreacionModuloComponent } from './modules/creacion-modulo/creacion-modulo.component';
 import { CreacionProgramaComponent } from './modules/creacion-programa/creacion-programa.component';
 import { GestionProgramasComponent } from './modules/gestion-programas/gestion-programas.component';
@@ -13,7 +14,7 @@ import { CreacionLeccionComponent } from './modules/creacion-leccion/creacion-le
 
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent  },
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
   { path: 'home', component: HomeComponent, children: [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
     { path: 'gestion-perfil', component: GestionPerfilComponent  },

@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UsersService {
-
   headerDict = {
     'Content-Type': 'multipart/form-data',
   };
@@ -16,14 +15,9 @@ export class UsersService {
     headers: new Headers(this.headerDict),
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createUser(user: any): Observable<any> {
-
-  //   const httpHeaders: HttpHeaders = new HttpHeaders({
-  //     'Content-Type': undefined
-  // });
-
     return this.http.post(`${environment.URLAPI}/users`, user);
   }
 
@@ -37,23 +31,20 @@ export class UsersService {
 
   updateUser(user: any): Observable<any> {
     const httpHeaders: HttpHeaders = new HttpHeaders({
-      'Content-Type': undefined
-  });
+      'Content-Type': undefined,
+    });
 
     const request = new XMLHttpRequest();
     request.open('POST', `${environment.URLAPI}/users`);
 
     request.send(user);
-    return this.http.put(`${environment.URLAPI}/users`, user, { headers: httpHeaders });
+    return this.http.put(`${environment.URLAPI}/users`, user, {
+      headers: httpHeaders,
+    });
   }
 
   createPerfilUser(user: any): Observable<any> {
-
-
     return this.http.post(`${environment.URLAPI}/perfil-usuarios`, user);
   }
 
-  uploadUserFile(file: any): Observable<any> {
-    return this.http.post(`${environment.URLAPI}/upload`, file);
-  }
 }
