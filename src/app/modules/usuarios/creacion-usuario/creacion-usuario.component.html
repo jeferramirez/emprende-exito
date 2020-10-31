@@ -1,4 +1,6 @@
-<div class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster">
+<div
+  class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster"
+>
   <div class="row">
     <div class="col-lg-9 col-md-12">
       <div class="card">
@@ -84,16 +86,17 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Sexo</label>
-                      <select
-                        formControlName="sexo"
-                        class="form-control selectpicker"
-                        data-style="btn btn-link"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                      </select>
+                      <label for="cmbSexo">Sexo</label>
+                      <div class="form-control">
+                        <mat-select
+                          formControlName="sexo"
+                          id="cmbSexo"
+                          class="px-3"
+                        >
+                          <mat-option value="Masculino"> Masculino </mat-option>
+                          <mat-option value="Femenino"> Femenino </mat-option>
+                        </mat-select>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -130,45 +133,50 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Ciudad</label>
-                      <select
-                        formControlName="ciudad"
-                        class="form-control selectpicker"
-                        data-style="btn btn-link"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option value="Cali">Cali</option>
-                        <option value="Medellin">Medellin</option>
-                      </select>
+                      <label for="cmbCiudad">Ciudad</label>
+                      <div class="form-control">
+                        <mat-select
+                          formControlName="sexo"
+                          id="cmbCiudad"
+                          class="px-3"
+                        >
+                          <mat-option value="bogota"> Bogotá </mat-option>
+                          <mat-option value="medellin"> Medellín </mat-option>
+                          <mat-option value="cali"> Cali </mat-option>
+                        </mat-select>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Pais</label>
-                      <select
-                        formControlName="pais"
-                        class="form-control selectpicker"
-                        data-style="btn btn-link"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option value="Colombia">Colombia</option>
-                      </select>
+                      <label for="cmbPais">Pais</label>
+                      <div class="form-control">
+                        <mat-select
+                          formControlName="sexo"
+                          id="cmbPais"
+                          class="px-3"
+                        >
+                          <mat-option value="colombia"> Colombia </mat-option>
+                        </mat-select>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="exampleFormControlSelect1">Rol</label>
-                      <select
-                        class="form-control selectpicker"
-                        data-style="btn btn-link"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option value="mentor">Mentor</option>
-                        <option value="tutor">Tutor</option>
-                        <option value="emprendedor">Emprendedor</option>
-                      </select>
+                      <label for="cmbRol">Rol</label>
+                      <div class="form-control">
+                        <mat-select
+                          formControlName="sexo"
+                          id="cmbRol"
+                          class="px-3"
+                        >
+                          <mat-option value="mentor"> Mentor </mat-option>
+                          <mat-option value="emprendedor"> Emprendedor </mat-option>
+                          <mat-option value="tutor"> Tutor </mat-option>
+                        </mat-select>
+                      </div>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -297,11 +305,18 @@
     <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
-          <img class="img" [src]=" previewimage || '../../../assets/imagenPerfil.jpg'" />
+          <img
+            class="img"
+            [src]="previewimage || '../../../assets/imagenPerfil.jpg'"
+          />
         </div>
         <div class="card-body">
           <span class="btn btn-primary btn-file">
-            Añadir foto de perfil<input type="file"  (change)="onFileSelect($event)" id="imageuser"/>
+            Añadir foto de perfil<input
+              type="file"
+              (change)="onFileSelect($event)"
+              id="imageuser"
+            />
           </span>
         </div>
       </div>
