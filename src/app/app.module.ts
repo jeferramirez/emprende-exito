@@ -1,3 +1,4 @@
+import { GestionMatriculasComponent } from './modules/gestion-matriculas/gestion-matriculas.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -38,7 +39,8 @@ import { DemoMaterialModule } from './material-module';
     CreacionProgramaComponent,
     CreacionModuloComponent,
     CreacionLeccionComponent,
-    UpdateUsuarioComponent
+    UpdateUsuarioComponent,
+    GestionMatriculasComponent
   ],
   imports: [
     BrowserModule,

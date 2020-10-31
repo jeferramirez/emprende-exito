@@ -1,3 +1,4 @@
+import { GestionMatriculasComponent } from './modules/gestion-matriculas/gestion-matriculas.component';
 import { NotAuthGuard } from './services/guards/not-auth.guard';
 import { AuthGuard } from './services/guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'creacion-programa', component: CreacionProgramaComponent  },
     { path: 'creacion-modulo', component: CreacionModuloComponent  },
     { path: 'creacion-leccion', component: CreacionLeccionComponent  },
+    { path: 'gestion-matriculas', component: GestionMatriculasComponent  },
   ], canActivate: [AuthGuard] },
 ];
 
@@ -36,4 +38,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 
