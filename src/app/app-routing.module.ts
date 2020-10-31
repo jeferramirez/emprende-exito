@@ -14,12 +14,14 @@ import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/c
 // pages
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
+import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
   { path: 'home', component: HomeComponent, children: [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
+    { path: 'actualizar-usuario', component: UpdateUsuarioComponent },
     { path: 'gestion-perfil', component: GestionPerfilComponent  },
     { path: 'creacion-usuario', component: CreacionUsuarioComponent  },
     { path: 'gestion-programas', component: GestionProgramasComponent  },

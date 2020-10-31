@@ -12,17 +12,17 @@ import { GestionPerfilComponent } from './modules/usuarios/gestion-perfil/gestio
 import { RouterModule } from '@angular/router';
 import { CreacionUsuarioComponent } from './modules/usuarios/creacion-usuario/creacion-usuario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatPaginatorModule} from '@angular/material/paginator';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {MatInputModule} from '@angular/material/input';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { GestionProgramasComponent } from './modules/programas/gestion-programas/gestion-programas.component';
 import { CreacionProgramaComponent } from './modules/programas/creacion-programa/creacion-programa.component';
 import { CreacionModuloComponent } from './modules/programas/creacion-modulo/creacion-modulo.component';
 import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/creacion-leccion.component';
+import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
+import { DemoMaterialModule } from './material-module';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/c
     GestionProgramasComponent,
     CreacionProgramaComponent,
     CreacionModuloComponent,
-    CreacionLeccionComponent
+    CreacionLeccionComponent,
+    UpdateUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -46,11 +47,9 @@ import { CreacionLeccionComponent } from './modules/programas/creacion-leccion/c
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
     HttpClientModule,
-    MatInputModule
+    DemoMaterialModule
+
   ],
   providers: [
     {
