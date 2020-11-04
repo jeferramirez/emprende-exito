@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 export class GeneralService {
   file: any;
   previewimage: any;
+  varValue: any;
 
   constructor(private http: HttpClient) {}
 
@@ -47,5 +48,13 @@ export class GeneralService {
   async getFile(file): Promise<any> {
     const reader = await this.filReader(file);
     return { previewimage: reader.target.result };
+  }
+
+  getNavigationValue(): any {
+    return this.varValue;
+  }
+
+  setNavigationValue(valor: any): any {
+    this.varValue = valor;
   }
 }
