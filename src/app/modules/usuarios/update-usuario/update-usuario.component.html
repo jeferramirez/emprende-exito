@@ -8,12 +8,12 @@
           <p class="card-category">Información personal y de seguimiento</p>
         </div>
         <div class="card-body">
-          <form>
+          <form [formGroup]="userForm">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Usuario</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="username" type="text" class="form-control" />
                 </div>
               </div>
 

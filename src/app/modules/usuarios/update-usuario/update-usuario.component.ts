@@ -1,46 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-
-import {NestedTreeControl} from '@angular/cdk/tree';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../models/user.model';
 
-/**
- * Food data with nested structure.
- * Each node has a name and an optional list of children.
- */
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [
-      {name: 'Apple'},
-      {name: 'Banana'},
-      {name: 'Fruit loops'},
-    ]
-  }, {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [
-          {name: 'Broccoli'},
-          {name: 'Brussels sprouts'},
-        ]
-      }, {
-        name: 'Orange',
-        children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
-        ]
-      },
-    ]
-  },
-];
+
 @Component({
   selector: 'app-update-usuario',
   templateUrl: './update-usuario.component.html',
@@ -48,22 +14,57 @@ const TREE_DATA: FoodNode[] = [
 })
 export class UpdateUsuarioComponent implements OnInit {
 
-  treeControl = new NestedTreeControl<FoodNode>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<FoodNode>();
-
-  constructor(private route: ActivatedRoute) {
-    this.dataSource.data = TREE_DATA;
+  userForm: FormGroup;
+  constructor(private route: ActivatedRoute, private userSrv: UsersService, private fb: FormBuilder) {
   }
 
-  hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   ngOnInit(): void {
 
+    this.initForm();
     console.log( this.route.snapshot)
+    this.getUser(this.route.snapshot.params['id']);
 
   }
 
 
+
+  getUser(id: string): void {
+    this.userSrv.getUser(id).subscribe( resp => {
+
+     const user =   new User( resp );
+     console.log(user)
+    });
+  }
+
+
+  initForm(): void {
+    this.userForm = this.fb.group( {
+      username: [ '', [Validators.required] ],
+      fechaProximoSeguimiento: [''],
+      descripcion: [''],
+      id: [''],
+      email: [''],
+      nombre: [''],
+      telefono: [''],
+      apellido: [''],
+
+
+
+
+
+    });
+
+  }
+
+
+  setUser( user ): void {
+
+    console.log(this.userForm)
+
+
+
+  }
 
 
 

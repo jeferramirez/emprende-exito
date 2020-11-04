@@ -44,6 +44,7 @@ export class CreacionUsuarioComponent implements OnInit {
       telefono: ['', [Validators.required]],
       celular: ['', [Validators.required]],
       ciudad: ['', [Validators.required]],
+      rol: ['', [Validators.required]],
       pais: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],

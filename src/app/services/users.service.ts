@@ -7,13 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UsersService {
-  headerDict = {
-    'Content-Type': 'multipart/form-data',
-  };
 
-  requestOptions = {
-    headers: new Headers(this.headerDict),
-  };
 
   constructor(private http: HttpClient) {}
 
@@ -25,22 +19,16 @@ export class UsersService {
     return this.http.get(`${environment.URLAPI}/users`);
   }
 
+  getUser(id: string): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/users/${id}`);
+  }
+
   deleteUser(id: any): Observable<any> {
     return this.http.delete(`${environment.URLAPI}/users/${id}`);
   }
 
   updateUser(user: any): Observable<any> {
-    const httpHeaders: HttpHeaders = new HttpHeaders({
-      'Content-Type': undefined,
-    });
-
-    const request = new XMLHttpRequest();
-    request.open('POST', `${environment.URLAPI}/users`);
-
-    request.send(user);
-    return this.http.put(`${environment.URLAPI}/users`, user, {
-      headers: httpHeaders,
-    });
+    return this.http.put(`${environment.URLAPI}/users`, user);
   }
 
   createPerfilUser(user: any): Observable<any> {
