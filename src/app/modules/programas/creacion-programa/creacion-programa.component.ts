@@ -35,6 +35,7 @@ export class CreacionProgramaComponent implements OnInit {
 
   createProgram(): void {
     const program = this.programForm.value;
+    program.estado = true;
     this.programSrv.createProgram(program)
       .pipe(
         switchMap((data) => {
