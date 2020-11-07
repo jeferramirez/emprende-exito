@@ -8,7 +8,7 @@
           <div class="card-body table-responsive">
             <div class="row my-3 mx-2">
               <div class="col-md-10">
-                <form>
+                <form [formGroup]="moduleForm">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
@@ -40,7 +40,7 @@
                         <label for="cmbRol">Tutor</label>
                         <div class="form-control">
                           <mat-select
-                            formControlName="sexo"
+                            formControlName="tutor"
                             id="cmbRol"
                             class="px-3"
                           >
@@ -60,20 +60,20 @@
                     <div class="card m-0 p-0">
                       <img
                         class="card-img-top"
-                        src="../../../assets/photo.png"
-                        alt="Card image cap"
+                        [src]=" previewimage || '../../../assets/photo.png'"
+                        alt="Imagen módulo"
                       />
                     </div>
                   </div>
                 </div>
 
                 <span class="btn btn-primary btn-file">
-                  Añadir foto<input type="file" />
+                  Añadir foto<input type="file" (change)="onFileSelect($event)"/>
                 </span>
               </div>
             </div>
           </div>
-          <button class="btn btn-primary mx-auto mb-4">Crear módulo</button>
+          <button class="btn btn-primary mx-auto mb-4" [disabled]="moduleForm.invalid" (click)="createModule()">Crear módulo</button>
         </div>
       </div>
     </div>

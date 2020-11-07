@@ -30,6 +30,7 @@ export class CreacionProgramaComponent implements OnInit {
     this.programForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
+      imagen: ['', [Validators.required]],
     });
   }
 
@@ -39,7 +40,7 @@ export class CreacionProgramaComponent implements OnInit {
     this.programSrv.createProgram(program)
       .pipe(
         switchMap((data) => {
-          console.log(data);
+          this.generalSrv.setNavigationValue(data.id);
           const formData = this.generalSrv.getFormdata(
             data.id,
             'imagen',
@@ -59,6 +60,7 @@ export class CreacionProgramaComponent implements OnInit {
             confirmButtonText: 'Ok',
             timer: 3000,
           });
+
         },
         (error) => {
           console.log(error);
@@ -75,6 +77,7 @@ export class CreacionProgramaComponent implements OnInit {
 
   async onFileSelect(event): Promise<any> {
     const { file, previewimage } = await this.generalSrv.onFileSelect(event);
+    this.programForm.get('imagen').setValue(file);
     this.file = file;
     this.previewimage = previewimage;
   }

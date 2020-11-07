@@ -33,7 +33,7 @@
             </div>
             <div *ngFor="let program of programs; let i = index" class="col-md-3">
               <div *ngIf="programs.length > 0" class="card" >
-                <img class="card-img-top" [src]="getFile(program.imagen.url)" rel="nofollow" alt="Card image cap">
+                <img class="card-img-top" style="height: 13em;" [src]="getFile(program.imagen.url)" rel="nofollow" alt="Card image cap">
                 <div class="card-body">
                   <h3 class="card-title text-center">{{program.nombre}}</h3>
                   <div class="card-footer justify-content-center">
