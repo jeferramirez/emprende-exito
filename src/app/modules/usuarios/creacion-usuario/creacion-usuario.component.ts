@@ -48,12 +48,13 @@ export class CreacionUsuarioComponent implements OnInit {
       pais: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      profesion: ['', [Validators.required]],
-      ocupacion: ['', [Validators.required]],
-      tipo_proyecto: ['', [Validators.required]],
-      habilidad: ['', [Validators.required]],
-      interes: ['', [Validators.required]],
-      acerca_de: ['', [Validators.required]],
+      profesion: [''],
+      ocupacion: [''],
+      tipoProyecto: [''],
+      habilidades: [''],
+      intereses: [''],
+      acercaDe: [''],
+      imagen: ['', [Validators.required]],
     });
   }
 
@@ -120,6 +121,7 @@ export class CreacionUsuarioComponent implements OnInit {
 
   async onFileSelect(event): Promise<any> {
     const { file, previewimage } = await this.generalSrv.onFileSelect(event);
+    this.userForm.get('imagen').setValue(file);
     this.file = file;
     this.previewimage = previewimage;
   }
