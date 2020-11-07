@@ -140,9 +140,9 @@
                           id="cmbCiudad"
                           class="px-3"
                         >
-                          <mat-option value="bogota"> Bogotá </mat-option>
-                          <mat-option value="medellin"> Medellín </mat-option>
-                          <mat-option value="cali"> Cali </mat-option>
+                          <mat-option value="Bogota"> Bogotá </mat-option>
+                          <mat-option value="Medellin"> Medellín </mat-option>
+                          <mat-option value="Cali"> Cali </mat-option>
                         </mat-select>
                       </div>
                     </div>
@@ -158,7 +158,7 @@
                           id="cmbPais"
                           class="px-3"
                         >
-                          <mat-option value="colombia"> Colombia </mat-option>
+                          <mat-option value="Colombia"> Colombia </mat-option>
                         </mat-select>
                       </div>
                     </div>
@@ -172,9 +172,9 @@
                           id="cmbRol"
                           class="px-3"
                         >
-                          <mat-option value="mentor"> Mentor </mat-option>
-                          <mat-option value="emprendedor"> Emprendedor </mat-option>
-                          <mat-option value="tutor"> Tutor </mat-option>
+                          <mat-option value="Mentor"> Mentor </mat-option>
+                          <mat-option value="Emprendedor"> Emprendedor </mat-option>
+                          <mat-option value="Tutor"> Tutor </mat-option>
                         </mat-select>
                       </div>
                     </div>
@@ -186,6 +186,7 @@
                         formControlName="password"
                         type="password"
                         class="form-control"
+                        autocomplete="on"
                       />
                     </div>
                   </div>
@@ -200,6 +201,7 @@
                         formControlName="confirmPassword"
                         type="password"
                         class="form-control"
+                        autocomplete="on"
                       />
                     </div>
                   </div>
@@ -242,7 +244,7 @@
                     <div class="form-group">
                       <label class="bmd-label-floating">Tipo de proyecto</label>
                       <input
-                        formControlName="tipo_proyecto"
+                        formControlName="tipoProyecto"
                         type="text"
                         class="form-control"
                       />
@@ -256,7 +258,7 @@
                       <label for="habilidades">Habilidades</label>
                       <textarea
                         class="form-control"
-                        formControlName="habilidad"
+                        formControlName="habilidades"
                         id="habilidades"
                         rows="3"
                       ></textarea>
@@ -269,7 +271,7 @@
                       <label for="intereses">Interéses</label>
                       <textarea
                         class="form-control"
-                        formControlName="interes"
+                        formControlName="intereses"
                         id="intereses"
                         rows="3"
                       ></textarea>
@@ -279,11 +281,11 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="habilidades">Acerca de</label>
+                      <label for="acercaDe">Acerca de</label>
                       <textarea
-                        formControlName="acerca_de"
+                        formControlName="acercaDe"
                         class="form-control"
-                        id="habilidades"
+                        id="acercaDe"
                         rows="3"
                       ></textarea>
                     </div>

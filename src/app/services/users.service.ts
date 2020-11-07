@@ -35,4 +35,8 @@ export class UsersService {
     return this.http.post(`${environment.URLAPI}/perfil-usuarios`, user);
   }
 
+  getProfileUser(id: string): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/perfil-user/${id}`);
+  }
+
 }

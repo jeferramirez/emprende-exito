@@ -8,15 +8,12 @@ import Swal from 'sweetalert2';
 import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { environment } from '../../../../environments/environment';
 
-
-
 @Component({
   selector: 'app-update-usuario',
   templateUrl: './update-usuario.component.html',
-  styleUrls: ['./update-usuario.component.css']
+  styleUrls: ['./update-usuario.component.css'],
 })
 export class UpdateUsuarioComponent implements OnInit {
-
   userForm: FormGroup;
   seguimientos = [];
   profilePicture;
@@ -29,14 +26,11 @@ export class UpdateUsuarioComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.initForm();
     this.getUser(this.route.snapshot.params['id']);
     this.getSeguimientos();
 
   }
-
-
 
   getUser(id: string): void {
     this.userSrv.getUser(id).subscribe( resp => {
@@ -49,10 +43,9 @@ export class UpdateUsuarioComponent implements OnInit {
     });
   }
 
-
   initForm(): void {
-    this.userForm = this.fb.group( {
-      username: [ '', [Validators.required] ],
+    this.userForm = this.fb.group({
+      username: ['', [Validators.required]],
       fechaProximoSeguimiento: [''],
       fechaUltimoSeguimiento: [''],
       descripcion: [''],
@@ -63,9 +56,7 @@ export class UpdateUsuarioComponent implements OnInit {
       celular: [''],
       apellido: [''],
     });
-
   }
-
 
   setUser(): void {
     const user = new User(this.userForm.value);
@@ -77,7 +68,11 @@ export class UpdateUsuarioComponent implements OnInit {
       users_permissions_user:  '24'
     };
 
-    this.seguimientoSrv.createSeguimiento(seguimiento)
+    this.seguimientoSrv.createSeguimiento(seguimiento).subscribe( resp => {
+
+
+      console.log(resp)
+    })
 
 
     this.userSrv.updateUser(  user, user.id ).subscribe( resp => {
@@ -87,8 +82,8 @@ export class UpdateUsuarioComponent implements OnInit {
         icon: 'success',
         confirmButtonText: 'Ok',
         timer: 3000,
-      });    });
-
+      });
+    });
   }
 
 
