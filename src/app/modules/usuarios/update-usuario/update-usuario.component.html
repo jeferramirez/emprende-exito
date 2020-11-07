@@ -20,14 +20,14 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Nombre</label>
-                  <input type="text" class="form-control" />
+                  <input  formControlName="nombre" type="text" class="form-control" />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Apellido</label>
-                  <input type="text" class="form-control" />
+                  <input  formControlName="apellido" type="text" class="form-control" />
                 </div>
               </div>
             </div>
@@ -36,21 +36,21 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Correo electronico</label>
-                  <input type="text" class="form-control" />
+                  <input  formControlName="email" type="text" class="form-control" />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Teléfono</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="telefono"  type="text" class="form-control" />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Celular</label>
-                  <input type="text" class="form-control" />
+                  <input formControlName="celular"  type="text" class="form-control" />
                 </div>
               </div>
 
@@ -142,7 +142,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary pull-right">
+            <button type="submit" (click)="setUser()" class="btn btn-primary pull-right">
               Actualizar
             </button>
             <div class="clearfix"></div>

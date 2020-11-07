@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../models/user.model';
+import Swal from 'sweetalert2';
 
 
 
@@ -22,7 +23,6 @@ export class UpdateUsuarioComponent implements OnInit {
   ngOnInit(): void {
 
     this.initForm();
-    console.log( this.route.snapshot)
     this.getUser(this.route.snapshot.params['id']);
 
   }
@@ -34,6 +34,7 @@ export class UpdateUsuarioComponent implements OnInit {
 
      const user =   new User( resp );
      console.log(user)
+     this.userForm.patchValue(user);
     });
   }
 
@@ -47,22 +48,23 @@ export class UpdateUsuarioComponent implements OnInit {
       email: [''],
       nombre: [''],
       telefono: [''],
+      celular: [''],
       apellido: [''],
-
-
-
-
-
     });
 
   }
 
 
-  setUser( user ): void {
-
-    console.log(this.userForm)
-
-
+  setUser(): void {
+    const user = new User(this.userForm.value)
+    this.userSrv.updateUser(  user, user.id ).subscribe( resp => {
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Usuario actualizado!.',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+        timer: 3000,
+      });    });
 
   }
 

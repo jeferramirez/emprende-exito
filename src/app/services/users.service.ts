@@ -27,8 +27,8 @@ export class UsersService {
     return this.http.delete(`${environment.URLAPI}/users/${id}`);
   }
 
-  updateUser(user: any): Observable<any> {
-    return this.http.put(`${environment.URLAPI}/users`, user);
+  updateUser(user: any, id: string): Observable<any> {
+    return this.http.put(`${environment.URLAPI}/users/${id}`, user);
   }
 
   createPerfilUser(user: any): Observable<any> {
