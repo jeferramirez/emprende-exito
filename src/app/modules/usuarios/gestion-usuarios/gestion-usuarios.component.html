@@ -34,8 +34,8 @@
 
           <div class="table-users mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
-              <ng-container matColumnDef="nick">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nick</th>
+              <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
                 <td (click)="navigateUser(row)" mat-cell *matCellDef="let row">{{ row.username }}</td>
               </ng-container>
 

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
-    'nick',
+    'usuario',
     'nombre',
     'apellido',
     'email',

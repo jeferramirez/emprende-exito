@@ -68,7 +68,7 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Fecha último seguimiento</label>
-                  <input formControlName="fechaProximoSeguimiento" type="date" class="form-control" />
+                  <input formControlName="fechaUltimoSeguimiento" type="date" class="form-control" />
                 </div>
               </div>
 
@@ -93,26 +93,12 @@
 
                   <table class="table">
                     <tbody>
-                      <tr>
+                      <tr *ngFor="let item of seguimientos">
                         <td class="text-center">
                           <span class="material-icons">visibility</span>
                         </td>
-                        <td>21-10-2020</td>
-                        <td>Jefferson Ramirez</td>
-                      </tr>
-                      <tr>
-                        <td class="text-center">
-                          <span class="material-icons">visibility</span>
-                        </td>
-                        <td>22-10-2020</td>
-                        <td>Miguel Castrillón</td>
-                      </tr>
-                      <tr>
-                        <td class="text-center">
-                          <span class="material-icons">visibility</span>
-                        </td>
-                        <td>23-10-2020</td>
-                        <td>James Rodriguez</td>
+                        <td>{{item.fecha_ultimoseguimiento}}</td>
+                        <td>{{item.users_permissions_user.nombre}}  {{item.users_permissions_user.apellido}} </td>
                       </tr>
                     </tbody>
                   </table>
@@ -126,20 +112,11 @@
                 <h3> Descripción seguimiento</h3>
               </div>
 
-              <div class="col-md-8">
+              <div class="col-md-10">
                 <div class="form-group">
                   <textarea class="form-control" formControlName="descripcion" id="desc" rows="4"></textarea>
                 </div>
               </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Programar próximo seguimiento</label>
-                  <input formControlName="fechaProximoSeguimiento" type="date" class="form-control" />
-                </div>
-              </div>
-
-
             </div>
 
             <button type="submit" (click)="setUser()" class="btn btn-primary pull-right">
@@ -156,7 +133,7 @@
     <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
-          <img class="img" src="../../../assets/imagenPerfil.jpg" />
+          <img class="img" [src]="profilePicture || '../../../assets/imagenPerfil.jpg'" />
         </div>
         <div class="card-body">
           <h4 class="card-category text-gray">Emprendedor</h4>

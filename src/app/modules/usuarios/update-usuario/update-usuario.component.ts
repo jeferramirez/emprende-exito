@@ -5,6 +5,8 @@ import { UsersService } from 'src/app/services/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../models/user.model';
 import Swal from 'sweetalert2';
+import { SeguimientoService } from 'src/app/services/seguimiento.service';
+import { environment } from '../../../../environments/environment';
 
 
 
@@ -16,7 +18,13 @@ import Swal from 'sweetalert2';
 export class UpdateUsuarioComponent implements OnInit {
 
   userForm: FormGroup;
-  constructor(private route: ActivatedRoute, private userSrv: UsersService, private fb: FormBuilder) {
+  seguimientos = [];
+  profilePicture;
+  constructor(
+    private route: ActivatedRoute,
+    private userSrv: UsersService,
+    private fb: FormBuilder,
+    private seguimientoSrv: SeguimientoService) {
   }
 
 
@@ -24,6 +32,7 @@ export class UpdateUsuarioComponent implements OnInit {
 
     this.initForm();
     this.getUser(this.route.snapshot.params['id']);
+    this.getSeguimientos();
 
   }
 
@@ -32,6 +41,8 @@ export class UpdateUsuarioComponent implements OnInit {
   getUser(id: string): void {
     this.userSrv.getUser(id).subscribe( resp => {
 
+     this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
+     console.log(resp)
      const user =   new User( resp );
      console.log(user)
      this.userForm.patchValue(user);
@@ -43,6 +54,7 @@ export class UpdateUsuarioComponent implements OnInit {
     this.userForm = this.fb.group( {
       username: [ '', [Validators.required] ],
       fechaProximoSeguimiento: [''],
+      fechaUltimoSeguimiento: [''],
       descripcion: [''],
       id: [''],
       email: [''],
@@ -56,7 +68,18 @@ export class UpdateUsuarioComponent implements OnInit {
 
 
   setUser(): void {
-    const user = new User(this.userForm.value)
+    const user = new User(this.userForm.value);
+
+    const seguimiento = {
+      descripcion: this.userForm.get('descripcion').value,
+      fecha_proximoseguimiento: this.userForm.get('fechaProximoSeguimiento').value,
+      fecha_ultimoseguimiento: this.userForm.get('fechaUltimoSeguimiento').value,
+      users_permissions_user:  '24'
+    };
+
+    this.seguimientoSrv.createSeguimiento(seguimiento)
+
+
     this.userSrv.updateUser(  user, user.id ).subscribe( resp => {
       Swal.fire({
         title: '¡Éxito!',
@@ -66,6 +89,14 @@ export class UpdateUsuarioComponent implements OnInit {
         timer: 3000,
       });    });
 
+  }
+
+
+  getSeguimientos(): void {
+    this.seguimientoSrv.getSeguimiento('24').subscribe(resp => {
+      this.seguimientos = resp;
+      console.log(resp)
+    })
   }
 
 
