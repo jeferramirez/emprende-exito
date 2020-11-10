@@ -7,8 +7,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UsersService {
-
-
   constructor(private http: HttpClient) {}
 
   createUser(user: any): Observable<any> {
@@ -28,6 +26,7 @@ export class UsersService {
   }
 
   updateUser(user: any, id: string): Observable<any> {
+    console.log(user, id);
     return this.http.put(`${environment.URLAPI}/users/${id}`, user);
   }
 
@@ -39,4 +38,14 @@ export class UsersService {
     return this.http.get(`${environment.URLAPI}/perfil-user/${id}`);
   }
 
+  updateProfileUser(profileUser: any, id: string): Observable<any> {
+    return this.http.put(
+      `${environment.URLAPI}/perfil-usuarios/${id}`,
+      profileUser
+    );
+  }
+
+  validateHash(params): Observable<any> {
+    return this.http.post(`${environment.URLAPI}/validatePass`, params);
+  }
 }
