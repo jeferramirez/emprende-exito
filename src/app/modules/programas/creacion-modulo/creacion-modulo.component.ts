@@ -15,6 +15,7 @@ export class CreacionModuloComponent implements OnInit {
   moduleForm: FormGroup;
   file: any;
   previewimage: any;
+  idModule = null;
 
   constructor(
     private modulesSrv: ModulesService,
@@ -45,6 +46,7 @@ export class CreacionModuloComponent implements OnInit {
       .pipe(
         switchMap((data) => {
           this.generalSrv.setNavigationValue(data.id);
+          this.idModule = data.id;
           const formData = this.generalSrv.getFormdata(
             data.id,
             'imagen',

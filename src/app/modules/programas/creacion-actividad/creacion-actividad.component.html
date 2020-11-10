@@ -36,22 +36,30 @@
                 </div>
               </form>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-12">
               <div class="row">
-                <div class="col-md-12 mx-auto">
-                  <div class="card m-0 p-0">
-                    <img
-                      class="card-img-top"
-                      [src]="previewimage || '../../../assets/photo.png'"
-                      alt="Card image cap"
+                <div class="col-md-12 text-center">
+                    <label for="imageuser">
+                      <img
+                        class="card-img-top"
+                        [src]="previewimage || '../../../assets/photo.png'"
+                        alt="Card image cap"
+                        style="max-width: 200px; max-width: 200px"
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      style="display: none"
+                      (change)="onFileSelect($event)"
+                      id="imageuser"
                     />
-                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <label class="photo-book " for="imageuser">
+                    Agregar imagen
+                  </label>
                 </div>
               </div>
-
-              <span class="btn btn-primary btn-file">
-                Añadir foto<input type="file" (change)="onFileSelect($event)" />
-              </span>
             </div>
           </div>
         </div>

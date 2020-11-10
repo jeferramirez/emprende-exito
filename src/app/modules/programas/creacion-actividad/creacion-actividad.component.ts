@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ActivityService } from './../../../services/activity.service';
 import { GeneralService } from './../../../services/general.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -20,7 +21,8 @@ export class CreacionActividadComponent implements OnInit {
   constructor(
     private activitySrv: ActivityService,
     private fb: FormBuilder,
-    private generalSrv: GeneralService
+    private generalSrv: GeneralService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +66,11 @@ export class CreacionActividadComponent implements OnInit {
             confirmButtonText: 'Ok',
             timer: 3000,
           });
+
+          setTimeout(() => {
+            this.router.navigate(['home/gestion-programas']);
+          }, 500);
+
         },
         (error) => {
           console.log(error);

@@ -19769,3 +19769,16 @@ Copyright (c) 2015 Daniel Eden
   color: #fff;
   cursor: pointer
 }
+
+.photo-book {
+  padding: 0.7em;
+  background: #89B021;
+  border-radius: 0.2em;
+  color: #fff;
+  cursor: pointer
+}
+
+.card-program:hover {
+  background:rgba(33, 149, 243, 0.226);
+  cursor: pointer;
+}

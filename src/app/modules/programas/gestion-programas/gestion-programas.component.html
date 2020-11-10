@@ -29,19 +29,19 @@
           </div>
           <div class="row">
             <div *ngIf="programs.length === 0" class="col-md-12">
-              <h3 class="text-center">Sin programas</h3>
+              <h3 class="text-center pt-4">Sin programas</h3>
             </div>
             <div *ngFor="let program of programs; let i = index" class="col-md-3">
-              <div *ngIf="programs.length > 0" class="card" >
+              <div *ngIf="programs.length > 0" class="card card-program" >
                 <img class="card-img-top" style="height: 200px;" [src]="getFile(program.imagen.url)" rel="nofollow" alt="Card image cap">
                 <div class="card-body">
                   <h3 class="card-title text-center">{{program.nombre}}</h3>
                   <div class="card-footer justify-content-center">
-                    <a href="#pablo" title="Editar programa">
-                      <i class="material-icons text-primary" >edit</i>
+                    <a title="Editar programa">
+                      <i class="material-icons text-primary mx-2" >edit</i>
                     </a>
-                    <a href="#pablo" title="Eliminar programa" >
-                        <i  class="material-icons text-danger">delete</i>
+                    <a title="Eliminar programa" (click)="deleteProgram()" >
+                        <i  class="material-icons text-danger mx-2">delete</i>
                     </a>
                   </div>
                 </div>

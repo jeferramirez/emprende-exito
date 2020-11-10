@@ -1,4 +1,6 @@
-<div class="container-fluid animate__animated animate__fadeInUp  animate__faster">
+<div
+  class="container-fluid animate__animated animate__fadeInUp animate__faster"
+>
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <div class="card">
@@ -12,7 +14,9 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="bmd-label-floating">Nombre del programa</label>
+                      <label class="bmd-label-floating"
+                        >Nombre del programa</label
+                      >
                       <input
                         formControlName="nombre"
                         type="text"
@@ -36,26 +40,40 @@
                 </div>
               </form>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-12">
               <div class="row">
-                <div class="col-md-12 mx-auto">
-                  <div class="card m-0 p-0">
-                    <img
-                      class="card-img-top"
-                      [src]=" previewimage || '../../../assets/photo.png'"
-                      alt="Card image cap"
+                <div class="col-md-12 text-center">
+                    <label for="imageuser">
+                      <img
+                        class="card-img-top"
+                        [src]="previewimage || '../../../assets/photo.png'"
+                        alt="Card image cap"
+                        style="max-width: 200px; max-width: 200px"
+                      />
+                    </label>
+                    <input
+                      type="file"
+                      style="display: none"
+                      (change)="onFileSelect($event)"
+                      id="imageuser"
                     />
-                  </div>
+                </div>
+                <div class="card-body text-center">
+                  <label class="photo-book " for="imageuser">
+                    Agregar imagen
+                  </label>
                 </div>
               </div>
-
-              <span class="btn btn-primary btn-file">
-                Añadir foto<input type="file" (change)="onFileSelect($event)"/>
-              </span>
             </div>
           </div>
         </div>
-        <button class="btn btn-primary mx-auto mb-4" [disabled]="programForm.invalid" (click)="createProgram()">Crear programa</button>
+        <button
+          class="btn btn-primary mx-auto mb-4"
+          [disabled]="programForm.invalid"
+          (click)="createProgram()"
+        >
+          Crear programa
+        </button>
       </div>
     </div>
   </div>
@@ -67,7 +85,7 @@
             <div class="col-lg-6 col-md-6 align-self-center">
               <h4 class="card-title">Módulos</h4>
             </div>
-            <div class="col-lg-6 col-md-6 s text-right align-self-center">
+            <div *ngIf="idProgram !== null" class="col-lg-6 col-md-6 s text-right align-self-center">
               <a
                 title="Agregar modulo"
                 routerLink="../creacion-modulo"

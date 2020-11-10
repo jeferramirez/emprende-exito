@@ -15,6 +15,7 @@ export class CreacionLeccionComponent implements OnInit {
   lessonForm: FormGroup;
   file: any;
   previewimage: any;
+  idLesson = null;
 
   constructor(
     private lessonSrv: LessonService,
@@ -44,6 +45,7 @@ export class CreacionLeccionComponent implements OnInit {
       .pipe(
         switchMap((data) => {
           this.generalSrv.setNavigationValue(data.id);
+          this.idLesson = data.id;
           const formData = this.generalSrv.getFormdata(
             data.id,
             'imagen',

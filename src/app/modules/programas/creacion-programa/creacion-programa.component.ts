@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class CreacionProgramaComponent implements OnInit {
   programForm: FormGroup;
-  programs = [];
+  idProgram = null;
   file: any;
   previewimage: any;
 
@@ -37,10 +37,12 @@ export class CreacionProgramaComponent implements OnInit {
   createProgram(): void {
     const program = this.programForm.value;
     program.estado = true;
-    this.programSrv.createProgram(program)
+    this.programSrv
+      .createProgram(program)
       .pipe(
         switchMap((data) => {
           this.generalSrv.setNavigationValue(data.id);
+          this.idProgram = data.id;
           const formData = this.generalSrv.getFormdata(
             data.id,
             'imagen',
@@ -60,7 +62,6 @@ export class CreacionProgramaComponent implements OnInit {
             confirmButtonText: 'Ok',
             timer: 3000,
           });
-
         },
         (error) => {
           console.log(error);

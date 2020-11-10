@@ -40,22 +40,30 @@
                 </div>
               </form>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-12">
               <div class="row">
-                <div class="col-md-12 mx-auto">
-                  <div class="card m-0 p-0">
+                <div class="col-md-12 text-center">
+                  <label for="imageuser">
                     <img
                       class="card-img-top"
                       [src]="previewimage || '../../../assets/photo.png'"
                       alt="Card image cap"
+                      style="max-width: 200px; max-width: 200px"
                     />
-                  </div>
+                  </label>
+                  <input
+                    type="file"
+                    style="display: none"
+                    (change)="onFileSelect($event)"
+                    id="imageuser"
+                  />
+                </div>
+                <div class="card-body text-center">
+                  <label class="photo-book" for="imageuser">
+                    Agregar imagen
+                  </label>
                 </div>
               </div>
-
-              <span class="btn btn-primary btn-file">
-                Añadir foto<input type="file" (change)="onFileSelect($event)" />
-              </span>
             </div>
           </div>
         </div>
@@ -77,7 +85,7 @@
             <div class="col-lg-6 col-md-6 align-self-center">
               <h4 class="card-title">Actividades</h4>
             </div>
-            <div class="col-lg-6 col-md-6 s text-right align-self-center">
+            <div *ngIf="idLesson !== null" class="col-lg-6 col-md-6 s text-right align-self-center">
               <a
                 title="Agregar actividad"
                 routerLink="../creacion-actividad"
