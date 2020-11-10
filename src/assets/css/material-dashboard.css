@@ -14822,7 +14822,7 @@ h2.title {
 .dropdown-menu a:hover,
 .dropdown-menu a:focus,
 .dropdown-menu a:active {
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(23, 51, 177, 0.4);
   background-color: #3373A6;
   color: #FFFFFF;
 }
@@ -19762,21 +19762,10 @@ Copyright (c) 2015 Daniel Eden
 
 /*# sourceMappingURL=dashboard-free.css.map */
 
-.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-   min-width: 100%;
-   min-height: 100%;
-   font-size: 100px;
- text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-   outline: none;
-   cursor: inherit;
-  display: block;
+.photo-profile {
+  padding: 1em;
+  background: #89B021;
+  border-radius: 0.2em;
+  color: #fff;
+  cursor: pointer
 }

@@ -181,15 +181,14 @@
                   </div>
                 </div>
 
-
-                <a
+                <!-- <a
                   class="text-success pull-right"
                   href="#"
                   data-toggle="tab"
                   (click)="handleSimulateClick()"
                 >
                   Continuar<i class="material-icons">navigate_next</i>
-                </a>
+                </a> -->
               </form>
             </div>
             <div class="tab-pane" id="perfilEinteres">
@@ -267,13 +266,14 @@
                   </div>
                 </div>
               </form>
-              <button
-                [disabled]="disabledButton"
-                class="btn btn-primary pull-right"
-              >
-                Actualizar
-              </button>
             </div>
+            <button
+              [disabled]="disabledButton"
+              class="btn btn-primary pull-right"
+              (click)="setProfileUser()"
+            >
+              Actualizar
+            </button>
           </div>
         </div>
       </div>
@@ -281,19 +281,20 @@
     <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
-          <img
-            class="img"
-            [src]="previewimage || urlImage"
-          />
-        </div>
-        <div class="card-body">
-          <span class="btn btn-primary btn-file">
-            Añadir foto de perfil<input
+          <label for="imageuser">
+            <img class="img" [src]="previewimage || urlImage" style="height: 130px; cursor: pointer; min-width: 140px;" />
+          </label>
+          <input
               type="file"
+              style="display: none"
               (change)="onFileSelect($event)"
               id="imageuser"
             />
-          </span>
+        </div>
+        <div class="card-body">
+          <label class="photo-profile" for="imageuser">
+            Cambiar foto de perfil
+          </label>
         </div>
       </div>
     </div>
@@ -306,12 +307,17 @@
           <p class="card-category">Seguridad de cuenta</p>
         </div>
         <div class="card-body">
-          <form>
+          <form  [formGroup]="userPassForm">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Contraseña actual</label>
-                  <input type="password" class="form-control" autocomplete="on"/>
+                  <input
+                    type="password"
+                    class="form-control"
+                    autocomplete="on"
+                    formControlName="currentPass"
+                  />
                 </div>
               </div>
             </div>
@@ -320,7 +326,12 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Contraseña nueva</label>
-                  <input type="password" class="form-control" autocomplete="on" />
+                  <input
+                    type="password"
+                    class="form-control"
+                    autocomplete="on"
+                    formControlName="passNew"
+                  />
                 </div>
               </div>
 
@@ -329,12 +340,19 @@
                   <label class="bmd-label-floating"
                     >Confirmar nueva contraseña</label
                   >
-                  <input type="password" class="form-control" autocomplete="on"/>
+                  <input
+                    type="password"
+                    class="form-control"
+                    autocomplete="on"
+                    formControlName="passNewConfirm"
+                  />
                 </div>
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary pull-right">
+            <button type="submit" class="btn btn-primary pull-right"
+            [disabled]="userPassForm.invalid"
+            (click)="setPass()">
               Actualizar contraseña
             </button>
             <div class="clearfix"></div>

@@ -18,7 +18,7 @@
                     <div class="ripple-container"></div>
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a
                     class="nav-link"
                     name="continuar"
@@ -29,7 +29,7 @@
                     <i class="material-icons">psychology</i> Perfil e intereses
                     <div class="ripple-container"></div>
                   </a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -173,7 +173,9 @@
                           class="px-3"
                         >
                           <mat-option value="Mentor"> Mentor </mat-option>
-                          <mat-option value="Emprendedor"> Emprendedor </mat-option>
+                          <mat-option value="Emprendedor">
+                            Emprendedor
+                          </mat-option>
                           <mat-option value="Tutor"> Tutor </mat-option>
                         </mat-select>
                       </div>
@@ -207,17 +209,24 @@
                   </div>
                 </div>
 
-                <a
+                <!-- <a
                   class="text-success pull-right"
                   href="#"
                   data-toggle="tab"
                   (click)="handleSimulateClick()"
                 >
                   Continuar<i class="material-icons">navigate_next</i>
-                </a>
+                </a> -->
+                <button
+                  [disabled]="userForm.invalid"
+                  (click)="createUser()"
+                  class="btn btn-primary pull-right"
+                >
+                  Crear usuario
+                </button>
               </form>
             </div>
-            <div class="tab-pane" id="perfilEinteres">
+            <!-- <div class="tab-pane" id="perfilEinteres">
               <form [formGroup]="userForm">
                 <div class="row">
                   <div class="col-md-4">
@@ -299,27 +308,33 @@
               >
                 Crear usuario
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
+
     <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
-          <img
-            class="img"
-            [src]="previewimage || '../../../assets/imagenPerfil.jpg'"
+          <label for="imageuser">
+            <img
+              class="img"
+              [src]="previewimage || '../../../assets/imagenPerfil.jpg'"
+              style="height: 130px; cursor: pointer;"
+            />
+          </label>
+          <input
+            type="file"
+            style="display: none"
+            (change)="onFileSelect($event)"
+            id="imageuser"
           />
         </div>
         <div class="card-body">
-          <span class="btn btn-primary btn-file">
-            Añadir foto de perfil<input
-              type="file"
-              (change)="onFileSelect($event)"
-              id="imageuser"
-            />
-          </span>
+          <label class="photo-profile" for="imageuser">
+            Cambiar foto de perfil
+          </label>
         </div>
       </div>
     </div>
