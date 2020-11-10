@@ -15,6 +15,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class UpdateUsuarioComponent implements OnInit {
   userForm: FormGroup;
+  idUser;
   seguimientos = [];
   profilePicture;
   constructor(
@@ -27,7 +28,8 @@ export class UpdateUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.getUser(this.route.snapshot.params['id']);
+    this.idUser = this.route.snapshot.params['id'];
+    this.getUser(this.idUser);
     this.getSeguimientos();
 
   }
@@ -65,7 +67,7 @@ export class UpdateUsuarioComponent implements OnInit {
       descripcion: this.userForm.get('descripcion').value,
       fecha_proximoseguimiento: this.userForm.get('fechaProximoSeguimiento').value,
       fecha_ultimoseguimiento: this.userForm.get('fechaUltimoSeguimiento').value,
-      users_permissions_user:  '24'
+      users_permissions_user:  this.idUser
     };
 
     this.seguimientoSrv.createSeguimiento(seguimiento).subscribe( resp => {
@@ -88,9 +90,9 @@ export class UpdateUsuarioComponent implements OnInit {
 
 
   getSeguimientos(): void {
-    this.seguimientoSrv.getSeguimiento('24').subscribe(resp => {
+    this.seguimientoSrv.getSeguimiento(this.idUser).subscribe(resp => {
       this.seguimientos = resp;
-      console.log(resp)
+      console.log(resp);
     })
   }
 
