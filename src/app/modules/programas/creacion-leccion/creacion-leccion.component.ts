@@ -67,7 +67,6 @@ export class CreacionLeccionComponent implements OnInit {
           });
         },
         (error) => {
-          console.log(error);
           Swal.fire({
             title: '¡Error!',
             text: 'Lección no creada.',

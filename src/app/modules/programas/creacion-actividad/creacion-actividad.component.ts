@@ -5,18 +5,26 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
+import { of, combineLatest, identity } from 'rxjs';
 
 @Component({
   selector: 'app-creacion-actividad',
   templateUrl: './creacion-actividad.component.html',
-  styleUrls: ['./creacion-actividad.component.css']
+  styleUrls: ['./creacion-actividad.component.css'],
 })
 export class CreacionActividadComponent implements OnInit {
-
   idLesson;
   activityForm: FormGroup;
   file: any;
   previewimage: any;
+  recursos = [{ URL: '', titulo: '' }];
+  recursoVideo;
+  nameVideo;
+  recursoDOC;
+  nameDOC;
+  filesIMG = [];
+  filesDOC = [];
+  idActivity;
 
   constructor(
     private activitySrv: ActivityService,
@@ -27,6 +35,7 @@ export class CreacionActividadComponent implements OnInit {
 
   ngOnInit(): void {
     this.idLesson = this.generalSrv.getNavigationValue();
+    console.log(this.idLesson);
     this.createActivityForm();
   }
 
@@ -39,6 +48,7 @@ export class CreacionActividadComponent implements OnInit {
   }
 
   createActivity(): void {
+    console.log(this.idLesson);
     const lesson = this.activityForm.value;
     lesson.estado = true;
     lesson.leccion = this.idLesson;
@@ -46,7 +56,7 @@ export class CreacionActividadComponent implements OnInit {
       .createActivity(lesson)
       .pipe(
         switchMap((data) => {
-          this.generalSrv.setNavigationValue(data.id);
+          this.idActivity = data.id;
           const formData = this.generalSrv.getFormdata(
             data.id,
             'imagen',
@@ -55,6 +65,9 @@ export class CreacionActividadComponent implements OnInit {
             ''
           );
           return this.generalSrv.uploadFile(formData);
+        }),
+        switchMap((data) => {
+          return combineLatest(this.insertURL(this.idActivity));
         })
       )
       .subscribe(
@@ -67,13 +80,14 @@ export class CreacionActividadComponent implements OnInit {
             timer: 3000,
           });
 
+          this.uploadFilesIMG(this.idActivity);
+          this.uploadFilesDOC(this.idActivity);
+
           setTimeout(() => {
             this.router.navigate(['home/gestion-programas']);
           }, 500);
-
         },
         (error) => {
-          console.log(error);
           Swal.fire({
             title: '¡Error!',
             text: 'Actividad no creada.',
@@ -92,6 +106,97 @@ export class CreacionActividadComponent implements OnInit {
     this.previewimage = previewimage;
   }
 
+  addRow(): void {
+    this.recursos.push({ URL: '', titulo: '' });
+  }
+
+  addFileDOC(): void {
+    document.getElementById('multiSelectDOC').click();
+  }
+
+  addFileIMG(): void {
+    document.getElementById('multiSelectIMG').click();
+  }
+
+  onChangeIMG(e: any): void {
+    const files = [];
+    const arrayFile = e.target.files;
+    for (const iterator of arrayFile) {
+      files.push(iterator.name);
+      this.filesIMG.push(iterator);
+    }
+    this.nameVideo = files.join(' , ');
+  }
+
+  onChangeDOC(e: any): void {
+    const files = [];
+    const arrayFile = e.target.files;
+    for (const iterator of arrayFile) {
+      files.push(iterator.name);
+      this.filesDOC.push(iterator);
+    }
+    this.nameDOC = files.join(' , ');
+  }
+
+  insertURL(id: any): any {
+    return this.recursos.map((recurso) => {
+      if (recurso.titulo && recurso.URL) {
+        return this.activitySrv.createResourceVideo({
+          ...recurso,
+          actividad: id,
+        });
+      }
+      return of({});
+    });
+  }
+
+  uploadFilesIMG(id: any): any {
+    return this.filesIMG.map((file) => {
+      this.generalSrv
+        .createFileIMG({ actividad: id })
+        .pipe(
+          switchMap((data) => {
+            const formData = this.generalSrv.getFormdata(
+              data.id,
+              'imagen',
+              file,
+              'imagenes',
+              ''
+            );
+            return this.generalSrv.uploadFile(formData);
+          })
+        )
+        .subscribe(
+          (resp) => {},
+          (error) => {
+            console.log(error);
+          }
+        );
+    });
+  }
+
+  uploadFilesDOC(id: any): any {
+    return this.filesDOC.map((file) => {
+      this.generalSrv
+        .createFileDOC({ actividad: id })
+        .pipe(
+          switchMap((data) => {
+            const formData = this.generalSrv.getFormdata(
+              data.id,
+              'imagen',
+              file,
+              'documento',
+              ''
+            );
+            return this.generalSrv.uploadFile(formData);
+          })
+        )
+        .subscribe(
+          (resp) => {},
+          (error) => {
+            console.log(error);
+          }
+        );
+    });
+  }
 }
-
-

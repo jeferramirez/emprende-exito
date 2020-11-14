@@ -1,4 +1,6 @@
-<div class="container-fluid  animate__animated animate__fadeInUp  animate__faster">
+<div
+  class="container-fluid animate__animated animate__fadeInUp animate__faster"
+>
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <div class="card">
@@ -12,7 +14,9 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label class="bmd-label-floating">Nombre del actividad</label>
+                      <label class="bmd-label-floating"
+                        >Nombre del actividad</label
+                      >
                       <input
                         formControlName="nombre"
                         type="text"
@@ -39,32 +43,131 @@
             <div class="col-md-2 col-sm-12">
               <div class="row">
                 <div class="col-md-12 text-center">
-                    <label for="imageuser">
-                      <img
-                        class="card-img-top"
-                        [src]="previewimage || '../../../assets/photo.png'"
-                        alt="Card image cap"
-                        style="max-width: 200px; max-width: 200px"
-                      />
-                    </label>
-                    <input
-                      type="file"
-                      style="display: none"
-                      (change)="onFileSelect($event)"
-                      id="imageuser"
+                  <label for="imageuser">
+                    <img
+                      class="card-img-top"
+                      [src]="previewimage || '../../../assets/photo.png'"
+                      alt="Card image cap"
+                      style="max-width: 200px; max-width: 200px"
                     />
+                  </label>
+                  <input
+                    type="file"
+                    style="display: none"
+                    (change)="onFileSelect($event)"
+                    id="imageuser"
+                  />
                 </div>
                 <div class="card-body text-center">
-                  <label class="photo-book " for="imageuser">
+                  <label class="photo-book" for="imageuser">
                     Agregar imagen
                   </label>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="row mx-2">
+            <ul class="nav nav-pills nav-pills-info mb-4" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-toggle="tab"
+                  href="#videos"
+                  role="tablist"
+                  aria-expanded="true"
+                >
+                  Videos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  href="#imagenes"
+                  role="tablist"
+                  aria-expanded="false"
+                >
+                  Imagenes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  href="#archivos"
+                  role="tablist"
+                  aria-expanded="false"
+                >
+                  Archivos
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="row mx-2">
+            <div class="tab-content tab-space">
+              <div
+                class="tab-pane active rounded table-responsive"
+                id="videos"
+                aria-expanded="true"
+              >
+              <table class="table" id="tableImg">
+                <thead>
+                  <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">URL</th>
+                    <th scope="col" style="text-align: right;"><a
+                      title="Agregar nueva fila"
+                      (click)="addRow()"
+                      class="btn btn-primary btn-fab btn-fab-mini btn-round"
+                    >
+                      <i class="material-icons">video_call</i>
+                    </a></th>
+                </thead>
+                <tbody>
+                  <tr class="tableRow" *ngFor="let recurso of recursos">
+                    <td><input [(ngModel)]="recurso.titulo" type="text" class="input-table"/></td>
+                    <td colspan="2"><input [(ngModel)]="recurso.URL" type="text" class="input-table" style="min-width: 280px;"/></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+              <div class="tab-pane ml-3" id="imagenes" aria-expanded="false">
+                <div class="form-group form-file-upload form-file-multiple">
+                  <input (change)="onChangeIMG($event)" [(ngModel)]="recursoVideo" id="multiSelectIMG" type="file" multiple class="inputFileHidden">
+                  <div class="input-group">
+                      <input style="min-width: 600px;" (click)="addFileIMG()" [(ngModel)]="nameVideo" type="text" class="form-control inputFileVisible" placeholder="Imagenes" multiple>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-fab btn-round btn-primary" (click)="addFileIMG()">
+                              <i class="material-icons">layers</i>
+                          </button>
+                      </span>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane ml-3" id="archivos" aria-expanded="false">
+                <div class="form-group form-file-upload form-file-multiple">
+                  <input (change)="onChangeDOC($event)" [(ngModel)]="recursoDOC" id="multiSelectDOC" type="file" multiple class="inputFileHidden">
+                  <div class="input-group">
+                      <input style="min-width: 600px;" (click)="addFileDOC()" [(ngModel)]="nameDOC" type="text" class="form-control inputFileVisible" placeholder="Archivos" multiple>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-fab btn-round btn-primary" (click)="addFileDOC()">
+                              <i class="material-icons">layers</i>
+                          </button>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button class="btn btn-primary mx-auto mb-4" [disabled]="activityForm.invalid"
-        (click)="createActivity()">Crear actividad</button>
+        <button
+          class="btn btn-primary mx-auto mb-4"
+          [disabled]="activityForm.invalid"
+          (click)="createActivity()"
+        >
+          Crear actividad
+        </button>
       </div>
     </div>
   </div>

@@ -25,6 +25,7 @@ export class CreacionModuloComponent implements OnInit {
 
   ngOnInit(): void {
     this.idProgram = this.generalSrv.getNavigationValue();
+    console.log(this.idProgram);
     this.createModuleForm();
   }
 
@@ -36,6 +37,11 @@ export class CreacionModuloComponent implements OnInit {
       tutor: ['', [Validators.required]],
     });
   }
+
+  get disabledButton(): boolean {
+    return this.moduleForm.invalid ? true : false;
+  }
+
 
   createModule(): void {
     const module = this.moduleForm.value;
@@ -68,7 +74,6 @@ export class CreacionModuloComponent implements OnInit {
           });
         },
         (error) => {
-          console.log(error);
           Swal.fire({
             title: '¡Error!',
             text: 'Módulo no creado.',

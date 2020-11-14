@@ -38,24 +38,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="cmbRol">Tutor</label>
-                      <div class="form-control">
-                        <mat-select
-                          formControlName="tutor"
-                          id="cmbRol"
-                          class="px-3"
-                        >
-                          <mat-option value="mentor"> Miguel </mat-option>
-                          <mat-option value="emprendedor"> Jefer </mat-option>
-                          <mat-option value="tutor"> Juan </mat-option>
-                        </mat-select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </form>
             </div>
             <div class="col-md-2 col-sm-12">
@@ -64,7 +46,7 @@
                   <label for="imageuser">
                     <img
                       class="card-img-top"
-                      [src]="previewimage || '../../../assets/photo.png'"
+                      [src]="previewimage || urlImage"
                       alt="Card image cap"
                       style="max-width: 200px; max-width: 200px"
                     />
@@ -78,7 +60,7 @@
                 </div>
                 <div class="card-body text-center">
                   <label class="photo-book" for="imageuser">
-                    Agregar imagen
+                    Cambiar imagen
                   </label>
                 </div>
               </div>
@@ -87,10 +69,10 @@
         </div>
         <button
           class="btn btn-primary mx-auto mb-4"
-          [disabled]="disabledButton"
-          (click)="createModule()"
+          [disabled]="moduleForm.invalid"
+          (click)="updateModule()"
         >
-          Crear módulo
+          Actualizar Módulo
         </button>
       </div>
     </div>
@@ -103,10 +85,11 @@
             <div class="col-lg-6 col-md-6 align-self-center">
               <h4 class="card-title">Lecciones</h4>
             </div>
-            <div *ngIf="idModule !== null" class="col-lg-6 col-md-6 s text-right align-self-center">
+            <!-- *ngIf="idModule !== null" -->
+            <div class="col-lg-6 col-md-6 s text-right align-self-center">
               <a
                 title="Agregar lección"
-                routerLink="../creacion-leccion"
+                routerLink="../../creacion-leccion"
                 class="btn btn-primary btn-fab btn-fab-mini btn-round m-0 p-0"
               >
                 <i class="material-icons">queue</i>
@@ -115,7 +98,35 @@
           </div>
         </div>
         <div class="card-body table-responsive">
-          <h3 class="text-center mt-2">Sin lecciones</h3>
+          <div class="row mx-1">
+            <input
+            type="text"
+            value=""
+            class="form-control"
+            placeholder="Buscar lección..."
+          />
+          </div>
+          <div class="row">
+            <div *ngIf="lessons.length === 0" class="col-md-12">
+              <h3 class="text-center pt-4">Sin lecciones</h3>
+            </div>
+            <div *ngFor="let lesson of lessons; let i = index" class="col-md-3">
+              <div *ngIf="lessons.length > 0" class="card card-program" >
+                <img class="card-img-top" style="height: 200px;" [src]="getFile(lesson.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateLesson(lesson)">
+                <div class="card-body">
+                  <h3 class="card-title text-center">{{lesson.nombre}}</h3>
+                  <div class="card-footer justify-content-center">
+                    <a title="Editar lección" (click)="navigateLesson(module)">
+                      <i class="material-icons text-primary mx-2" >edit</i>
+                    </a>
+                    <a title="Eliminar lección" (click)="deleteLesson(lesson.id)" >
+                        <i  class="material-icons text-danger mx-2">delete</i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

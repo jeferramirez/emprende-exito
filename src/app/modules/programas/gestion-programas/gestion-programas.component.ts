@@ -1,8 +1,9 @@
+import { Router } from '@angular/router';
 import { environment } from './../../../../environments/environment';
-import { GeneralService } from './../../../services/general.service';
 import { ProgramsService } from './../../../services/programs.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-gestion-programas',
@@ -11,9 +12,10 @@ import Swal from 'sweetalert2';
 })
 export class GestionProgramasComponent implements OnInit {
   programs = [];
+
   constructor(
     private programServ: ProgramsService,
-    private generalSrv: GeneralService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,20 +45,31 @@ export class GestionProgramasComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.programServ.deleteProgram(id).subscribe(
-          (resp) => {
-            Swal.fire(
-              '¡Éxito!',
-              'El programa se eliminó exitosamente.',
-              'success'
-            );
-            this.getPrograms();
-          },
-          (error) => {
-            Swal.fire('¡Error!', 'El programa no se eliminó.', 'warning');
-          }
-        );
+        this.programServ
+          .deleteProgram(id)
+          .pipe(
+            switchMap((data) => {
+              return this.programServ.getPrograms();
+            })
+          )
+          .subscribe(
+            (resp) => {
+              this.programs = resp;
+              Swal.fire(
+                '¡Éxito!',
+                'El programa se eliminó éxitosamente.',
+                'success'
+              );
+            },
+            (error) => {
+              Swal.fire('¡Error!', 'El programa no se logró eliminar.', 'error');
+            }
+          );
       }
     });
+  }
+
+  navigateProgram(item): void {
+    this.router.navigate(['home/update-programa/', item.id]);
   }
 }

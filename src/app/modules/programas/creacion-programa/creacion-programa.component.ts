@@ -64,7 +64,6 @@ export class CreacionProgramaComponent implements OnInit {
           });
         },
         (error) => {
-          console.log(error);
           Swal.fire({
             title: '¡Error!',
             text: 'Programa no creado.',

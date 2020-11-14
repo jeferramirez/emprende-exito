@@ -24,6 +24,10 @@ import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update
 import { DemoMaterialModule } from './material-module';
 import { GestionMatriculasComponent } from './modules/programas/gestion-matriculas/gestion-matriculas.component';
 import { CreacionActividadComponent } from './modules/programas/creacion-actividad/creacion-actividad.component';
+import { UpdateProgramaComponent } from './modules/programas/update-programa/update-programa.component';
+import { UpdateModuloComponent } from './modules/programas/update-modulo/update-modulo.component';
+import { UpdateLeccionComponent } from './modules/programas/update-leccion/update-leccion.component';
+import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
 
 
 @NgModule({
@@ -43,6 +47,10 @@ import { CreacionActividadComponent } from './modules/programas/creacion-activid
     UpdateUsuarioComponent,
     GestionMatriculasComponent,
     CreacionActividadComponent,
+    UpdateProgramaComponent,
+    UpdateModuloComponent,
+    UpdateLeccionComponent,
+    UpdateActividadComponent,
   ],
   imports: [
     BrowserModule,

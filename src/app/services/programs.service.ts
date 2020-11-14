@@ -27,7 +27,22 @@ export class ProgramsService {
     return this.http.get(`${environment.URLAPI}/programas`);
   }
 
+  getProgram(id: any): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/programas/${id}`);
+  }
+
   deleteProgram(id: any): Observable<any> {
-    return this.http.delete(`${environment.URLAPI}/programas/${id}`);
+    return this.http.delete(`${environment.URLAPI}/deleteProgram/${id}`);
+  }
+
+  updateProgram(program: any, id: number): Observable<any> {
+    return this.http.put(
+      `${environment.URLAPI}/programas/${id}`,
+      program
+    );
+  }
+
+  getModules(id: any): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/listaModulos/${id}`);
   }
 }

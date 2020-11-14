@@ -12,7 +12,6 @@ export class SeguimientoService {
 
 
   createSeguimiento(seguimiento: any): Observable<any> {
-    console.log(seguimiento)
     return this.http.post(`${environment.URLAPI}/ficha-seguimientos`, seguimiento);
   }
 

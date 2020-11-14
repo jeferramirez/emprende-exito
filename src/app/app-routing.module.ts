@@ -1,3 +1,6 @@
+import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
+import { UpdateModuloComponent } from './modules/programas/update-modulo/update-modulo.component';
+import { UpdateProgramaComponent } from './modules/programas/update-programa/update-programa.component';
 import { NotAuthGuard } from './services/guards/not-auth.guard';
 import { AuthGuard } from './services/guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -17,6 +20,7 @@ import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 import { UpdateUsuarioComponent } from './modules/usuarios/update-usuario/update-usuario.component';
 import { CreacionActividadComponent } from './modules/programas/creacion-actividad/creacion-actividad.component';
+import { UpdateLeccionComponent } from './modules/programas/update-leccion/update-leccion.component';
 
 
 const routes: Routes = [
@@ -33,6 +37,10 @@ const routes: Routes = [
     { path: 'creacion-leccion', component: CreacionLeccionComponent  },
     { path: 'gestion-matriculas', component: GestionMatriculasComponent  },
     { path: 'creacion-actividad', component: CreacionActividadComponent  },
+    { path: 'update-programa/:id', component: UpdateProgramaComponent  },
+    { path: 'update-modulo/:id', component: UpdateModuloComponent  },
+    { path: 'update-leccion/:id', component: UpdateLeccionComponent  },
+    { path: 'update-actividad/:id', component: UpdateActividadComponent  },
 
   ], canActivate: [AuthGuard] },
 ];

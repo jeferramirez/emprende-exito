@@ -41,9 +41,7 @@ export class UpdateUsuarioComponent implements OnInit {
      if (resp.profile) {
         this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
       }
-     console.log(resp)
      const user =   new User( resp );
-     console.log(user)
      this.userForm.patchValue(user);
     });
   }
@@ -95,7 +93,6 @@ export class UpdateUsuarioComponent implements OnInit {
   getSeguimientos(): void {
     this.seguimientoSrv.getSeguimiento(this.idUser).subscribe(resp => {
       this.seguimientos = resp;
-      console.log(resp);
     })
   }
 

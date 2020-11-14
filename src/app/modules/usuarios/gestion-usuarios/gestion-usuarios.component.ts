@@ -1,3 +1,4 @@
+import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -29,13 +30,11 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userSrv: UsersService, private router: Router) {
+  constructor(private userSrv: UsersService, private router: Router, private generalSrv: GeneralService) {
     // this.dataSource = new MatTableDataSource();
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.getUser();
@@ -75,14 +74,17 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getUser(): void{
+  deleteFile(id): void{
+    this.generalSrv.deleteFile(id).subscribe();
+  }
+
+  getUser(): void {
     this.userSrv.getUsers().subscribe((users) => {
       this.dataSource = new MatTableDataSource(users);
     });
   }
 
   navigateUser(item): void {
-    console.log(item)
-    this.router.navigate(['home/actualizar-usuario/', item.id])
+    this.router.navigate(['home/actualizar-usuario/', item.id]);
   }
 }

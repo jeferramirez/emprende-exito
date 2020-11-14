@@ -5,17 +5,17 @@
     <div class="col-lg-12 col-md-12">
       <div class="card">
         <div class="card-header card-header-info">
-          <h4 class="card-title">Módulo</h4>
+          <h4 class="card-title">Actividad</h4>
         </div>
         <div class="card-body table-responsive">
           <div class="row my-3 mx-2">
             <div class="col-md-10">
-              <form [formGroup]="moduleForm">
+              <form [formGroup]="activityForm">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="bmd-label-floating"
-                        >Nombre del módulo</label
+                        >Nombre de actividad</label
                       >
                       <input
                         formControlName="nombre"
@@ -28,31 +28,13 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="desc">Descripción del módulo</label>
+                      <label for="desc">Descripción de actividad</label>
                       <textarea
                         class="form-control"
                         formControlName="descripcion"
                         id="desc"
                         rows="4"
                       ></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="cmbRol">Tutor</label>
-                      <div class="form-control">
-                        <mat-select
-                          formControlName="tutor"
-                          id="cmbRol"
-                          class="px-3"
-                        >
-                          <mat-option value="mentor"> Miguel </mat-option>
-                          <mat-option value="emprendedor"> Jefer </mat-option>
-                          <mat-option value="tutor"> Juan </mat-option>
-                        </mat-select>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -64,7 +46,7 @@
                   <label for="imageuser">
                     <img
                       class="card-img-top"
-                      [src]="previewimage || '../../../assets/photo.png'"
+                      [src]="previewimage || urlImage"
                       alt="Card image cap"
                       style="max-width: 200px; max-width: 200px"
                     />
@@ -78,7 +60,7 @@
                 </div>
                 <div class="card-body text-center">
                   <label class="photo-book" for="imageuser">
-                    Agregar imagen
+                    Cambiar imagen
                   </label>
                 </div>
               </div>
@@ -87,36 +69,11 @@
         </div>
         <button
           class="btn btn-primary mx-auto mb-4"
-          [disabled]="disabledButton"
-          (click)="createModule()"
+          [disabled]="activityForm.invalid"
+          (click)="updateActivity()"
         >
-          Crear módulo
+          Actualizar actividad
         </button>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-12 col-md-12 s">
-      <div class="card">
-        <div class="card-header card-header-info">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 align-self-center">
-              <h4 class="card-title">Lecciones</h4>
-            </div>
-            <div *ngIf="idModule !== null" class="col-lg-6 col-md-6 s text-right align-self-center">
-              <a
-                title="Agregar lección"
-                routerLink="../creacion-leccion"
-                class="btn btn-primary btn-fab btn-fab-mini btn-round m-0 p-0"
-              >
-                <i class="material-icons">queue</i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="card-body table-responsive">
-          <h3 class="text-center mt-2">Sin lecciones</h3>
-        </div>
       </div>
     </div>
   </div>

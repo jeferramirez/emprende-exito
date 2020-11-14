@@ -12,4 +12,23 @@ export class LessonService {
   createLesson(lesson: any): Observable<any> {
     return this.http.post(`${environment.URLAPI}/leccions`, lesson);
   }
+
+  getLessons(id: string): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/listaLeccions/${id}`);
+  }
+
+  getLesson(id: any): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/leccions/${id}`);
+  }
+
+  deleteLesson(id: any): Observable<any> {
+    return this.http.delete(`${environment.URLAPI}/deleteLesson/${id}`);
+  }
+
+  updateLesson(lesson: any, id: number): Observable<any> {
+    return this.http.put(
+      `${environment.URLAPI}/leccions/${id}`,
+      lesson
+    );
+  }
 }

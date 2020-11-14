@@ -26,7 +26,6 @@ export class UsersService {
   }
 
   updateUser(user: any, id: string): Observable<any> {
-    console.log(user, id);
     return this.http.put(`${environment.URLAPI}/users/${id}`, user);
   }
 

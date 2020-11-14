@@ -4322,7 +4322,7 @@ tbody.collapse.show {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
   color: #ffffff;
-  background-color: #2196f3;
+  background-color: #004E7B;
 }
 
 .nav-fill .nav-item {
@@ -17020,7 +17020,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #89229b;
+  color: #669547;
   text-decoration: none;
 }
 

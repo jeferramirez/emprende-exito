@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class GeneralService {
   file: any;
   previewimage: any;
-  varValue: any;
+  varValue = null;
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +33,6 @@ export class GeneralService {
   }
 
   async onFileSelect(event): Promise<any> {
-    console.log(event);
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
       const reader = await this.filReader(this.file);
@@ -43,6 +42,10 @@ export class GeneralService {
 
   uploadFile(file: any): Observable<any> {
     return this.http.post(`${environment.URLAPI}/upload`, file);
+  }
+
+  deleteFile(id): Observable<any> {
+    return this.http.delete(`${environment.URLAPI}/upload/files/`, id);
   }
 
   async getFile(file): Promise<any> {
@@ -56,5 +59,13 @@ export class GeneralService {
 
   setNavigationValue(valor: any): any {
     this.varValue = valor;
+  }
+
+  createFileIMG(IMG: any): Observable<any> {
+    return this.http.post(`${environment.URLAPI}/imagenes`, IMG);
+  }
+
+  createFileDOC(IMG: any): Observable<any> {
+    return this.http.post(`${environment.URLAPI}/documentos`, IMG);
   }
 }

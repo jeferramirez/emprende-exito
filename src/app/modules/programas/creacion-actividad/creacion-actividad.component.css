@@ -1,0 +1,25 @@
+.input-table {
+  outline: none;
+  border: 0px;
+  text-decoration: none;
+  border-radius: 0.3em;
+  background: rgb(240, 234, 234);
+  padding: 1em;
+}
+
+#videos {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.main-section{
+	margin:0 auto;
+	padding: 20px;
+	margin-top: 100px;
+	background-color: #fff;
+	box-shadow: 0px 0px 20px #c1c1c1;
+}
+.fileinput-remove,
+.fileinput-upload{
+	display: none;
+}
