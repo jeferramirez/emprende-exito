@@ -150,19 +150,18 @@ export class UpdateProgramaComponent implements OnInit {
       if (result.isConfirmed) {
         this.moduleSrv
           .deleteModule(id)
-          .pipe(
-            switchMap((data) => {
-              return this.moduleSrv.getModules(id);
-            })
-          )
           .subscribe(
             (resp) => {
-              this.modules = resp;
               Swal.fire(
                 '¡Éxito!',
                 'El módulo se eliminó éxitosamente.',
                 'success'
               );
+
+              setTimeout(() => {
+                this.getModules(this.idProgram);
+              }, 1400);
+
             },
             (error) => {
               Swal.fire('¡Error!', 'El mpodulo no se logró eliminar.', 'error');

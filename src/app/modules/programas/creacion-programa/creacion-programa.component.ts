@@ -77,7 +77,7 @@ export class CreacionProgramaComponent implements OnInit {
 
   async onFileSelect(event): Promise<any> {
     const { file, previewimage } = await this.generalSrv.onFileSelect(event);
-    this.programForm.get('imagen').setValue(file);
+    this.programForm.get('imagen').setValue('2');
     this.file = file;
     this.previewimage = previewimage;
   }
