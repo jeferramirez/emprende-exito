@@ -27,40 +27,30 @@
                     type="text"
                     class="form-control"
                     placeholder="Buscar..."
+
                   />
                 </div>
-                <table class="table">
+                <table class="table" aria-disabled="true">
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let item of usuarios">
                       <td class="text-center">
-                        <input type="checkbox" />
+                        <input type="checkbox" name="select"  [(ngModel)]="item.checked"/>
                       </td>
-                      <td>Jefferson Ramirez</td>
+                      <td>{{item.nombre}} {{item.apellido}}</td>
                     </tr>
-                    <tr>
-                      <td class="text-center">
-                        <input type="checkbox" />
-                      </td>
-                      <td>Miguel Castrillón</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <input type="checkbox" />
-                      </td>
-                      <td>James Rodriguez</td>
-                    </tr>
+
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="col-md-2 align-self-center">
               <div class="row">
-                <button class="btn btn-success mx-auto" title="Agregar">
+                <button (click)="addMatricula()" class="btn btn-success mx-auto" title="Agregar">
                   Agregar
                 </button>
               </div>
               <div class="row">
-                <button class="btn btn-danger mx-auto" title="Quitar">
+                <button (click)="removeMatricula()" class="btn btn-danger mx-auto" title="Quitar">
                   Quitar
                 </button>
               </div>
@@ -72,34 +62,24 @@
                 <mat-select
                   class="px-5 my-3"
                   placeholder="Seleccione un programa"
+                  (selectionChange)="changeProgram($event)"
                 >
                   <mat-option
-                    *ngFor="let program of programs"
-                    [value]="program.value"
-                  >
-                    {{ program.viewValue }}
+                    *ngFor="let program of programas"
+                    [value]="program.id">
+                    {{ program.nombre }}
                   </mat-option>
                 </mat-select>
 
                 <table class="table">
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let item of currentmatricula">
                       <td class="text-center">
-                        <input type="checkbox" />
+                        <input type="checkbox"   [(ngModel)]="item.checked"/>
                       </td>
-                      <td>Jefferson Ramirez</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <input type="checkbox" />
-                      </td>
-                      <td>Miguel Castrillón</td>
-                    </tr>
-                    <tr>
-                      <td class="text-center">
-                        <input type="checkbox" />
-                      </td>
-                      <td>James Rodriguez</td>
+                      <td>{{item.nombre}} {{item.apellido}}</td>
+                      <td>{{item.fechaMatricula}}</td>
+
                     </tr>
                   </tbody>
                 </table>
