@@ -152,7 +152,6 @@ export class UpdateModuloComponent implements OnInit {
           .deleteLesson(id)
           .subscribe(
             (resp) => {
-              this.lessons = resp;
               Swal.fire(
                 '¡Éxito!',
                 'La lección se eliminó éxitosamente.',
