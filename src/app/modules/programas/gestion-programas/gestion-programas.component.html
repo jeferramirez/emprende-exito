@@ -35,12 +35,11 @@
             </div>
             <div
               *ngFor="let program of programs; let i = index"
-              class="col-md-3"
+              class="col-md-2"
             >
               <div *ngIf="programs.length > 0" class="card card-program">
                 <img
                   class="card-img-top"
-                  style="height: 200px"
                   (click)="navigateProgram(program)"
                   [src]="getFile(program.imagen.url)"
                   rel="nofollow"

@@ -123,6 +123,7 @@ export class UpdateLeccionComponent implements OnInit {
   getActivitys(id: any): void {
     this.activitySrv.getActividads(id).subscribe((resp) => {
       this.activitys = resp;
+      console.log(resp);
     });
   }
 
@@ -151,7 +152,7 @@ export class UpdateLeccionComponent implements OnInit {
           .deleteActividads(id)
           .pipe(
             switchMap((data) => {
-              return this.lessonSrv.getLesson(id);
+              return this.activitySrv.getActividads(id);
             })
           )
           .subscribe(

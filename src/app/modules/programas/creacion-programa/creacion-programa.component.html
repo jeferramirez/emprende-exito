@@ -68,6 +68,7 @@
           </div>
         </div>
         <button
+          *ngIf="indButton"
           class="btn btn-primary mx-auto mb-4"
           [disabled]="programForm.invalid"
           (click)="createProgram()"

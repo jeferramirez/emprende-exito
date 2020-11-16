@@ -1,10 +1,13 @@
+import { ModalComponent } from './../modal/modal.component';
+import { switchMap } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
 import { ActivityService } from './../../../services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from './../../../services/general.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-update-actividad',
@@ -12,25 +15,48 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-actividad.component.css'],
 })
 export class UpdateActividadComponent implements OnInit {
+  @ViewChild(ModalComponent) modalComponent;
+
   activityForm: FormGroup;
   file: any;
   previewimage: any;
   activity;
   urlImage;
   idActivity;
+  videos = [];
+  documentos = [];
+  imagenes = [];
+  urlAPI = environment.URLAPI;
 
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,
     private route: ActivatedRoute,
     private activitySrv: ActivityService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.idActivity = this.route.snapshot.params['id'];
     this.getActivity(this.idActivity);
     this.initForm();
+    this.getVideos(this.idActivity);
+    this.getDocs(this.idActivity);
+    this.getIMG(this.idActivity);
+  }
+
+  openDialog(video, imagen, file): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        id: this.idActivity,
+        showVideos: video,
+        showImages: imagen,
+        showFiles: file,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   initForm(): void {
@@ -109,7 +135,7 @@ export class UpdateActividadComponent implements OnInit {
         },
         (error) => {
           Swal.fire({
-            title: 'Error!',
+            title: '¡Error!',
             text: 'No se logró actualizar la actividad.',
             icon: 'error',
             confirmButtonText: 'Ok',
@@ -117,5 +143,127 @@ export class UpdateActividadComponent implements OnInit {
           });
         }
       );
+  }
+
+  getVideos(id: any): void {
+    this.activitySrv.getVideos(id).subscribe((resp) => {
+      this.videos = resp;
+    });
+  }
+
+  getDocs(id: any): void {
+    this.activitySrv.getDocs(id).subscribe((resp) => {
+      this.documentos = resp;
+    });
+  }
+
+  getIMG(id: any): void {
+    this.activitySrv.getImagenes(id).subscribe((resp) => {
+      this.imagenes = resp;
+    });
+  }
+
+  deleteDoc(id: number, idFile: number): void {
+    Swal.fire({
+      title: '¿Está seguro de eliminar el archivo?',
+      text:
+        'Esta acción no se puede revertir y borrará todo lo relacionado al mismo.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.activitySrv
+          .deleteDoc(id)
+          .pipe(
+            switchMap((data) => {
+              return this.activitySrv.deleteFile(idFile);
+            })
+          )
+          .subscribe(
+            (resp) => {
+              Swal.fire(
+                '¡Éxito!',
+                'El archivo se eliminó éxitosamente.',
+                'success'
+              );
+              this.getDocs(this.idActivity);
+            },
+            (error) => {
+              Swal.fire('¡Error!', 'El archivo no se logró eliminar.', 'error');
+            }
+          );
+      }
+    });
+  }
+
+  deleteImagen(id: number, idFile: number): void {
+    Swal.fire({
+      title: '¿Está seguro de eliminar la imagen?',
+      text:
+        'Esta acción no se puede revertir y borrará todo lo relacionado a la misma.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.activitySrv
+          .deleteImagen(id)
+          .pipe(
+            switchMap((data) => {
+              return this.activitySrv.deleteFile(idFile);
+            })
+          )
+          .subscribe(
+            (resp) => {
+              Swal.fire(
+                '¡Éxito!',
+                'La imagen se eliminó éxitosamente.',
+                'success'
+              );
+              this.getIMG(this.idActivity);
+            },
+            (error) => {
+              Swal.fire('¡Error!', 'La imagen no se logró eliminar.', 'error');
+            }
+          );
+      }
+    });
+  }
+
+  deleteVideo(id: number): void {
+    Swal.fire({
+      title: '¿Está seguro de eliminar el vídeo?',
+      text:
+        'Esta acción no se puede revertir y borrará todo lo relacionado al mismo.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.activitySrv.deleteVideo(id).subscribe(
+          (resp) => {
+            Swal.fire(
+              '¡Éxito!',
+              'El vídeo se eliminó éxitosamente.',
+              'success'
+            );
+            this.getVideos(this.idActivity);
+          },
+          (error) => {
+            Swal.fire('¡Error!', 'El vídeo no se logró eliminar.', 'error');
+          }
+        );
+      }
+    });
   }
 }

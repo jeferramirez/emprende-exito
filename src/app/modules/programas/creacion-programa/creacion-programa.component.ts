@@ -15,6 +15,7 @@ export class CreacionProgramaComponent implements OnInit {
   idProgram = null;
   file: any;
   previewimage: any;
+  indButton = true;
 
   constructor(
     private programSrv: ProgramsService,
@@ -62,6 +63,7 @@ export class CreacionProgramaComponent implements OnInit {
             confirmButtonText: 'Ok',
             timer: 3000,
           });
+          this.indButton = false;
         },
         (error) => {
           Swal.fire({

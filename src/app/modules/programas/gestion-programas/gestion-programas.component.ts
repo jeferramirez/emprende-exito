@@ -13,10 +13,7 @@ import { map, switchMap } from 'rxjs/operators';
 export class GestionProgramasComponent implements OnInit {
   programs = [];
 
-  constructor(
-    private programServ: ProgramsService,
-    private router: Router
-  ) {}
+  constructor(private programServ: ProgramsService, private router: Router) {}
 
   ngOnInit(): void {
     this.getPrograms();
@@ -54,7 +51,6 @@ export class GestionProgramasComponent implements OnInit {
           )
           .subscribe(
             (resp) => {
-              this.programs = resp;
               Swal.fire(
                 '¡Éxito!',
                 'El programa se eliminó éxitosamente.',
@@ -62,7 +58,11 @@ export class GestionProgramasComponent implements OnInit {
               );
             },
             (error) => {
-              Swal.fire('¡Error!', 'El programa no se logró eliminar.', 'error');
+              Swal.fire(
+                '¡Error!',
+                'El programa no se logró eliminar.',
+                'error'
+              );
             }
           );
       }

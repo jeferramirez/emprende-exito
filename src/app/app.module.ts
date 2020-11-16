@@ -28,6 +28,7 @@ import { UpdateProgramaComponent } from './modules/programas/update-programa/upd
 import { UpdateModuloComponent } from './modules/programas/update-modulo/update-modulo.component';
 import { UpdateLeccionComponent } from './modules/programas/update-leccion/update-leccion.component';
 import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
+import { ModalComponent } from './modules/programas/modal/modal.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { UpdateActividadComponent } from './modules/programas/update-actividad/u
     UpdateModuloComponent,
     UpdateLeccionComponent,
     UpdateActividadComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

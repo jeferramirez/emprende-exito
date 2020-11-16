@@ -25,6 +25,7 @@ export class CreacionActividadComponent implements OnInit {
   filesIMG = [];
   filesDOC = [];
   idActivity;
+  indButton = true;
 
   constructor(
     private activitySrv: ActivityService,
@@ -35,7 +36,6 @@ export class CreacionActividadComponent implements OnInit {
 
   ngOnInit(): void {
     this.idLesson = this.generalSrv.getNavigationValue();
-    console.log(this.idLesson);
     this.createActivityForm();
   }
 
@@ -82,6 +82,7 @@ export class CreacionActividadComponent implements OnInit {
 
           this.uploadFilesIMG(this.idActivity);
           this.uploadFilesDOC(this.idActivity);
+          this.indButton = false;
 
           setTimeout(() => {
             this.router.navigate(['home/gestion-programas']);
