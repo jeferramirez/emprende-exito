@@ -150,19 +150,18 @@ export class UpdateModuloComponent implements OnInit {
       if (result.isConfirmed) {
         this.lessonSrv
           .deleteLesson(id)
-          .pipe(
-            switchMap((data) => {
-              return this.lessonSrv.getLessons(id);
-            })
-          )
           .subscribe(
             (resp) => {
-              this.lessons = resp;
               Swal.fire(
                 '¡Éxito!',
                 'La lección se eliminó éxitosamente.',
                 'success'
               );
+
+              setTimeout(() => {
+                this.getLessons(this.idModule);
+              }, 1400);
+
             },
             (error) => {
               Swal.fire('¡Error!', 'La lección no se logró eliminar.', 'error');

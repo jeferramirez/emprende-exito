@@ -89,7 +89,7 @@ export class CreacionModuloComponent implements OnInit {
 
   async onFileSelect(event): Promise<any> {
     const { file, previewimage } = await this.generalSrv.onFileSelect(event);
-    this.moduleForm.get('imagen').setValue(file);
+    this.moduleForm.get('imagen').setValue('2');
     this.file = file;
     this.previewimage = previewimage;
   }
