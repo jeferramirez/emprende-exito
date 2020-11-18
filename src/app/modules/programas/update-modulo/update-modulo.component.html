@@ -44,13 +44,12 @@
                       <label for="cmbRol">Tutor</label>
                       <div class="form-control">
                         <mat-select
-                          formControlName="tutor"
+                          formControlName="users_permissions_user"
                           id="cmbRol"
                           class="px-3"
                         >
-                          <mat-option value="mentor"> Miguel </mat-option>
-                          <mat-option value="emprendedor"> Jefer </mat-option>
-                          <mat-option value="tutor"> Juan </mat-option>
+                          <mat-option *ngFor="let item of tutores" [value]="item.id"> {{item.nombre }} {{item.apellido}} </mat-option>
+
                         </mat-select>
                       </div>
                     </div>

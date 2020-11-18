@@ -7,6 +7,7 @@ import { GeneralService } from './../../../services/general.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-update-modulo',
@@ -21,6 +22,7 @@ export class UpdateModuloComponent implements OnInit {
   urlImage;
   lessons = [];
   idModule;
+  tutores = [];
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +30,8 @@ export class UpdateModuloComponent implements OnInit {
     private route: ActivatedRoute,
     private moduleSrv: ModulesService,
     private router: Router,
-    private lessonSrv: LessonService
+    private lessonSrv: LessonService,
+    private userSrv: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -36,13 +39,23 @@ export class UpdateModuloComponent implements OnInit {
     this.generalSrv.setNavigationValue(this.idModule);
     this.getModule(this.idModule);
     this.initForm();
+    this.getTutores();
+  }
+
+
+
+  getTutores(): void {
+    this.userSrv.getUsers().subscribe( res => {
+      this.tutores = res.filter(usuario => usuario.rol === 'Tutor');
+      console.log(this.tutores)
+    });
   }
 
   initForm(): void {
     this.moduleForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
-      tutor: ['', [Validators.required]],
+      users_permissions_user: ['', [Validators.required]],
     });
   }
   getModule(id: any): void {
@@ -97,8 +110,8 @@ export class UpdateModuloComponent implements OnInit {
   }
 
   updateModule(): void {
-    this.moduleSrv
-      .updateModule(this.moduleForm.value, this.module.id)
+
+    this.moduleSrv.updateModule(this.moduleForm.value, this.module.id)
       .subscribe(
         (resp) => {
           Swal.fire({
