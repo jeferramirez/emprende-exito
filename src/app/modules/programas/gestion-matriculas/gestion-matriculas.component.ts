@@ -54,7 +54,7 @@ export class GestionMatriculasComponent implements OnInit {
       this.currentmatricula.map(matricula => {
         const newmatricula = {
           users_permissions_user: matricula.id,
-          fechaMatricula: moment().toDate(),
+          fechamatricula: moment().toDate(),
           programa: this.selectProgram
         };
         if (!matricula.id_matricula) {
@@ -121,7 +121,7 @@ export class GestionMatriculasComponent implements OnInit {
         apellido: matricula.users_permissions_user.apellido,
         id: matricula.users_permissions_user.id,
         id_matricula: matricula.id,
-        fechaMatricula: matricula.fechaMatricula
+        fechamatricula: matricula.fechamatricula
       }));
 
 
@@ -137,7 +137,7 @@ export class GestionMatriculasComponent implements OnInit {
         apellido: matricula.users_permissions_user.apellido,
         id: matricula.users_permissions_user.id,
         id_matricula: matricula.id,
-        fechaMatricula: matricula.fechaMatricula
+        fechamatricula: matricula.fechamatricula
       }));
   }
 
@@ -162,6 +162,7 @@ export class GestionMatriculasComponent implements OnInit {
 
   getMatriculas(): void {
     this.matriculaSrv.getMatriculas().subscribe(resp => {
+      console.log(resp)
       this.matriculas = resp;
     });
 
