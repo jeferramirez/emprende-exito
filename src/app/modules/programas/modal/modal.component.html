@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h3>Añade tus recursos.</h3>
+  <h3 *ngIf="data.showVideos || data.showImages || data.showFiles">Añade tus recursos.</h3>
   <div class="card">
     <div class="card-body">
       <div class="row mx-2">
@@ -120,6 +120,44 @@
             </div>
           </div>
         </div>
+
+        <div
+          *ngIf="data.showUpdateVideo"
+          class="tab-pane active rounded table-responsive"
+        >
+          <div class="tab-pane ml-3" id="archivos" aria-expanded="false">
+            <div class="form-group form-file-upload form-file-multiple">
+              <table class="table" id="tableImg">
+                <thead>
+                  <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">URL</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr class="tableRow">
+                    <td>
+                      <input
+                        [(ngModel)]="data.titulo"
+                        type="text"
+                        class="input-table"
+                      />
+                    </td>
+                    <td colspan="2">
+                      <input
+                       [(ngModel)]="data.URL"
+                        type="text"
+                        class="input-table"
+                        style="min-width: 280px"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -163,6 +201,21 @@
       [mat-dialog-close]="true"
       cdkFocusInitial
       (click)="uploadFilesDOC(data.id)"
+    >
+      Guardar
+    </button>
+  </div>
+
+  <div *ngIf="data.showUpdateVideo" class="pull-right">
+    <button class="btn btn-danger mr-2" mat-button mat-dialog-close>
+      Cancelar
+    </button>
+    <button
+      class="btn btn-primary"
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      (click)="updateVideo()"
     >
       Guardar
     </button>

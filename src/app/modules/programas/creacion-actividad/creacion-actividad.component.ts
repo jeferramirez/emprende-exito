@@ -48,7 +48,6 @@ export class CreacionActividadComponent implements OnInit {
   }
 
   createActivity(): void {
-    console.log(this.idLesson);
     const lesson = this.activityForm.value;
     lesson.estado = true;
     lesson.leccion = this.idLesson;

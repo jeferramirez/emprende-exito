@@ -30,6 +30,10 @@ export class ActivityService {
     return this.http.post(`${environment.URLAPI}/videos`, activityVideo);
   }
 
+  updateResourceVideo( id: any, video: any,): Observable<any> {
+    return this.http.put(`${environment.URLAPI}/videos/${id}`, video);
+  }
+
   updateActivity(activity: any, id: number): Observable<any> {
     return this.http.put(`${environment.URLAPI}/actividads/${id}`, activity);
   }

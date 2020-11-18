@@ -1,7 +1,6 @@
 import { switchMap } from 'rxjs/operators';
 import { GeneralService } from './../../../services/general.service';
-import { Router } from '@angular/router';
-import { forkJoin, observable, of } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { ActivityService } from './../../../services/activity.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -66,6 +65,7 @@ export class ModalComponent implements OnInit {
       }
     );
   }
+
   addFileIMG(): void {
     document.getElementById('multiSelectIMG').click();
   }
@@ -170,5 +170,35 @@ export class ModalComponent implements OnInit {
           }
         );
     });
+  }
+
+  updateVideo(): void {
+    this.activitySrv
+      .updateResourceVideo(this.data.idVideo, {
+        id: this.data.idVideo,
+        titulo: this.data.titulo,
+        URL: this.data.URL,
+        actividad: this.data.id,
+      })
+      .subscribe(
+        (resp) => {
+          Swal.fire({
+            title: '¡Éxito!',
+            text: 'Video actualizado.',
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            timer: 3000,
+          });
+        },
+        (error) => {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'No se logró actualizar el video.',
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            timer: 3000,
+          });
+        }
+      );
   }
 }

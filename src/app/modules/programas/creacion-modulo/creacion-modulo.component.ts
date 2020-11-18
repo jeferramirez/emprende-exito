@@ -1,3 +1,4 @@
+import { UsersService } from './../../../services/users.service';
 import { ModulesService } from './../../../services/modules.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeneralService } from './../../../services/general.service';
@@ -17,17 +18,19 @@ export class CreacionModuloComponent implements OnInit {
   previewimage: any;
   idModule = null;
   indButton = true;
+  tutores = [];
 
   constructor(
     private modulesSrv: ModulesService,
     private fb: FormBuilder,
-    private generalSrv: GeneralService
+    private generalSrv: GeneralService,
+    private userSrv: UsersService
   ) {}
 
   ngOnInit(): void {
     this.idProgram = this.generalSrv.getNavigationValue();
-    console.log(this.idProgram);
     this.createModuleForm();
+    this.getTutores();
   }
 
   createModuleForm(): void {
@@ -35,7 +38,7 @@ export class CreacionModuloComponent implements OnInit {
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       imagen: ['', [Validators.required]],
-      tutor: ['', [Validators.required]],
+      users_permissions_user: ['', [Validators.required]],
     });
   }
 
@@ -43,6 +46,11 @@ export class CreacionModuloComponent implements OnInit {
     return this.moduleForm.invalid ? true : false;
   }
 
+  getTutores(): void {
+    this.userSrv.getUsers().subscribe((res) => {
+      this.tutores = res.filter((usuario) => usuario.rol === 'Tutor');
+    });
+  }
 
   createModule(): void {
     const module = this.moduleForm.value;

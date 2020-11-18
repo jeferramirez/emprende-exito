@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
+import { identity } from 'rxjs';
 
 @Component({
   selector: 'app-update-actividad',
@@ -55,8 +56,21 @@ export class UpdateActividadComponent implements OnInit {
         showFiles: file,
       },
     });
+  }
 
-    dialogRef.afterClosed().subscribe((result) => {});
+  modalVideo(id, titulo, URL): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        id: this.idActivity,
+        showVideos: false,
+        showImages: false,
+        showFiles: false,
+        showUpdateVideo: true,
+        titulo,
+        URL,
+        idVideo: id
+      },
+    });
   }
 
   initForm(): void {

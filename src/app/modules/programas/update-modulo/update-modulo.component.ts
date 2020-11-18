@@ -42,12 +42,9 @@ export class UpdateModuloComponent implements OnInit {
     this.getTutores();
   }
 
-
-
   getTutores(): void {
-    this.userSrv.getUsers().subscribe( res => {
-      this.tutores = res.filter(usuario => usuario.rol === 'Tutor');
-      console.log(this.tutores)
+    this.userSrv.getUsers().subscribe((res) => {
+      this.tutores = res.filter((usuario) => usuario.rol === 'Tutor');
     });
   }
 
@@ -62,7 +59,10 @@ export class UpdateModuloComponent implements OnInit {
     this.moduleSrv.getModule(id).subscribe((resp) => {
       this.module = resp;
       this.urlImage = `${environment.URLAPI}` + resp.imagen.url;
-      this.moduleForm.patchValue(this.module);
+      this.moduleForm.patchValue({
+        ...this.module,
+        users_permissions_user: this.module.users_permissions_user.id,
+      });
       this.getLessons(this.idModule);
     });
   }
@@ -110,8 +110,8 @@ export class UpdateModuloComponent implements OnInit {
   }
 
   updateModule(): void {
-
-    this.moduleSrv.updateModule(this.moduleForm.value, this.module.id)
+    this.moduleSrv
+      .updateModule(this.moduleForm.value, this.module.id)
       .subscribe(
         (resp) => {
           Swal.fire({
@@ -161,25 +161,22 @@ export class UpdateModuloComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.lessonSrv
-          .deleteLesson(id)
-          .subscribe(
-            (resp) => {
-              Swal.fire(
-                '¡Éxito!',
-                'La lección se eliminó éxitosamente.',
-                'success'
-              );
+        this.lessonSrv.deleteLesson(id).subscribe(
+          (resp) => {
+            Swal.fire(
+              '¡Éxito!',
+              'La lección se eliminó éxitosamente.',
+              'success'
+            );
 
-              setTimeout(() => {
-                this.getLessons(this.idModule);
-              }, 1400);
-
-            },
-            (error) => {
-              Swal.fire('¡Error!', 'La lección no se logró eliminar.', 'error');
-            }
-          );
+            setTimeout(() => {
+              this.getLessons(this.idModule);
+            }, 1400);
+          },
+          (error) => {
+            Swal.fire('¡Error!', 'La lección no se logró eliminar.', 'error');
+          }
+        );
       }
     });
   }

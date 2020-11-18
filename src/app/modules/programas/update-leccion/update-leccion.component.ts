@@ -123,7 +123,6 @@ export class UpdateLeccionComponent implements OnInit {
   getActivitys(id: any): void {
     this.activitySrv.getActividads(id).subscribe((resp) => {
       this.activitys = resp;
-      console.log(resp);
     });
   }
 
@@ -150,19 +149,17 @@ export class UpdateLeccionComponent implements OnInit {
       if (result.isConfirmed) {
         this.activitySrv
           .deleteActividads(id)
-          .pipe(
-            switchMap((data) => {
-              return this.activitySrv.getActividads(id);
-            })
-          )
           .subscribe(
             (resp) => {
-              this.activitys = resp;
               Swal.fire(
                 '¡Éxito!',
                 'La actividad se eliminó éxitosamente.',
                 'success'
               );
+
+              setTimeout(() => {
+                this.getActivitys(this.idLesson);
+              }, 1400);
             },
             (error) => {
               Swal.fire('¡Error!', 'La actividad no se logró eliminar.', 'error');

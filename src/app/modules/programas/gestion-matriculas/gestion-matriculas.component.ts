@@ -41,7 +41,6 @@ export class GestionMatriculasComponent implements OnInit {
       this.selectedUsers.forEach(user => {
 
         const find = this.currentmatricula.findIndex(matricula => matricula.id == user.id);
-        console.log(find)
         if (find == -1) {
           user.fechaMatricula = moment().format('YYYY-MM-DD'),
           this.currentmatricula.push(user);
@@ -84,9 +83,6 @@ export class GestionMatriculasComponent implements OnInit {
       this.usuarios = usuarios.filter(usuario => usuario.rol === 'Emprendedor');
       this.usuarios = this.usuarios.map(usuario => ({ ...usuario, checked: false }));
       this.cacheUser = this.usuarios;
-
-      console.log(this.usuarios)
-
     });
   }
 
@@ -96,7 +92,6 @@ export class GestionMatriculasComponent implements OnInit {
     const observables = [];
     this.currentmatricula.map( matricula =>  {
       if (matricula.checked) {
-        console.log(matricula)
         observables.push(this.matriculaSrv.deleteMatricula(matricula.id_matricula));
       }
     });
@@ -162,7 +157,6 @@ export class GestionMatriculasComponent implements OnInit {
 
   getMatriculas(): void {
     this.matriculaSrv.getMatriculas().subscribe(resp => {
-      console.log(resp)
       this.matriculas = resp;
     });
 
