@@ -1,0 +1,170 @@
+<div class="container-fluid">
+  <h3>Añade tus recursos.</h3>
+  <div class="card">
+    <div class="card-body">
+      <div class="row mx-2">
+        <div
+          *ngIf="data.showVideos"
+          class="tab-pane active rounded table-responsive"
+          id="videos"
+        >
+          <table class="table" id="tableImg">
+            <thead>
+              <tr>
+                <th scope="col">Titulo</th>
+                <th scope="col">URL</th>
+                <th scope="col" style="text-align: right">
+                  <a
+                    title="Agregar nueva fila"
+                    (click)="addRow()"
+                    class="btn btn-primary btn-fab btn-fab-mini btn-round"
+                  >
+                    <i class="material-icons">video_call</i>
+                  </a>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="tableRow" *ngFor="let video of videos">
+                <td>
+                  <input
+                    [(ngModel)]="video.titulo"
+                    type="text"
+                    class="input-table"
+                  />
+                </td>
+                <td colspan="2">
+                  <input
+                    [(ngModel)]="video.URL"
+                    type="text"
+                    class="input-table"
+                    style="min-width: 280px"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          *ngIf="data.showImages"
+          class="tab-pane active rounded table-responsive"
+        >
+          <div class="tab-pane ml-3" id="imagenes" aria-expanded="false">
+            <div class="form-group form-file-upload form-file-multiple">
+              <input
+                (change)="onChangeIMG($event)"
+                id="multiSelectIMG"
+                type="file"
+                multiple
+                class="inputFileHidden"
+              />
+              <div class="input-group">
+                <input
+                  style="min-width: 600px"
+                  (click)="addFileIMG()"
+                  [(ngModel)]="nameIMG"
+                  type="text"
+                  class="form-control inputFileVisible"
+                  placeholder="Imagenes"
+                  multiple
+                />
+                <span class="input-group-btn">
+                  <button
+                    type="button"
+                    class="btn btn-fab btn-round btn-primary"
+                    (click)="addFileIMG()"
+                  >
+                    <i class="material-icons">layers</i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="data.showFiles"
+          class="tab-pane active rounded table-responsive"
+        >
+          <div class="tab-pane ml-3" id="archivos" aria-expanded="false">
+            <div class="form-group form-file-upload form-file-multiple">
+              <input
+                (change)="onChangeDOC($event)"
+                id="multiSelectDOC"
+                type="file"
+                multiple
+                class="inputFileHidden"
+              />
+              <div class="input-group">
+                <input
+                  style="min-width: 600px"
+                  (click)="addFileDOC()"
+                  [(ngModel)]="nameDOC"
+                  type="text"
+                  class="form-control inputFileVisible"
+                  placeholder="Archivos"
+                  multiple
+                />
+                <span class="input-group-btn">
+                  <button
+                    type="button"
+                    class="btn btn-fab btn-round btn-primary"
+                    (click)="addFileDOC()"
+                  >
+                    <i class="material-icons">layers</i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="data.showVideos" class="pull-right">
+    <button class="btn btn-danger mr-2" mat-button mat-dialog-close>
+      Cancelar
+    </button>
+    <button
+      class="btn btn-primary"
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      (click)="insertURL(data.id)"
+    >
+      Guardar
+    </button>
+  </div>
+
+  <div *ngIf="data.showImages" class="pull-right">
+    <button class="btn btn-danger mr-2" mat-button mat-dialog-close>
+      Cancelar
+    </button>
+    <button
+      class="btn btn-primary"
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      (click)="uploadFilesIMG(data.id)"
+    >
+      Guardar
+    </button>
+  </div>
+
+  <div *ngIf="data.showFiles" class="pull-right">
+    <button class="btn btn-danger mr-2" mat-button mat-dialog-close>
+      Cancelar
+    </button>
+    <button
+      class="btn btn-primary"
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      (click)="uploadFilesDOC(data.id)"
+    >
+      Guardar
+    </button>
+  </div>
+</div>

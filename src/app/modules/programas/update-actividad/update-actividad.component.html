@@ -66,6 +66,249 @@
               </div>
             </div>
           </div>
+          <div class="row mx-2">
+            <ul class="nav nav-pills nav-pills-info mb-4" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-toggle="tab"
+                  href="#videos"
+                  role="tablist"
+                  aria-expanded="true"
+                >
+                  Videos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  href="#imagenes"
+                  role="tablist"
+                  aria-expanded="false"
+                >
+                  Imagenes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="tab"
+                  href="#archivos"
+                  role="tablist"
+                  aria-expanded="false"
+                >
+                  Archivos
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="row mx-2">
+            <div class="tab-content tab-space">
+              <div
+                class="tab-pane active rounded table-responsive"
+                id="videos"
+                aria-expanded="true"
+              >
+                <div *ngIf="videos.length <= 0">
+                  <label style="color: black"
+                    >Sin videos para mostrar -
+                    <a
+                      (click)="openDialog(true, false, false)"
+                      style="font: bold; color: #89b021; cursor: pointer"
+                      >Agregar videos
+                    </a>
+                  </label>
+                </div>
+                <table *ngIf="videos.length > 0" class="table" id="tableImg">
+                  <thead>
+                    <tr>
+                      <th scope="col">Titulo</th>
+                      <th scope="col">URL</th>
+                      <th scope="col" class="text-center">
+                        <a
+                          title="Agregar videos"
+                          (click)="openDialog(true, false, false)"
+                          class="btn btn-primary btn-fab btn-fab-mini btn-round"
+                        >
+                          <i class="material-icons">add_to_queue</i>
+                        </a>
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr class="tableRow" *ngFor="let video of videos">
+                      <td>
+                        <input
+                          disabled
+                          [(ngModel)]="video.titulo"
+                          type="text"
+                          class="input-table"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          disabled
+                          [(ngModel)]="video.URL"
+                          type="text"
+                          class="input-table"
+                          style="min-width: 280px"
+                        />
+                      </td>
+                      <td>
+                        <a
+                          title="Visualizar"
+                          href="{{ video.URL }}"
+                          target="_blank"
+                          class="btn btn-info btn-fab btn-fab-mini btn-round"
+                        >
+                          <i class="material-icons">visibility</i>
+                        </a>
+                        <a
+                          title="Editar"
+                          class="btn btn-warning btn-fab btn-fab-mini btn-round"
+                        >
+                          <i class="material-icons">create</i>
+                        </a>
+                        <a
+                          title="Eliminar"
+                          (click)="deleteVideo(video.id)"
+                          class="btn btn-danger btn-fab btn-fab-mini btn-round"
+                        >
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane ml-3" id="imagenes" aria-expanded="false">
+                <div *ngIf="imagenes.length <= 0">
+                  <label style="color: black"
+                    >Sin imagenes para mostrar -
+                    <a
+                      (click)="openDialog(false, true, false)"
+                      style="font: bold; color: #89b021; cursor: pointer"
+                      >Agregar imagenes
+                    </a>
+                  </label>
+                </div>
+                <div *ngIf="imagenes.length > 0" class="table-responsive">
+                  <table class="table" id="tableImg">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col" class="text-center">
+                          <a
+                            title="Agregar videos"
+                            (click)="openDialog(false, true, false)"
+                            class="btn btn-primary btn-fab btn-fab-mini btn-round"
+                          >
+                            <i class="material-icons">add_photo_alternate</i>
+                          </a>
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr
+                        class="tableRow"
+                        *ngFor="let imagen of imagenes; let i = index"
+                      >
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                          {{ imagen.imagen.name }}
+                        </td>
+
+                        <td>
+                          <a
+                            title="Visualizar"
+                            href="{{ urlAPI + imagen.imagen.url }}"
+                            target="_blank"
+                            class="btn btn-info btn-fab btn-fab-mini btn-round"
+                          >
+                            <i class="material-icons">visibility</i>
+                          </a>
+                          <a
+                            title="Eliminar"
+                            (click)="deleteImagen(imagen.id, imagen.imagen.id)"
+                            class="btn btn-danger btn-fab btn-fab-mini btn-round"
+                          >
+                            <i class="material-icons">delete</i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane ml-3" id="archivos" aria-expanded="false">
+                <div *ngIf="documentos.length <= 0">
+                  <label style="color: black"
+                    >Sin archivos para mostrar -
+                    <a
+                      (click)="openDialog(false, false, true)"
+                      style="font: bold; color: #89b021; cursor: pointer"
+                      >Agregar archivos
+                    </a>
+                  </label>
+                </div>
+                <div class="table-responsive" *ngIf="documentos.length > 0">
+                  <table class="table" id="tableImg">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col" class="text-center">
+                          <a
+                            title="Agregar videos"
+                            (click)="openDialog(false, false, true)"
+                            class="btn btn-primary btn-fab btn-fab-mini btn-round"
+                          >
+                            <i class="material-icons">create_new_folder</i>
+                          </a>
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr
+                        class="tableRow"
+                        *ngFor="let documento of documentos; let i = index"
+                      >
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                          {{ documento.imagen.name }}
+                        </td>
+
+                        <td>
+                          <a
+                            title="Descargar"
+                            href="{{ urlAPI + documento.imagen.url }}"
+                            target="_blank"
+                            class="btn btn-info btn-fab btn-fab-mini btn-round"
+                          >
+                            <i class="material-icons">get_app</i>
+                          </a>
+                          <a
+                            title="Eliminar"
+                            (click)="
+                              deleteDoc(documento.id, documento.imagen.id)
+                            "
+                            class="btn btn-danger btn-fab btn-fab-mini btn-round"
+                          >
+                            <i class="material-icons">delete</i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <button
           class="btn btn-primary mx-auto mb-4"

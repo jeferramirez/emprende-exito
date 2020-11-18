@@ -16,6 +16,7 @@ export class CreacionModuloComponent implements OnInit {
   file: any;
   previewimage: any;
   idModule = null;
+  indButton = true;
 
   constructor(
     private modulesSrv: ModulesService,
@@ -72,6 +73,7 @@ export class CreacionModuloComponent implements OnInit {
             confirmButtonText: 'Ok',
             timer: 3000,
           });
+          this.indButton = false;
         },
         (error) => {
           Swal.fire({
