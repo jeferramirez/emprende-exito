@@ -22,6 +22,7 @@ export class UpdateProgramaComponent implements OnInit {
   program;
   urlImage;
   modules = [];
+  rol;
 
   constructor(
     private fb: FormBuilder,
@@ -37,6 +38,7 @@ export class UpdateProgramaComponent implements OnInit {
     this.generalSrv.setNavigationValue(this.idProgram);
     this.getProgram(this.idProgram);
     this.initForm();
+    this.rol = this.generalSrv.getRolUser();
   }
 
   initForm(): void {

@@ -23,6 +23,7 @@ export class UpdateModuloComponent implements OnInit {
   lessons = [];
   idModule;
   tutores = [];
+  rol;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +41,7 @@ export class UpdateModuloComponent implements OnInit {
     this.getModule(this.idModule);
     this.initForm();
     this.getTutores();
+    this.rol = this.generalSrv.getRolUser();
   }
 
   getTutores(): void {

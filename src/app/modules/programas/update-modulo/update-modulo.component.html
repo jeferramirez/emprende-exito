@@ -75,7 +75,7 @@
                     id="imageuser"
                   />
                 </div>
-                <div class="card-body text-center">
+                <div *ngIf="rol === 'Mentor' "class="card-body text-center">
                   <label class="photo-book" for="imageuser">
                     Cambiar imagen
                   </label>
@@ -85,6 +85,7 @@
           </div>
         </div>
         <button
+          *ngIf="rol === 'Mentor' "
           class="btn btn-primary mx-auto mb-4"
           [disabled]="moduleForm.invalid"
           (click)="updateModule()"
@@ -103,7 +104,7 @@
               <h4 class="card-title">Lecciones</h4>
             </div>
             <!-- *ngIf="idModule !== null" -->
-            <div class="col-lg-6 col-md-6 s text-right align-self-center">
+            <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="col-lg-6 col-md-6 s text-right align-self-center">
               <a
                 title="Agregar lección"
                 routerLink="../../creacion-leccion"
@@ -132,7 +133,7 @@
                 <img class="card-img-top" [src]="getFile(lesson.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateLesson(lesson)">
                 <div class="card-body">
                   <h3 class="card-title text-center">{{lesson.nombre}}</h3>
-                  <div class="card-footer justify-content-center">
+                  <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="card-footer justify-content-center">
                     <a title="Editar lección" (click)="navigateLesson(module)">
                       <i class="material-icons text-primary mx-2" >edit</i>
                     </a>

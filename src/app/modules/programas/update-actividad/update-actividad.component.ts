@@ -28,6 +28,7 @@ export class UpdateActividadComponent implements OnInit {
   documentos = [];
   imagenes = [];
   urlAPI = environment.URLAPI;
+  rol;
 
   constructor(
     private fb: FormBuilder,
@@ -45,6 +46,8 @@ export class UpdateActividadComponent implements OnInit {
     this.getVideos(this.idActivity);
     this.getDocs(this.idActivity);
     this.getIMG(this.idActivity);
+    this.rol = this.generalSrv.getRolUser();
+
   }
 
   openDialog(video, imagen, file): void {

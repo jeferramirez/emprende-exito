@@ -23,6 +23,7 @@ export class GestionPerfilComponent implements OnInit {
   urlImage;
   idProfile;
   resultPass;
+  rol;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class GestionPerfilComponent implements OnInit {
     this.initForm();
     this.setUser();
     this.getProfileUser();
+    this.rol = this.generalSrv.getRolUser();
   }
 
   initForm(): void {
@@ -74,7 +76,7 @@ export class GestionPerfilComponent implements OnInit {
   setUser(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userForm.patchValue(this.user.user);
-    this.urlImage = `${environment.URLAPI}` + this.user.user.profile.url;
+    this.urlImage = `${environment.URLAPI}` + this.user.user.profile?.url;
   }
 
   handleSimulateClick(): void {

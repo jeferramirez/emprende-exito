@@ -1,3 +1,4 @@
+import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,13 +20,14 @@ export class UpdateUsuarioComponent implements OnInit {
   idUser;
   seguimientos = [];
   profilePicture;
+
   constructor(
     private route: ActivatedRoute,
     private userSrv: UsersService,
     private fb: FormBuilder,
-    private seguimientoSrv: SeguimientoService) {
-  }
-
+    private seguimientoSrv: SeguimientoService,
+    private generalSrv: GeneralService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -36,13 +38,12 @@ export class UpdateUsuarioComponent implements OnInit {
   }
 
   getUser(id: string): void {
-    this.userSrv.getUser(id).subscribe( resp => {
-
-     if (resp.profile) {
+    this.userSrv.getUser(id).subscribe((resp) => {
+      if (resp.profile) {
         this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
       }
-     const user =   new User( resp );
-     this.userForm.patchValue(user);
+      const user = new User(resp);
+      this.userForm.patchValue(user);
     });
   }
 
@@ -50,7 +51,7 @@ export class UpdateUsuarioComponent implements OnInit {
     this.userForm = this.fb.group({
       username: ['', [Validators.required]],
       fechaProximoSeguimiento: ['', [Validators.required]],
-      fechaUltimoSeguimiento: ['' , [Validators.required]],
+      fechaUltimoSeguimiento: ['', [Validators.required]],
       descripcion: [''],
       id: [''],
       email: [''],
@@ -64,38 +65,37 @@ export class UpdateUsuarioComponent implements OnInit {
   setUser(): void {
     const user = new User(this.userForm.value);
 
+    this.userSrv
+      .updateUser(user, user.id)
+      .pipe(
+        switchMap(() =>
+          this.seguimientoSrv.createSeguimiento({
+            descripcion: this.userForm.get('descripcion').value,
+            fecha_proximoseguimiento: this.userForm.get(
+              'fechaProximoSeguimiento'
+            ).value,
+            fecha_ultimoseguimiento: this.userForm.get('fechaUltimoSeguimiento')
+              .value,
+            users_permissions_user: this.idUser,
+          })
+        )
+      )
+      .subscribe((resp) => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Usuario actualizado!.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          timer: 3000,
+        });
 
-    this.userSrv.updateUser(  user, user.id ).pipe(
-
-      switchMap( () => this.seguimientoSrv.createSeguimiento(
-        {
-        descripcion: this.userForm.get('descripcion').value,
-        fecha_proximoseguimiento: this.userForm.get('fechaProximoSeguimiento').value,
-        fecha_ultimoseguimiento: this.userForm.get('fechaUltimoSeguimiento').value,
-        users_permissions_user:  this.idUser
-      }))
-
-    )
-    .subscribe( resp => {
-      Swal.fire({
-        title: '¡Éxito!',
-        text: 'Usuario actualizado!.',
-        icon: 'success',
-        confirmButtonText: 'Ok',
-        timer: 3000,
+        this.getSeguimientos();
       });
-
-      this.getSeguimientos();
-    });
   }
-
 
   getSeguimientos(): void {
-    this.seguimientoSrv.getSeguimiento(this.idUser).subscribe(resp => {
+    this.seguimientoSrv.getSeguimiento(this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
-    })
+    });
   }
-
-
-
 }

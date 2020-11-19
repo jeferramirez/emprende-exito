@@ -21,6 +21,7 @@ export class UpdateLeccionComponent implements OnInit {
   urlImage;
   activitys = [];
   idLesson;
+  rol;
 
   constructor(
     private fb: FormBuilder,
@@ -36,6 +37,7 @@ export class UpdateLeccionComponent implements OnInit {
     this.generalSrv.setNavigationValue(this.idLesson);
     this.getLesson(this.idLesson);
     this.initForm();
+    this.rol = this.generalSrv.getRolUser();
   }
 
   initForm(): void {

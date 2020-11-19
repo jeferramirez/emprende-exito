@@ -1,3 +1,4 @@
+import { GeneralService } from './../../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -23,8 +24,12 @@ export class SidebarComponent implements OnInit {
       label: 'Matriculas',
     },
   ];
+  rol;
 
-  constructor() {}
+  constructor(private generalSrv: GeneralService
+    ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.rol = this.generalSrv.getRolUser();
+  }
 }

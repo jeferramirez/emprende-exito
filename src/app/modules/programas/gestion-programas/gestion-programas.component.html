@@ -9,7 +9,7 @@
             <div class="col-lg-6 col-md-6 s">
               <h4 class="card-title">Listado de programas</h4>
             </div>
-            <div class="col-lg-6 col-md-6 s text-right align-self-center">
+            <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="col-lg-6 col-md-6 s text-right align-self-center">
               <a
                 title="Agregar programa"
                 routerLink="../creacion-programa"
@@ -47,7 +47,7 @@
                 />
                 <div class="card-body">
                   <h3 class="card-title text-center">{{ program.nombre }}</h3>
-                  <div class="card-footer justify-content-center">
+                  <div *ngIf="rol === 'Mentor' " class="card-footer justify-content-center">
                     <a
                       title="Editar programa"
                       (click)="navigateProgram(program)"

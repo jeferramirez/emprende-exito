@@ -1,10 +1,9 @@
+import { GeneralService } from './../../../services/general.service';
 import { Router } from '@angular/router';
 import { environment } from './../../../../environments/environment';
 import { ProgramsService } from './../../../services/programs.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { debounceTime, map, merge, mergeMap, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-programas',
@@ -13,11 +12,17 @@ import { of } from 'rxjs';
 })
 export class GestionProgramasComponent implements OnInit {
   programs = [];
+  rol;
 
-  constructor(private programServ: ProgramsService, private router: Router) {}
+  constructor(
+    private programServ: ProgramsService,
+    private router: Router,
+    private generalSrv: GeneralService
+  ) {}
 
   ngOnInit(): void {
     this.getPrograms();
+    this.rol = this.generalSrv.getRolUser();
   }
 
   getPrograms(): void {
@@ -43,28 +48,22 @@ export class GestionProgramasComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.programServ
-          .deleteProgram(id)
-          .subscribe(
-            (resp: any) => {
-              Swal.fire(
-                '¡Éxito!',
-                'El programa se eliminó éxitosamente.',
-                'success'
-              );
+        this.programServ.deleteProgram(id).subscribe(
+          (resp: any) => {
+            Swal.fire(
+              '¡Éxito!',
+              'El programa se eliminó éxitosamente.',
+              'success'
+            );
 
-              setTimeout(() => {
-                this.getPrograms();
-              }, 1400);
-            },
-            (error) => {
-              Swal.fire(
-                '¡Error!',
-                'El programa no se logró eliminar.',
-                'error'
-              );
-            }
-          );
+            setTimeout(() => {
+              this.getPrograms();
+            }, 1400);
+          },
+          (error) => {
+            Swal.fire('¡Error!', 'El programa no se logró eliminar.', 'error');
+          }
+        );
       }
     });
   }
@@ -72,7 +71,4 @@ export class GestionProgramasComponent implements OnInit {
   navigateProgram(item): void {
     this.router.navigate(['home/update-programa/', item.id]);
   }
-
-
-
 }

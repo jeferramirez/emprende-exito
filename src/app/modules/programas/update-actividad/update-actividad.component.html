@@ -58,7 +58,7 @@
                     id="imageuser"
                   />
                 </div>
-                <div class="card-body text-center">
+                <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="card-body text-center">
                   <label class="photo-book" for="imageuser">
                     Cambiar imagen
                   </label>
@@ -127,6 +127,7 @@
                       <th scope="col">URL</th>
                       <th scope="col" class="text-center">
                         <a
+                        *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                           title="Agregar videos"
                           (click)="openDialog(true, false, false)"
                           class="btn btn-primary btn-fab btn-fab-mini btn-round"
@@ -165,7 +166,7 @@
                         >
                           <i class="material-icons">visibility</i>
                         </a>
-                        <a
+                        <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                           title="Editar"
                           class="btn btn-warning btn-fab btn-fab-mini btn-round"
                           (click)="modalVideo(video.id, video.titulo, video.URL)"
@@ -173,6 +174,7 @@
                           <i class="material-icons">create</i>
                         </a>
                         <a
+                        *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                           title="Eliminar"
                           (click)="deleteVideo(video.id)"
                           class="btn btn-danger btn-fab btn-fab-mini btn-round"
@@ -202,7 +204,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col" class="text-center">
-                          <a
+                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                             title="Agregar videos"
                             (click)="openDialog(false, true, false)"
                             class="btn btn-primary btn-fab btn-fab-mini btn-round"
@@ -232,7 +234,7 @@
                           >
                             <i class="material-icons">visibility</i>
                           </a>
-                          <a
+                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                             title="Eliminar"
                             (click)="deleteImagen(imagen.id, imagen.imagen.id)"
                             class="btn btn-danger btn-fab btn-fab-mini btn-round"
@@ -249,7 +251,7 @@
                 <div *ngIf="documentos.length <= 0">
                   <label style="color: black"
                     >Sin archivos para mostrar -
-                    <a
+                    <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                       (click)="openDialog(false, false, true)"
                       style="font: bold; color: #89b021; cursor: pointer"
                       >Agregar archivos
@@ -263,7 +265,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col" class="text-center">
-                          <a
+                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                             title="Agregar videos"
                             (click)="openDialog(false, false, true)"
                             class="btn btn-primary btn-fab btn-fab-mini btn-round"
@@ -293,7 +295,7 @@
                           >
                             <i class="material-icons">get_app</i>
                           </a>
-                          <a
+                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
                             title="Eliminar"
                             (click)="
                               deleteDoc(documento.id, documento.imagen.id)
@@ -312,6 +314,7 @@
           </div>
         </div>
         <button
+          *ngIf="rol === 'Mentor' || rol === 'Tutor'"
           class="btn btn-primary mx-auto mb-4"
           [disabled]="activityForm.invalid"
           (click)="updateActivity()"
