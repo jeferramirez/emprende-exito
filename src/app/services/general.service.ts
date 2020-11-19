@@ -68,4 +68,9 @@ export class GeneralService {
   createFileDOC(IMG: any): Observable<any> {
     return this.http.post(`${environment.URLAPI}/documentos`, IMG);
   }
+
+
+  getUser(): any{
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }
