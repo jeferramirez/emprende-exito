@@ -127,9 +127,9 @@
             <div *ngIf="lessons.length === 0" class="col-md-12">
               <h3 class="text-center pt-4">Sin lecciones</h3>
             </div>
-            <div *ngFor="let lesson of lessons; let i = index" class="col-md-3">
+            <div *ngFor="let lesson of lessons; let i = index" class="col-md-2">
               <div *ngIf="lessons.length > 0" class="card card-program" >
-                <img class="card-img-top" style="height: 200px;" [src]="getFile(lesson.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateLesson(lesson)">
+                <img class="card-img-top" [src]="getFile(lesson.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateLesson(lesson)">
                 <div class="card-body">
                   <h3 class="card-title text-center">{{lesson.nombre}}</h3>
                   <div class="card-footer justify-content-center">

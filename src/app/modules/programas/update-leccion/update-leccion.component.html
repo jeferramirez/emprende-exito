@@ -110,9 +110,9 @@
             <div *ngIf="activitys.length === 0" class="col-md-12">
               <h3 class="text-center pt-4">Sin actividades</h3>
             </div>
-            <div *ngFor="let activity of activitys; let i = index" class="col-md-3">
+            <div *ngFor="let activity of activitys; let i = index" class="col-md-2">
               <div *ngIf="activitys.length > 0" class="card card-program" >
-                <img class="card-img-top" style="height: 200px;" [src]="getFile(activity.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateActivity(activity)">
+                <img class="card-img-top"  [src]="getFile(activity.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateActivity(activity)">
                 <div class="card-body">
                   <h3 class="card-title text-center">{{activity.nombre}}</h3>
                   <div class="card-footer justify-content-center">
