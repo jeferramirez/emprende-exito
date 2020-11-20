@@ -22,7 +22,7 @@ export class UpdateProgramaComponent implements OnInit {
   urlImage;
   modules = [];
   rol;
-
+  porcentaje = 10;
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,

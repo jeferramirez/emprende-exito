@@ -23,7 +23,7 @@ export class UpdateModuloComponent implements OnInit {
   idModule;
   tutores = [];
   rol;
-
+  porcentaje = 10;
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,

@@ -29,6 +29,8 @@ import { UpdateModuloComponent } from './modules/programas/update-modulo/update-
 import { UpdateLeccionComponent } from './modules/programas/update-leccion/update-leccion.component';
 import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
 import { ModalComponent } from './modules/programas/modal/modal.component';
+import { CircleProgressComponent } from './shared/components/circle-progress/circle-progress.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { ModalComponent } from './modules/programas/modal/modal.component';
     UpdateLeccionComponent,
     UpdateActividadComponent,
     ModalComponent,
+    CircleProgressComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,8 +65,15 @@ import { ModalComponent } from './modules/programas/modal/modal.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    DemoMaterialModule
-
+    DemoMaterialModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: '#78C000',
+      innerStrokeColor: '#C7E596',
+      animationDuration: 300,
+    })
   ],
   providers: [
     {
