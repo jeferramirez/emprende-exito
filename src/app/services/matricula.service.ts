@@ -15,12 +15,15 @@ export class MatriculaService {
     return this.http.get(`${environment.URLAPI}/matriculas`);
   }
 
-
   createMatricula(matricula): Observable<any> {
     return this.http.post(`${environment.URLAPI}/matriculas`, matricula);
   }
 
   deleteMatricula(idMatricula): Observable<any> {
     return this.http.delete(`${environment.URLAPI}/matriculas/${idMatricula}`);
+  }
+
+  getUserMatricula(id): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/getUserMatricula/${id}`);
   }
 }

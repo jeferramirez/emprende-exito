@@ -21,7 +21,6 @@
                         formControlName="nombre"
                         type="text"
                         class="form-control"
-                        [disabled]="acceptRol"
                       />
                     </div>
                   </div>
@@ -31,7 +30,6 @@
                     <div class="form-group">
                       <label for="desc">Descripción de lección</label>
                       <textarea
-                       [disabled]="acceptRol"
                         class="form-control"
                         formControlName="descripcion"
                         id="desc"
@@ -45,7 +43,15 @@
             <div class="col-md-2 col-sm-12">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <label for="imageuser">
+                  <label *ngIf="rol === 'Mentor' || rol === 'Tutor'" for="imageuser">
+                    <img
+                      class="card-img-top"
+                      [src]="previewimage || urlImage"
+                      alt="Card image cap"
+                      style="max-width: 200px; max-width: 200px"
+                    />
+                  </label>
+                  <label *ngIf="rol === 'Emprendedor'">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -60,7 +66,10 @@
                     id="imageuser"
                   />
                 </div>
-                <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="card-body text-center">
+                <div
+                  *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                  class="card-body text-center"
+                >
                   <label class="photo-book" for="imageuser">
                     Cambiar imagen
                   </label>
@@ -70,7 +79,7 @@
           </div>
         </div>
         <button
-        *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+          *ngIf="rol === 'Mentor' || rol === 'Tutor'"
           class="btn btn-primary mx-auto mb-4"
           [disabled]="lessonForm.invalid"
           (click)="updateLesson()"
@@ -89,7 +98,10 @@
               <h4 class="card-title">Actividades</h4>
             </div>
             <!-- *ngIf="idModule !== null" -->
-            <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="col-lg-6 col-md-6 s text-right align-self-center">
+            <div
+              *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+              class="col-lg-6 col-md-6 s text-right align-self-center"
+            >
               <a
                 title="Agregar lección"
                 routerLink="../../creacion-actividad"
@@ -103,27 +115,45 @@
         <div class="card-body table-responsive">
           <div class="row mx-1">
             <input
-            type="text"
-            value=""
-            class="form-control"
-            placeholder="Buscar actividad..."
-          />
+              type="text"
+              value=""
+              class="form-control"
+              placeholder="Buscar actividad..."
+            />
           </div>
           <div class="row">
             <div *ngIf="activitys.length === 0" class="col-md-12">
               <h3 class="text-center pt-4">Sin actividades</h3>
             </div>
-            <div *ngFor="let activity of activitys; let i = index" class="col-md-2">
-              <div *ngIf="activitys.length > 0" class="card card-program" >
-                <img class="card-img-top"  [src]="getFile(activity.imagen.url)" rel="nofollow" alt="Card image cap" (click)="navigateActivity(activity)">
+            <div
+              *ngFor="let activity of activitys; let i = index"
+              class="col-md-2"
+            >
+              <div *ngIf="activitys.length > 0" class="card card-program">
+                <img
+                  class="card-img-top"
+                  [src]="getFile(activity.imagen.url)"
+                  rel="nofollow"
+                  alt="Card image cap"
+                  (click)="navigateActivity(activity)"
+                />
                 <div class="card-body">
-                  <h3 class="card-title text-center">{{activity.nombre}}</h3>
-                  <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="card-footer justify-content-center">
-                    <a title="Editar actividad" (click)="navigateActivity(activity)">
-                      <i class="material-icons text-primary mx-2" >edit</i>
+                  <h3 class="card-title text-center">{{ activity.nombre }}</h3>
+                  <div
+                    *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                    class="card-footer justify-content-center"
+                  >
+                    <a
+                      title="Editar actividad"
+                      (click)="navigateActivity(activity)"
+                    >
+                      <i class="material-icons text-primary mx-2">edit</i>
                     </a>
-                    <a title="Eliminar actividad" (click)="deleteActivity(activity.id)" >
-                        <i  class="material-icons text-danger mx-2">delete</i>
+                    <a
+                      title="Eliminar actividad"
+                      (click)="deleteActivity(activity.id)"
+                    >
+                      <i class="material-icons text-danger mx-2">delete</i>
                     </a>
                   </div>
                 </div>

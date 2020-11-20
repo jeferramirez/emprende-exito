@@ -8,7 +8,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
-import { identity } from 'rxjs';
 
 @Component({
   selector: 'app-update-actividad',
@@ -29,13 +28,13 @@ export class UpdateActividadComponent implements OnInit {
   imagenes = [];
   urlAPI = environment.URLAPI;
   rol;
+  dialogRef;
 
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,
     private route: ActivatedRoute,
     private activitySrv: ActivityService,
-    private router: Router,
     public dialog: MatDialog
   ) {}
 
@@ -47,7 +46,7 @@ export class UpdateActividadComponent implements OnInit {
     this.getDocs(this.idActivity);
     this.getIMG(this.idActivity);
     this.rol = this.generalSrv.getRolUser();
-
+    this.haspermissions();
   }
 
   openDialog(video, imagen, file): void {
@@ -58,6 +57,14 @@ export class UpdateActividadComponent implements OnInit {
         showImages: imagen,
         showFiles: file,
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => {
+        this.getVideos(this.idActivity);
+        this.getIMG(this.idActivity);
+        this.getDocs(this.idActivity);
+      }, 1500);
     });
   }
 
@@ -71,8 +78,14 @@ export class UpdateActividadComponent implements OnInit {
         showUpdateVideo: true,
         titulo,
         URL,
-        idVideo: id
+        idVideo: id,
       },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => {
+        this.getVideos(this.idActivity);
+      }, 1500);
     });
   }
 
@@ -282,5 +295,12 @@ export class UpdateActividadComponent implements OnInit {
         );
       }
     });
+  }
+
+  haspermissions(): void {
+    if (this.rol === 'Emprendedor') {
+      this.activityForm.get('nombre').disable();
+      this.activityForm.get('descripcion').disable();
+    }
   }
 }

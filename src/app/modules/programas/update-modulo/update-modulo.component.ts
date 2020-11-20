@@ -1,4 +1,3 @@
-import { switchMap } from 'rxjs/operators';
 import { LessonService } from './../../../services/lesson.service';
 import { environment } from './../../../../environments/environment';
 import { ModulesService } from './../../../services/modules.service';
@@ -24,7 +23,6 @@ export class UpdateModuloComponent implements OnInit {
   idModule;
   tutores = [];
   rol;
-  acceptRol = false;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +41,7 @@ export class UpdateModuloComponent implements OnInit {
     this.initForm();
     this.getTutores();
     this.rol = this.generalSrv.getRolUser();
+    this.haspermissions();
   }
 
   getTutores(): void {
@@ -184,12 +183,11 @@ export class UpdateModuloComponent implements OnInit {
     });
   }
 
-
   haspermissions(): void {
-    if (this.generalSrv.getRolUser() !== 'Emprendedor') {
-      this.acceptRol = false;
-    } else {
-      this.acceptRol = true;
+    if (this.rol === 'Emprendedor' || this.rol === 'Tutor') {
+      this.moduleForm.get('nombre').disable();
+      this.moduleForm.get('descripcion').disable();
+      this.moduleForm.get('users_permissions_user').disable();
     }
   }
 }

@@ -7,7 +7,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-update-programa',
@@ -39,6 +38,7 @@ export class UpdateProgramaComponent implements OnInit {
     this.getProgram(this.idProgram);
     this.initForm();
     this.rol = this.generalSrv.getRolUser();
+    this.haspermissions();
   }
 
   initForm(): void {
@@ -171,5 +171,12 @@ export class UpdateProgramaComponent implements OnInit {
           );
       }
     });
+  }
+
+  haspermissions(): void {
+    if (this.rol === 'Emprendedor' || this.rol === 'Tutor') {
+      this.programForm.get('nombre').disable();
+      this.programForm.get('descripcion').disable();
+    }
   }
 }

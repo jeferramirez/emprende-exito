@@ -19782,3 +19782,25 @@ Copyright (c) 2015 Daniel Eden
   background:rgba(33, 149, 243, 0.226);
   cursor: pointer;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width:  10px;   /* Tamaño del scroll en vertical */
+  height: 7px;    /* Tamaño del scroll en horizontal */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2770A4;
+  height: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #17517a;
+}

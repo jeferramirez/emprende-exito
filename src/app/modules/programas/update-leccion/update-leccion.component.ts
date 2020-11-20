@@ -22,7 +22,6 @@ export class UpdateLeccionComponent implements OnInit {
   activitys = [];
   idLesson;
   rol;
-  acceptRol = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +38,7 @@ export class UpdateLeccionComponent implements OnInit {
     this.getLesson(this.idLesson);
     this.initForm();
     this.rol = this.generalSrv.getRolUser();
+    this.haspermissions();
   }
 
   initForm(): void {
@@ -172,12 +172,10 @@ export class UpdateLeccionComponent implements OnInit {
     });
   }
 
-
   haspermissions(): void {
-    if (this.generalSrv.getRolUser() !== 'Emprendedor') {
-      this.acceptRol = false;
-    } else {
-      this.acceptRol = true;
+    if (this.rol === 'Emprendedor') {
+      this.lessonForm.get('nombre').disable();
+      this.lessonForm.get('descripcion').disable();
     }
   }
 }

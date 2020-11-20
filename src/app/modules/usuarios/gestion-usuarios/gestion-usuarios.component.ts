@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -26,15 +27,20 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     'acciones',
   ];
   dataSource: MatTableDataSource<any>;
+  rol;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userSrv: UsersService, private router: Router, private generalSrv: GeneralService) {
-    // this.dataSource = new MatTableDataSource();
-  }
+  constructor(
+    private userSrv: UsersService,
+    private router: Router,
+    private generalSrv: GeneralService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.rol = this.generalSrv.getRolUser();
+  }
 
   ngAfterViewInit(): void {
     this.getUser();
@@ -74,13 +80,23 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteFile(id): void{
+  deleteFile(id): void {
     this.generalSrv.deleteFile(id).subscribe();
   }
 
   getUser(): void {
     this.userSrv.getUsers().subscribe((users) => {
-      this.dataSource = new MatTableDataSource(users);
+      let userMap = users.map((user: any) => {
+        return {
+          ...user,
+          created_at: moment(user.created_at).format('DD/MM/YYYY HH:MM'),
+        };
+      });
+
+      if (this.rol === 'Tutor') {
+        userMap = userMap.filter((user: any) => user.rol === 'Emprendedor');
+      }
+      this.dataSource = new MatTableDataSource(userMap);
     });
   }
 

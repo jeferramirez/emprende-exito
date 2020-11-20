@@ -1,9 +1,12 @@
+import { switchMap } from 'rxjs/operators';
+import { MatriculaService } from 'src/app/services/matricula.service';
 import { GeneralService } from './../../../services/general.service';
 import { Router } from '@angular/router';
 import { environment } from './../../../../environments/environment';
 import { ProgramsService } from './../../../services/programs.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-programas',
@@ -13,22 +16,60 @@ import Swal from 'sweetalert2';
 export class GestionProgramasComponent implements OnInit {
   programs = [];
   rol;
+  user;
+  matriculas;
 
   constructor(
     private programServ: ProgramsService,
     private router: Router,
-    private generalSrv: GeneralService
+    private generalSrv: GeneralService,
+    private matricualSrv: MatriculaService
   ) {}
 
   ngOnInit(): void {
     this.getPrograms();
     this.rol = this.generalSrv.getRolUser();
+    this.user = this.generalSrv.getUser();
+    this.loadProgram();
+  }
+
+  getMatricula(id: number): void {
+    this.matricualSrv
+      .getUserMatricula(id)
+      .pipe(
+        switchMap((matricula) => {
+          return this.programServ.getPrograms().pipe(
+            switchMap((programas) => {
+              const filteProgram = programas.filter((programa: any) => {
+                const existe = matricula.find(
+                  (element: any) => element.programa.id === programa.id
+                );
+                if (existe) {
+                  return programa;
+                }
+              });
+              return of(filteProgram);
+            })
+          );
+        })
+      )
+      .subscribe((resp) => {
+        this.programs = resp;
+      });
   }
 
   getPrograms(): void {
     this.programServ.getPrograms().subscribe((resp) => {
       this.programs = resp;
     });
+  }
+
+  loadProgram(): void {
+    if (this.rol === 'Emprendedor') {
+      this.getMatricula(this.user.user.id);
+    } else {
+      this.getPrograms();
+    }
   }
 
   getFile(url: any): string {

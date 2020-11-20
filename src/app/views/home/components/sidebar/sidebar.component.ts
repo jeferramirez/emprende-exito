@@ -23,7 +23,6 @@ export class SidebarComponent implements OnInit {
       icon: 'library_books',
       label: 'Matriculas',
     },
-
     {
       ruta: '/home/',
       icon: 'pie_chart',
@@ -32,18 +31,14 @@ export class SidebarComponent implements OnInit {
   ];
   rol;
 
-  constructor(private generalSrv: GeneralService
-    ) {}
+  constructor(private generalSrv: GeneralService) {}
 
   ngOnInit(): void {
     this.rol = this.generalSrv.getRolUser();
     this.loadSidebar();
   }
 
-
-
   loadSidebar(): void {
-
     if (this.rol === 'Emprendedor') {
       this.menuItems = [
         {
@@ -54,9 +49,7 @@ export class SidebarComponent implements OnInit {
       ];
     }
 
-
     if (this.rol === 'Tutor') {
-
       this.menuItems = [
         {
           ruta: '/home/gestion-usuarios',
@@ -70,6 +63,5 @@ export class SidebarComponent implements OnInit {
         },
       ];
     }
-
   }
 }
