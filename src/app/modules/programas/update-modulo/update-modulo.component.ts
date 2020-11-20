@@ -24,6 +24,7 @@ export class UpdateModuloComponent implements OnInit {
   idModule;
   tutores = [];
   rol;
+  acceptRol = false;
 
   constructor(
     private fb: FormBuilder,
@@ -181,5 +182,14 @@ export class UpdateModuloComponent implements OnInit {
         );
       }
     });
+  }
+
+
+  haspermissions(): void {
+    if (this.generalSrv.getRolUser() !== 'Emprendedor') {
+      this.acceptRol = false;
+    } else {
+      this.acceptRol = true;
+    }
   }
 }

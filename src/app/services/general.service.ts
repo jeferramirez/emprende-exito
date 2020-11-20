@@ -74,7 +74,7 @@ export class GeneralService {
   }
 
   getRolUser(): any{
-    const {user} = JSON.parse(localStorage.getItem('user'));
+    const {user} = this.getUser();
     return user.rol;
   }
 }

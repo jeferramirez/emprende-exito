@@ -22,6 +22,7 @@ export class UpdateLeccionComponent implements OnInit {
   activitys = [];
   idLesson;
   rol;
+  acceptRol = false;
 
   constructor(
     private fb: FormBuilder,
@@ -169,5 +170,14 @@ export class UpdateLeccionComponent implements OnInit {
           );
       }
     });
+  }
+
+
+  haspermissions(): void {
+    if (this.generalSrv.getRolUser() !== 'Emprendedor') {
+      this.acceptRol = false;
+    } else {
+      this.acceptRol = true;
+    }
   }
 }

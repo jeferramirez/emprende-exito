@@ -21,6 +21,7 @@
                         formControlName="nombre"
                         type="text"
                         class="form-control"
+                        [disabled]="acceptRol"
                       />
                     </div>
                   </div>
@@ -30,6 +31,7 @@
                     <div class="form-group">
                       <label for="desc">Descripción de lección</label>
                       <textarea
+                       [disabled]="acceptRol"
                         class="form-control"
                         formControlName="descripcion"
                         id="desc"
