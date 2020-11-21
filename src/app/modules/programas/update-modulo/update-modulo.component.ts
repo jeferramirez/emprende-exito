@@ -1,3 +1,4 @@
+import { ProgressService } from './../../../services/progress.service';
 import { LessonService } from './../../../services/lesson.service';
 import { environment } from './../../../../environments/environment';
 import { ModulesService } from './../../../services/modules.service';
@@ -23,7 +24,9 @@ export class UpdateModuloComponent implements OnInit {
   idModule;
   tutores = [];
   rol;
-  porcentaje = 10;
+  porcentaje = 0;
+  user;
+
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,
@@ -31,7 +34,8 @@ export class UpdateModuloComponent implements OnInit {
     private moduleSrv: ModulesService,
     private router: Router,
     private lessonSrv: LessonService,
-    private userSrv: UsersService
+    private userSrv: UsersService,
+    private progressSrv: ProgressService
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +45,17 @@ export class UpdateModuloComponent implements OnInit {
     this.initForm();
     this.getTutores();
     this.rol = this.generalSrv.getRolUser();
+    this.user = this.generalSrv.getUser();
     this.haspermissions();
+    this.setPorcentaje();
+  }
+
+  setPorcentaje(): void {
+    this.progressSrv
+      .progressModule(this.user.user.id, this.idModule)
+      .subscribe(({ porcentaje }) => {
+        this.porcentaje = porcentaje;
+      });
   }
 
   getTutores(): void {

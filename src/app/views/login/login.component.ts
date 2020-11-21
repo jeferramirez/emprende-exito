@@ -1,8 +1,11 @@
+import { ProgressService } from './../../services/progress.service';
+import { switchMap } from 'rxjs/operators';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginSrv: LoginService,
-    private router: Router
+    private router: Router,
+    private progressSrv: ProgressService
   ) {}
 
   ngOnInit(): void {
@@ -29,20 +33,30 @@ export class LoginComponent implements OnInit {
   }
 
   validateLogin(): void {
-    this.loginSrv.login(this.loginForm.value).subscribe(
-      (resp) => {
-        localStorage.setItem('user', JSON.stringify(resp));
-        this.router.navigate(['/home']);
-      },
-      (error) => {
-        Swal.fire({
-          title: 'Error!',
-          text: 'Email o contraseña incorrectos',
-          icon: 'error',
-          confirmButtonText: 'ok',
-          timer: 3000
-        });
-      }
-    );
+    this.loginSrv
+      .login(this.loginForm.value)
+      .pipe(
+        switchMap((data) => {
+          localStorage.setItem('user', JSON.stringify(data));
+          if (data.user.rol === 'Emprendedor') {
+            return this.progressSrv.createProgress(data.user.id);
+          }
+          return of('');
+        })
+      )
+      .subscribe(
+        (resp) => {
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Email o contraseña incorrectos',
+            icon: 'error',
+            confirmButtonText: 'ok',
+            timer: 3000,
+          });
+        }
+      );
   }
 }
