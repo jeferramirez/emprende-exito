@@ -211,7 +211,7 @@ export class UpdateActividadComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.progressSrv
-          .deleteProgress({ idRecurso: id, campo: 'video' })
+          .deleteProgress({ idRecurso: id, campo: 'documento' })
           .subscribe();
         this.activitySrv
           .deleteDoc(id)
@@ -251,7 +251,7 @@ export class UpdateActividadComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.progressSrv
-                .deleteProgress({ idRecurso: id, campo: 'video' })
+                .deleteProgress({ idRecurso: id, campo: 'imagene' })
                 .subscribe();
         this.activitySrv
           .deleteImagen(id)
