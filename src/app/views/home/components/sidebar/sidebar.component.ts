@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit {
     {
       ruta: '/home/gestion-usuarios',
       icon: 'people_alt',
-      label: 'Gestión usuario',
+      label: 'Gestión de usuarios',
     },
     {
       ruta: '/home/gestion-programas',
@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
     {
       ruta: '/home/gestion-matriculas',
       icon: 'library_books',
-      label: 'Matriculas',
+      label: 'Matrículas',
     },
     {
       ruta: '/home/',

@@ -43,7 +43,7 @@
             <div class="col-md-2 col-sm-12">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <label *ngIf="rol === 'Mentor' || rol === 'Tutor'" for="imageuser">
+                  <label *ngIf="rol === 'Mentor'" for="imageuser">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -51,7 +51,7 @@
                       style="max-width: 200px; max-width: 200px"
                     />
                   </label>
-                  <label *ngIf="rol === 'Emprendedor'">
+                  <label *ngIf="rol !== 'Mentor'">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -66,7 +66,7 @@
                     id="imageuser"
                   />
                 </div>
-                <div *ngIf="rol === 'Mentor' || rol === 'Tutor'" class="card-body text-center">
+                <div *ngIf="rol === 'Mentor'" class="card-body text-center">
                   <label class="photo-book" for="imageuser">
                     Cambiar imagen
                   </label>
@@ -122,7 +122,7 @@
                   <label style="color: black"
                     >Sin videos para mostrar -
                     <a
-                      *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                      *ngIf="rol === 'Mentor'"
                       (click)="openDialog(true, false, false)"
                       style="font: bold; color: #89b021; cursor: pointer"
                       >Agregar videos
@@ -136,7 +136,7 @@
                       <th scope="col">URL</th>
                       <th scope="col" class="text-center">
                         <a
-                        *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                        *ngIf="rol === 'Mentor'"
                           title="Agregar videos"
                           (click)="openDialog(true, false, false)"
                           class="btn btn-primary btn-fab btn-fab-mini btn-round"
@@ -176,7 +176,7 @@
                         >
                           <i class="material-icons">visibility</i>
                         </a>
-                        <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                        <a *ngIf="rol === 'Mentor'"
                           title="Editar"
                           class="btn btn-warning btn-fab btn-fab-mini btn-round"
                           (click)="modalVideo(video.id, video.titulo, video.URL)"
@@ -184,7 +184,7 @@
                           <i class="material-icons">create</i>
                         </a>
                         <a
-                        *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                        *ngIf="rol === 'Mentor'"
                           title="Eliminar"
                           (click)="deleteVideo(video.id)"
                           class="btn btn-danger btn-fab btn-fab-mini btn-round"
@@ -201,7 +201,7 @@
                   <label style="color: black"
                     >Sin imagenes para mostrar -
                     <a
-                      *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                      *ngIf="rol === 'Mentor'"
                       (click)="openDialog(false, true, false)"
                       style="font: bold; color: #89b021; cursor: pointer"
                       >Agregar imagenes
@@ -215,8 +215,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col" class="text-center">
-                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
-                            title="Agregar videos"
+                          <a *ngIf="rol === 'Mentor'"
+                            title="Agregar imagenes"
                             (click)="openDialog(false, true, false)"
                             class="btn btn-primary btn-fab btn-fab-mini btn-round"
                           >
@@ -246,7 +246,7 @@
                           >
                             <i class="material-icons">visibility</i>
                           </a>
-                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                          <a *ngIf="rol === 'Mentor'"
                             title="Eliminar"
                             (click)="deleteImagen(imagen.id, imagen.imagen.id)"
                             class="btn btn-danger btn-fab btn-fab-mini btn-round"
@@ -263,7 +263,7 @@
                 <div *ngIf="documentos.length <= 0">
                   <label style="color: black"
                     >Sin archivos para mostrar -
-                    <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                    <a *ngIf="rol === 'Mentor'"
                       (click)="openDialog(false, false, true)"
                       style="font: bold; color: #89b021; cursor: pointer"
                       >Agregar archivos
@@ -277,8 +277,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col" class="text-center">
-                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
-                            title="Agregar videos"
+                          <a *ngIf="rol === 'Mentor'"
+                            title="Agregar archivos"
                             (click)="openDialog(false, false, true)"
                             class="btn btn-primary btn-fab btn-fab-mini btn-round"
                           >
@@ -308,7 +308,7 @@
                           >
                             <i class="material-icons">get_app</i>
                           </a>
-                          <a *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                          <a *ngIf="rol === 'Mentor'"
                             title="Eliminar"
                             (click)="
                               deleteDoc(documento.id, documento.imagen.id)
@@ -327,7 +327,7 @@
           </div>
         </div>
         <button
-          *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+          *ngIf="rol === 'Mentor'"
           class="btn btn-primary mx-auto mb-4"
           [disabled]="activityForm.invalid"
           (click)="updateActivity()"

@@ -2,7 +2,7 @@
   class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster"
 >
   <div class="row">
-    <div class="col-lg-9 col-md-12">
+    <div class="col-lg-12 col-md-12">
       <div class="card">
         <div class="card-header card-header-tabs card-header-info">
           <div class="nav-tabs-navigation">
@@ -18,18 +18,6 @@
                     <div class="ripple-container"></div>
                   </a>
                 </li>
-                <!-- <li class="nav-item">
-                  <a
-                    class="nav-link"
-                    name="continuar"
-                    id="continuar"
-                    href="#perfilEinteres"
-                    data-toggle="tab"
-                  >
-                    <i class="material-icons">psychology</i> Perfil e intereses
-                    <div class="ripple-container"></div>
-                  </a>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -114,7 +102,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label class="bmd-label-floating">Telefono</label>
+                      <label class="bmd-label-floating">Teléfono</label>
                       <input
                         formControlName="telefono"
                         type="text"
@@ -134,34 +122,24 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="cmbCiudad">Ciudad</label>
-                      <div class="form-control">
-                        <mat-select
-                          formControlName="ciudad"
-                          id="cmbCiudad"
-                          class="px-3"
-                        >
-                          <mat-option value="Bogota"> Bogotá </mat-option>
-                          <mat-option value="Medellin"> Medellín </mat-option>
-                          <mat-option value="Cali"> Cali </mat-option>
-                        </mat-select>
-                      </div>
+                      <label class="bmd-label-floating">Ciudad</label>
+                      <input
+                        formControlName="ciudad"
+                        type="text"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="cmbPais">Pais</label>
-                      <div class="form-control">
-                        <mat-select
-                          formControlName="pais"
-                          id="cmbPais"
-                          class="px-3"
-                        >
-                          <mat-option value="Colombia"> Colombia </mat-option>
-                        </mat-select>
-                      </div>
+                      <label class="bmd-label-floating">Pais</label>
+                      <input
+                        formControlName="pais"
+                        type="text"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -209,15 +187,6 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- <a
-                  class="text-success pull-right"
-                  href="#"
-                  data-toggle="tab"
-                  (click)="handleSimulateClick()"
-                >
-                  Continuar<i class="material-icons">navigate_next</i>
-                </a> -->
                 <button
                   [disabled]="userForm.invalid"
                   (click)="createUser()"
@@ -227,102 +196,19 @@
                 </button>
               </form>
             </div>
-            <!-- <div class="tab-pane" id="perfilEinteres">
-              <form [formGroup]="userForm">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Profesión</label>
-                      <input
-                        formControlName="profesion"
-                        type="text"
-                        class="form-control"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Ocupación</label>
-                      <input
-                        formControlName="ocupacion"
-                        type="text"
-                        class="form-control"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Tipo de proyecto</label>
-                      <input
-                        formControlName="tipoProyecto"
-                        type="text"
-                        class="form-control"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="habilidades">Habilidades</label>
-                      <textarea
-                        class="form-control"
-                        formControlName="habilidades"
-                        id="habilidades"
-                        rows="3"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="intereses">Interéses</label>
-                      <textarea
-                        class="form-control"
-                        formControlName="intereses"
-                        id="intereses"
-                        rows="3"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="acercaDe">Acerca de</label>
-                      <textarea
-                        formControlName="acercaDe"
-                        class="form-control"
-                        id="acercaDe"
-                        rows="3"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <button
-                [disabled]="userForm.invalid"
-                (click)="createUser()"
-                class="btn btn-primary pull-right"
-              >
-                Crear usuario
-              </button>
-            </div> -->
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div *ngIf="rol !== 'Mentor'" class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
           <label for="imageuser">
             <img
               class="img"
               [src]="previewimage || '../../../assets/imagenPerfil.jpg'"
-              style="height: 130px; cursor: pointer;"
+              style="height: 130px; cursor: pointer"
             />
           </label>
           <input

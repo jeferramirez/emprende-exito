@@ -76,7 +76,12 @@ export class GestionPerfilComponent implements OnInit {
   setUser(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userForm.patchValue(this.user.user);
-    this.urlImage = `${environment.URLAPI}` + this.user.user.profile?.url;
+
+    if (this.user.user.profile != null) {
+      this.urlImage = `${environment.URLAPI}` + this.user.user.profile?.url;
+    } else {
+      this.urlImage = '../../../assets/imagenPerfil.jpg';
+    }
   }
 
   handleSimulateClick(): void {
@@ -113,8 +118,7 @@ export class GestionPerfilComponent implements OnInit {
           icon: 'success',
           title: 'Se actualizó la foto de perfil',
         });
-
-        this.user.user.profile.url = resp[0].url;
+        this.user.user.profile = resp[0];
         localStorage.setItem('user', JSON.stringify(this.user));
       },
       (error) => {
@@ -205,7 +209,10 @@ export class GestionPerfilComponent implements OnInit {
     const objPass = this.userPassForm.value;
     if (status) {
       if (objPass.passNew === objPass.passNewConfirm) {
-        return this.userSrv.updateUser({...this.userForm.value, password: objPass.passNew}, this.user.user.id);
+        return this.userSrv.updateUser(
+          { ...this.userForm.value, password: objPass.passNew },
+          this.user.user.id
+        );
       } else {
         Swal.fire({
           title: 'Error!',
