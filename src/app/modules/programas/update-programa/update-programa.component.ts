@@ -1,3 +1,4 @@
+import { ProgressService } from './../../../services/progress.service';
 import { switchMap } from 'rxjs/operators';
 import { ModulesService } from './../../../services/modules.service';
 import { environment } from './../../../../environments/environment';
@@ -22,14 +23,17 @@ export class UpdateProgramaComponent implements OnInit {
   urlImage;
   modules = [];
   rol;
-  porcentaje = 10;
+  porcentaje = 0;
+  user;
+
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,
     private programSrv: ProgramsService,
     private route: ActivatedRoute,
     private moduleSrv: ModulesService,
-    private router: Router
+    private router: Router,
+    private progressSrv: ProgressService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +43,16 @@ export class UpdateProgramaComponent implements OnInit {
     this.initForm();
     this.rol = this.generalSrv.getRolUser();
     this.haspermissions();
+    this.user = this.generalSrv.getUser();
+    this.setPorcentaje();
+  }
+
+  setPorcentaje(): void {
+    this.progressSrv
+      .progressProgram(this.user.user.id, this.idProgram)
+      .subscribe(({ porcentaje }) => {
+        this.porcentaje = porcentaje;
+      });
   }
 
   initForm(): void {
@@ -150,25 +164,22 @@ export class UpdateProgramaComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.moduleSrv
-          .deleteModule(id)
-          .subscribe(
-            (resp) => {
-              Swal.fire(
-                '¡Éxito!',
-                'El módulo se eliminó éxitosamente.',
-                'success'
-              );
+        this.moduleSrv.deleteModule(id).subscribe(
+          (resp) => {
+            Swal.fire(
+              '¡Éxito!',
+              'El módulo se eliminó éxitosamente.',
+              'success'
+            );
 
-              setTimeout(() => {
-                this.getModules(this.idProgram);
-              }, 1400);
-
-            },
-            (error) => {
-              Swal.fire('¡Error!', 'El mpodulo no se logró eliminar.', 'error');
-            }
-          );
+            setTimeout(() => {
+              this.getModules(this.idProgram);
+            }, 1400);
+          },
+          (error) => {
+            Swal.fire('¡Error!', 'El mpodulo no se logró eliminar.', 'error');
+          }
+        );
       }
     });
   }

@@ -1,3 +1,4 @@
+import { ProgressService } from './../../../services/progress.service';
 import { ModalComponent } from './../modal/modal.component';
 import { switchMap } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
@@ -29,13 +30,15 @@ export class UpdateActividadComponent implements OnInit {
   urlAPI = environment.URLAPI;
   rol;
   dialogRef;
+  user;
 
   constructor(
     private fb: FormBuilder,
     private generalSrv: GeneralService,
     private route: ActivatedRoute,
     private activitySrv: ActivityService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private progressSrv: ProgressService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +49,7 @@ export class UpdateActividadComponent implements OnInit {
     this.getDocs(this.idActivity);
     this.getIMG(this.idActivity);
     this.rol = this.generalSrv.getRolUser();
+    this.user = this.generalSrv.getUser();
     this.haspermissions();
   }
 
@@ -206,6 +210,9 @@ export class UpdateActividadComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.progressSrv
+          .deleteProgress({ idRecurso: id, campo: 'documento' })
+          .subscribe();
         this.activitySrv
           .deleteDoc(id)
           .pipe(
@@ -243,6 +250,9 @@ export class UpdateActividadComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.progressSrv
+                .deleteProgress({ idRecurso: id, campo: 'imagene' })
+                .subscribe();
         this.activitySrv
           .deleteImagen(id)
           .pipe(
@@ -258,6 +268,7 @@ export class UpdateActividadComponent implements OnInit {
                 'success'
               );
               this.getIMG(this.idActivity);
+
             },
             (error) => {
               Swal.fire('¡Error!', 'La imagen no se logró eliminar.', 'error');
@@ -280,19 +291,24 @@ export class UpdateActividadComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.activitySrv.deleteVideo(id).subscribe(
-          (resp) => {
-            Swal.fire(
-              '¡Éxito!',
-              'El vídeo se eliminó éxitosamente.',
-              'success'
-            );
-            this.getVideos(this.idActivity);
-          },
-          (error) => {
-            Swal.fire('¡Error!', 'El vídeo no se logró eliminar.', 'error');
-          }
-        );
+        this.progressSrv
+                .deleteProgress({ idRecurso: id, campo: 'video' })
+                .subscribe();
+        this.activitySrv
+          .deleteVideo(id)
+          .subscribe(
+            (resp) => {
+              Swal.fire(
+                '¡Éxito!',
+                'El vídeo se eliminó éxitosamente.',
+                'success'
+              );
+              this.getVideos(this.idActivity);
+            },
+            (error) => {
+              Swal.fire('¡Error!', 'El vídeo no se logró eliminar.', 'error');
+            }
+          );
       }
     });
   }
@@ -302,5 +318,11 @@ export class UpdateActividadComponent implements OnInit {
       this.activityForm.get('nombre').disable();
       this.activityForm.get('descripcion').disable();
     }
+  }
+
+  setRecurso(idRecurso, campo): void {
+    this.progressSrv
+      .setRecurso({ idUser: this.user.user.id, idRecurso, campo })
+      .subscribe();
   }
 }
