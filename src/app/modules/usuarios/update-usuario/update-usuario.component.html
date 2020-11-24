@@ -53,10 +53,23 @@
                   <input formControlName="celular"  type="text" class="form-control" />
                 </div>
               </div>
-
-
             </div>
 
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Estado</label>
+
+                  <div class="togglebutton">
+                    <label>
+                      <input type="checkbox" formControlName="estado" />
+                      <span class="toggle"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
@@ -151,19 +164,19 @@
         <div class="card-avatar">
           <img class="img" [src]="profilePicture || '../../../assets/imagenPerfil.jpg'" />
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="profileInfo">
           <h4 class="card-category text-gray">Emprendedor</h4>
-          <h4 class="card-title">Juan</h4>
-          <h5 class="card-category text-gray">Profesión: </h5>
-          <h5 class="card-category text-gray">Ocupación: </h5>
+          <h4 class="card-title">{{userForm.get('nombre').value}}</h4>
+          <h5 class="card-category text-gray">Profesión: {{profileInfo.profesion}} </h5>
+          <h5 class="card-category text-gray">Ocupación: {{profileInfo.ocupacion}} </h5>
           <h4 class="card-title">Habilidades</h4>
-          <h5 class="card-category text-gray">Habilidad </h5>
+          <h5 class="card-category text-gray"> {{ profileInfo.habilidades}} </h5>
           <h4 class="card-title">Intereses</h4>
-          <h5 class="card-category text-gray">Interse-interes </h5>
+          <h5 class="card-category text-gray">{{profileInfo.intereses}}</h5>
           <h4 class="card-title">Tipo de proyecto </h4>
-          <h5 class="card-category text-gray">proyecto-interes </h5>
+          <h5 class="card-category text-gray">{{profileInfo.tipoProyecto}} </h5>
           <h4 class="card-title">Acerca de </h4>
-          <h5 class="card-category text-gray">informacion acerca del emprendedor </h5>
+          <h5 class="card-category text-gray"> {{profileInfo.acercaDe}} </h5>
         </div>
       </div>
     </div>

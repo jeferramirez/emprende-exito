@@ -8,12 +8,13 @@ export class User {
   nombre: string ;
   celular: string;
   telefono: string;
+  estado: string;
   id?: string;
 
 
 
 
-  constructor({ apellido, email,  username,  nombre, celular ,  telefono, id }) {
+  constructor({ apellido, email,  username,  nombre, celular ,  telefono, id , estado}) {
 
     this.apellido = apellido;
     this.email = email;
@@ -22,6 +23,7 @@ export class User {
     this.celular = celular;
     this.telefono = telefono;
     this.id = id;
+    this.estado = estado;
 
   }
 }

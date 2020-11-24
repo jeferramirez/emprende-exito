@@ -10,6 +10,7 @@ import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { environment } from '../../../../environments/environment';
 import { switchMap } from 'rxjs/operators';
 import { ProgramsService } from '../../../services/programs.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-update-usuario',
@@ -22,6 +23,7 @@ export class UpdateUsuarioComponent implements OnInit {
   seguimientos = [];
   programas= [];
   profilePicture;
+  profileInfo;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,12 +50,19 @@ export class UpdateUsuarioComponent implements OnInit {
   }
 
   getUser(id: string): void {
-    this.userSrv.getUser(id).subscribe((resp) => {
-      if (resp.profile) {
-        this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
-      }
-      const user = new User(resp);
-      this.userForm.patchValue(user);
+    this.userSrv.getUser(id).
+    pipe(
+      switchMap( resp => {
+        if (resp.profile) {
+          this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
+        }
+        const user = new User(resp);
+        this.userForm.patchValue(user);
+        return this.userSrv.getProfileUser(id);
+      })).
+    subscribe((resp) => {
+      this.profileInfo = resp;
+      console.log(resp)
     });
   }
 
@@ -69,6 +78,7 @@ export class UpdateUsuarioComponent implements OnInit {
       telefono: [''],
       celular: [''],
       apellido: [''],
+      estado: []
     });
   }
 
@@ -106,6 +116,10 @@ export class UpdateUsuarioComponent implements OnInit {
   getSeguimientos(): void {
     this.seguimientoSrv.getSeguimiento(this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
+
+      if (this.seguimientos.length > 0 ) {
+         // setear fechas
+      }
     });
   }
 }
