@@ -120,7 +120,7 @@
             </div>
             <!-- *ngIf="idModule !== null" -->
             <div
-              *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+              *ngIf="rol === 'Mentor'"
               class="col-lg-6 col-md-6 s text-right align-self-center"
             >
               <a
@@ -154,11 +154,12 @@
                   rel="nofollow"
                   alt="Card image cap"
                   (click)="navigateLesson(lesson)"
+                  style="height: 200px;"
                 />
                 <div class="card-body">
                   <h3 class="card-title text-center">{{ lesson.nombre }}</h3>
                   <div
-                    *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                    *ngIf="rol === 'Mentor'"
                     class="card-footer justify-content-center"
                   >
                     <a title="Editar lección" (click)="navigateLesson(module)">

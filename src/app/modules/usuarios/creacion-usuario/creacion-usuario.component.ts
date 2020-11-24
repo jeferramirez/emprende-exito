@@ -17,6 +17,7 @@ export class CreacionUsuarioComponent implements OnInit {
   perfilUsers = [];
   file: any;
   previewimage: any;
+  rol;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +28,7 @@ export class CreacionUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.rol = this.generalSrv.getRolUser();
   }
 
   handleSimulateClick(): void {
@@ -54,7 +56,7 @@ export class CreacionUsuarioComponent implements OnInit {
       habilidades: [''],
       intereses: [''],
       acercaDe: [''],
-      imagen: ['', [Validators.required]],
+      imagen: [''],
     });
   }
 
@@ -67,21 +69,28 @@ export class CreacionUsuarioComponent implements OnInit {
         .createUser(this.userForm.value)
         .pipe(
           switchMap((data) => {
-            const formData = this.generalSrv.getFormdata(
-              data.id,
-              'profile',
-              this.file,
-              'user',
-              'users-permissions'
-            );
-            return this.generalSrv.uploadFile(formData).pipe(
-              switchMap(() =>
-                this.userSrv.createPerfilUser({
-                  ...user,
-                  users_permissions_user: data.id,
-                })
-              )
-            );
+            if (this.file) {
+              const formData = this.generalSrv.getFormdata(
+                data.id,
+                'profile',
+                this.file,
+                'user',
+                'users-permissions'
+              );
+              return this.generalSrv.uploadFile(formData).pipe(
+                switchMap(() =>
+                  this.userSrv.createPerfilUser({
+                    ...user,
+                    users_permissions_user: data.id,
+                  })
+                )
+              );
+            } else {
+              return this.userSrv.createPerfilUser({
+                ...user,
+                users_permissions_user: data.id,
+              });
+            }
           })
         )
         .subscribe(

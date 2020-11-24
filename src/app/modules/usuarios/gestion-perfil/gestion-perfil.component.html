@@ -112,7 +112,7 @@
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label class="bmd-label-floating">Telefono</label>
+                      <label class="bmd-label-floating">Teléfono</label>
                       <input
                         formControlName="telefono"
                         type="text"
@@ -132,34 +132,24 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="cmbCiudad">Ciudad</label>
-                      <div class="form-control">
-                        <mat-select
-                          formControlName="ciudad"
-                          id="cmbCiudad"
-                          class="px-3"
-                        >
-                          <mat-option value="Bogota"> Bogotá </mat-option>
-                          <mat-option value="Medellin"> Medellín </mat-option>
-                          <mat-option value="Cali"> Cali </mat-option>
-                        </mat-select>
-                      </div>
+                      <label class="bmd-label-floating">Ciudad</label>
+                      <input
+                        formControlName="ciudad"
+                        type="text"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="cmbPais">Pais</label>
-                      <div class="form-control">
-                        <mat-select
-                          formControlName="pais"
-                          id="cmbPais"
-                          class="px-3"
-                        >
-                          <mat-option value="Colombia"> Colombia </mat-option>
-                        </mat-select>
-                      </div>
+                      <label class="bmd-label-floating">Pais</label>
+                      <input
+                        formControlName="pais"
+                        type="text"
+                        class="form-control"
+                      />
                     </div>
                   </div>
                   <div *ngIf="rol === 'Mentor'" class="col-md-4">

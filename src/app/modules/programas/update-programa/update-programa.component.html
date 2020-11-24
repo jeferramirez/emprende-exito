@@ -86,7 +86,7 @@
             </div>
             <div *ngFor="let module of modules; let i = index" class="col-md-2">
               <div *ngIf="modules.length > 0" class="card card-program">
-                <img class="card-img-top" (click)="navigateModule(module)" [src]="getFile(module.imagen.url)"
+                <img class="card-img-top" style="height: 200px;" (click)="navigateModule(module)" [src]="getFile(module.imagen.url)"
                   rel="nofollow" alt="Card image cap">
                 <div class="card-body">
                   <h3 class="card-title text-center">{{module.nombre}}</h3>

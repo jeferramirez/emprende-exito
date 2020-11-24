@@ -43,7 +43,7 @@
             <div class="col-md-2 col-sm-12">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <label *ngIf="rol === 'Mentor' || rol === 'Tutor'" for="imageuser">
+                  <label *ngIf="rol === 'Mentor'" for="imageuser">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -51,7 +51,7 @@
                       style="max-width: 200px; max-width: 200px"
                     />
                   </label>
-                  <label *ngIf="rol === 'Emprendedor'">
+                  <label *ngIf="rol !== 'Mentor'">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -67,7 +67,7 @@
                   />
                 </div>
                 <div
-                  *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                  *ngIf="rol === 'Mentor'"
                   class="card-body text-center"
                 >
                   <label class="photo-book" for="imageuser">
@@ -79,7 +79,7 @@
           </div>
         </div>
         <button
-          *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+          *ngIf="rol === 'Mentor'"
           class="btn btn-primary mx-auto mb-4"
           [disabled]="lessonForm.invalid"
           (click)="updateLesson()"
@@ -99,7 +99,7 @@
             </div>
             <!-- *ngIf="idModule !== null" -->
             <div
-              *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+              *ngIf="rol === 'Mentor'"
               class="col-lg-6 col-md-6 s text-right align-self-center"
             >
               <a
@@ -136,11 +136,12 @@
                   rel="nofollow"
                   alt="Card image cap"
                   (click)="navigateActivity(activity)"
+                  style="height: 200px;"
                 />
                 <div class="card-body">
                   <h3 class="card-title text-center">{{ activity.nombre }}</h3>
                   <div
-                    *ngIf="rol === 'Mentor' || rol === 'Tutor'"
+                    *ngIf="rol === 'Mentor'"
                     class="card-footer justify-content-center"
                   >
                     <a
