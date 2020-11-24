@@ -119,12 +119,11 @@
                     <table class="table " *ngIf="seguimientos.length > 0">
                       <tbody>
                         <tr *ngFor="let item of seguimientos">
-                          <td class="text-center" style="width: 15px;">
-                            <span class="material-icons">visibility</span>
-                          </td>
-                          <td style="width: 25px;">{{item.fecha_ultimoseguimiento}}</td>
-                          <td style="width: 45px;">{{item.users_permissions_user.nombre}}  {{item.users_permissions_user.apellido}} </td>
-                          <td style="width: 65px;">{{item.descripcion}} </td>
+
+                          <td style="width: 100px;">{{item.fecha_ultimoseguimiento}}</td>
+                          <td style="width: 100px;">{{item.users_permissions_user.nombre}}  {{item.users_permissions_user.apellido}} </td>
+                          <td style="width: 200px;">{{item.descripcion}} </td>
+                          <td (click)="openDialog(item.descripcion)" style="width: 50px; cursor: pointer;"> <i class="material-icons text-primary mx-2">edit</i></td>
 
                         </tr>
                       </tbody>

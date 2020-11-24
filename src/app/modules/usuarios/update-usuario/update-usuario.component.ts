@@ -10,7 +10,8 @@ import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { environment } from '../../../../environments/environment';
 import { switchMap } from 'rxjs/operators';
 import { ProgramsService } from '../../../services/programs.service';
-import { of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../programas/modal/modal.component';
 
 @Component({
   selector: 'app-update-usuario',
@@ -31,7 +32,8 @@ export class UpdateUsuarioComponent implements OnInit {
     private fb: FormBuilder,
     private seguimientoSrv: SeguimientoService,
     private generalSrv: GeneralService,
-    private programaSrv: ProgramsService
+    private programaSrv: ProgramsService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -120,6 +122,23 @@ export class UpdateUsuarioComponent implements OnInit {
       if (this.seguimientos.length > 0 ) {
          // setear fechas
       }
+    });
+  }
+
+
+  openDialog(descripcion): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        id: 2,
+        showFollow: true,
+        descripcion
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => {
+
+      }, 1500);
     });
   }
 }
