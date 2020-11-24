@@ -60,8 +60,16 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Programas </label>
-                  <input type="text" class="form-control" />
+                  <label for="cmbRol">Programa</label>
+                  <div class="form-control">
+                    <mat-select
+                      id="cmbRol"
+                      class="px-3"
+                    >
+                      <mat-option *ngFor="let item of programas" [value]="item.id"> {{item.nombre}} </mat-option>
+
+                    </mat-select>
+                  </div>
                 </div>
               </div>
 

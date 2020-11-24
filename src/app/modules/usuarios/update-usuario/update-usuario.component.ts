@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { environment } from '../../../../environments/environment';
 import { switchMap } from 'rxjs/operators';
+import { ProgramsService } from '../../../services/programs.service';
 
 @Component({
   selector: 'app-update-usuario',
@@ -19,6 +20,7 @@ export class UpdateUsuarioComponent implements OnInit {
   userForm: FormGroup;
   idUser;
   seguimientos = [];
+  programas= [];
   profilePicture;
 
   constructor(
@@ -26,7 +28,8 @@ export class UpdateUsuarioComponent implements OnInit {
     private userSrv: UsersService,
     private fb: FormBuilder,
     private seguimientoSrv: SeguimientoService,
-    private generalSrv: GeneralService
+    private generalSrv: GeneralService,
+    private programaSrv: ProgramsService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +37,14 @@ export class UpdateUsuarioComponent implements OnInit {
     this.idUser = this.route.snapshot.params['id'];
     this.getUser(this.idUser);
     this.getSeguimientos();
+    this.getPrograms();
+  }
 
+
+  getPrograms(): void {
+    this.programaSrv.getPrograms().subscribe( resp => {
+      this.programas = resp;
+    });
   }
 
   getUser(id: string): void {
