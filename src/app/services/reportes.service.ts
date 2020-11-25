@@ -18,5 +18,9 @@ export class ReportesService {
     return this.http.get(`${environment.URLAPI}/reporteMatricula`);
   }
 
+  reporteActividad(): Observable<any> {
+    return this.http.get(`${environment.URLAPI}/matriculas`);
+  }
 }
+
 
