@@ -88,13 +88,13 @@
                   <div class="togglebutton">
                     <label>
                       <input type="checkbox" formControlName="estado" />
-                      <span class="toggle"></span>
+                      <span class="toggle "></span>
                     </label>
                   </div>
                 </div>
               </div>
             </div>
-            <hr>
+            <hr />
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
@@ -154,12 +154,20 @@
                     <table class="table" *ngIf="seguimientos.length > 0">
                       <tbody>
                         <tr *ngFor="let item of seguimientos">
-
-                          <td style="width: 100px;">{{item.fecha_ultimoseguimiento}}</td>
-                          <td style="width: 100px;">{{item.users_permissions_user.nombre}}  {{item.users_permissions_user.apellido}} </td>
-                          <td style="width: 200px;">{{item.descripcion}} </td>
-                          <td (click)="openDialog(item.descripcion, item.id)" style="width: 50px; cursor: pointer;"> <i class="material-icons text-primary mx-2">edit</i></td>
-
+                          <td style="width: 100px">
+                            {{ item.fecha_ultimoseguimiento }}
+                          </td>
+                          <td style="width: 100px">
+                            {{ item.users_permissions_user.nombre }}
+                            {{ item.users_permissions_user.apellido }}
+                          </td>
+                          <td style="width: 200px">{{ item.descripcion }}</td>
+                          <td
+                            (click)="openDialog(item.descripcion, item.id)"
+                            style="width: 50px; cursor: pointer"
+                          >
+                            <i class="material-icons text-primary mx-2">edit</i>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -208,18 +216,36 @@
           />
         </div>
         <div class="card-body" *ngIf="profileInfo">
-          <h4 class="card-category text-gray">Emprendedor</h4>
-          <h4 class="card-title">{{userForm.get('nombre').value}}</h4>
-          <h5 class="card-category text-gray">Profesión: {{profileInfo.profesion}} </h5>
-          <h5 class="card-category text-gray">Ocupación: {{profileInfo.ocupacion}} </h5>
-          <h4 class="card-title">Habilidades</h4>
-          <h5 class="card-category text-gray"> {{ profileInfo.habilidades}} </h5>
-          <h4 class="card-title">Intereses</h4>
-          <h5 class="card-category text-gray">{{profileInfo.intereses}}</h5>
-          <h4 class="card-title">Tipo de proyecto </h4>
-          <h5 class="card-category text-gray">{{profileInfo.tipoProyecto}} </h5>
-          <h4 class="card-title">Acerca de </h4>
-          <h5 class="card-category text-gray"> {{profileInfo.acercaDe}} </h5>
+          <h4 class="card-text text-center">Emprendedor</h4>
+          <h5 class="card-title text-left text-gray">Nombre:</h5>
+          <h4 class="card-title text-left">
+            {{ userForm.get("nombre").value }}
+            {{ userForm.get("apellido").value }}
+          </h4>
+          <h5 class="card-title text-left text-gray">Profesión:</h5>
+          <h4 class="card-text text-left">{{ profileInfo.profesion }}</h4>
+          <h5 class="card-title text-left text-gray">Ocupación:</h5>
+          <h4 class="card-text text-left">{{ profileInfo.ocupacion }}</h4>
+
+          <h5 class="card-title text-left text-gray">Habilidades:</h5>
+          <textarea  rows="3" class="form-control" disabled>{{
+            profileInfo.habilidades
+          }}</textarea>
+
+          <h5 class="card-title text-left text-gray mt-3">Intereses:</h5>
+
+          <textarea rows="3" class="form-control" disabled>{{
+            profileInfo.intereses
+          }}</textarea>
+          <h5 class="card-title text-left text-gray mt-3">Tipo de proyecto:</h5>
+          <textarea rows="3" class="form-control" disabled>{{
+            profileInfo.tipoProyecto
+          }}</textarea>
+
+          <h5 class="card-title text-left text-gray mt-3">Acerca de:</h5>
+          <textarea rows="3" class="form-control" disabled>{{
+            profileInfo.acercaDe
+          }}</textarea>
         </div>
       </div>
     </div>
