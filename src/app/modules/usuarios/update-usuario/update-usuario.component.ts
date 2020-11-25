@@ -22,7 +22,7 @@ export class UpdateUsuarioComponent implements OnInit {
   userForm: FormGroup;
   idUser;
   seguimientos = [];
-  programas= [];
+  programas = [];
   profilePicture;
   profileInfo;
 
@@ -44,9 +44,8 @@ export class UpdateUsuarioComponent implements OnInit {
     this.getPrograms();
   }
 
-
   getPrograms(): void {
-    this.programaSrv.getPrograms().subscribe( resp => {
+    this.programaSrv.getPrograms().subscribe((resp) => {
       this.programas = resp;
     });
   }
@@ -87,32 +86,45 @@ export class UpdateUsuarioComponent implements OnInit {
   setUser(): void {
     const user = new User(this.userForm.value);
 
-    this.userSrv
-      .updateUser(user, user.id)
-      .pipe(
-        switchMap(() =>
-          this.seguimientoSrv.createSeguimiento({
-            descripcion: this.userForm.get('descripcion').value,
-            fecha_proximoseguimiento: this.userForm.get(
-              'fechaProximoSeguimiento'
-            ).value,
-            fecha_ultimoseguimiento: this.userForm.get('fechaUltimoSeguimiento')
-              .value,
-            users_permissions_user: this.idUser,
-          })
-        )
-      )
-      .subscribe((resp) => {
-        Swal.fire({
-          title: '¡Éxito!',
-          text: 'Usuario actualizado!.',
-          icon: 'success',
-          confirmButtonText: 'Ok',
-          timer: 3000,
-        });
+    Swal.fire({
+      title: '¿Está seguro de actualizar el usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userSrv
+          .updateUser(user, user.id)
+          .pipe(
+            switchMap(() =>
+              this.seguimientoSrv.createSeguimiento({
+                descripcion: this.userForm.get('descripcion').value,
+                fecha_proximoseguimiento: this.userForm.get(
+                  'fechaProximoSeguimiento'
+                ).value,
+                fecha_ultimoseguimiento: this.userForm.get(
+                  'fechaUltimoSeguimiento'
+                ).value,
+                users_permissions_user: this.idUser,
+              })
+            )
+          )
+          .subscribe((resp) => {
+            Swal.fire({
+              title: '¡Éxito!',
+              text: 'Usuario actualizado!.',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+              timer: 3000,
+            });
 
-        this.getSeguimientos();
-      });
+            this.getSeguimientos();
+          });
+      }
+    });
   }
 
   getSeguimientos(): void {

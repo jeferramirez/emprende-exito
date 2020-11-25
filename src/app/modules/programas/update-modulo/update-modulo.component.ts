@@ -126,28 +126,40 @@ export class UpdateModuloComponent implements OnInit {
   }
 
   updateModule(): void {
-    this.moduleSrv
-      .updateModule(this.moduleForm.value, this.module.id)
-      .subscribe(
-        (resp) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Módulo actualizado.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        },
-        (error) => {
-          Swal.fire({
-            title: 'Error!',
-            text: 'No se logró actualizar el módulo.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        }
-      );
+    Swal.fire({
+      title: '¿Está seguro de actualizar el módulo?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.moduleSrv
+          .updateModule(this.moduleForm.value, this.module.id)
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Módulo actualizado.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            },
+            (error) => {
+              Swal.fire({
+                title: 'Error!',
+                text: 'No se logró actualizar el módulo.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
+          );
+      }
+    });
   }
 
   getLessons(id: any): void {

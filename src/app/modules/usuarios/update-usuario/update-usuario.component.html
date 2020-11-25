@@ -1,5 +1,6 @@
-<div class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster">
-
+<div
+  class="container-fluid animate__animated animate__fadeInBottomLeft animate__faster"
+>
   <div class="row">
     <div class="col-md-9">
       <div class="card">
@@ -13,21 +14,33 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Usuario</label>
-                  <input formControlName="username" type="text" class="form-control" />
+                  <input
+                    formControlName="username"
+                    type="text"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Nombre</label>
-                  <input  formControlName="nombre" type="text" class="form-control" />
+                  <input
+                    formControlName="nombre"
+                    type="text"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Apellido</label>
-                  <input  formControlName="apellido" type="text" class="form-control" />
+                  <input
+                    formControlName="apellido"
+                    type="text"
+                    class="form-control"
+                  />
                 </div>
               </div>
             </div>
@@ -35,24 +48,38 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Correo electronico</label>
-                  <input  formControlName="email" type="text" class="form-control" />
+                  <label class="bmd-label-floating">Email</label>
+                  <input
+                    formControlName="email"
+                    type="text"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Teléfono</label>
-                  <input formControlName="telefono"  type="text" class="form-control" />
+                  <input
+                    formControlName="telefono"
+                    type="text"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
                   <label class="bmd-label-floating">Celular</label>
-                  <input formControlName="celular"  type="text" class="form-control" />
+                  <input
+                    formControlName="celular"
+                    type="text"
+                    class="form-control"
+                  />
                 </div>
               </div>
+<<<<<<< HEAD
+=======
             </div>
 
             <div class="row">
@@ -68,6 +95,7 @@
                   </div>
                 </div>
               </div>
+>>>>>>> 54a83b4ac5ea12a6ba6dbfa4ae3183780c8db9e1
             </div>
             <hr>
             <div class="row">
@@ -75,12 +103,13 @@
                 <div class="form-group">
                   <label for="cmbRol">Programa</label>
                   <div class="form-control">
-                    <mat-select
-                      id="cmbRol"
-                      class="px-3"
-                    >
-                      <mat-option *ngFor="let item of programas" [value]="item.id"> {{item.nombre}} </mat-option>
-
+                    <mat-select id="cmbRol" class="px-3">
+                      <mat-option
+                        *ngFor="let item of programas"
+                        [value]="item.id"
+                      >
+                        {{ item.nombre }}
+                      </mat-option>
                     </mat-select>
                   </div>
                 </div>
@@ -88,35 +117,44 @@
 
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Fecha último seguimiento</label>
-                  <input formControlName="fechaUltimoSeguimiento" type="date" class="form-control" />
+                  <label class="bmd-label-floating"
+                    >Fecha último seguimiento</label
+                  >
+                  <input
+                    formControlName="fechaUltimoSeguimiento"
+                    type="date"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Fecha próximo seguimiento</label>
-                  <input formControlName="fechaProximoSeguimiento" type="date" class="form-control" />
+                  <label class="bmd-label-floating"
+                    >Fecha próximo seguimiento</label
+                  >
+                  <input
+                    formControlName="fechaProximoSeguimiento"
+                    type="date"
+                    class="form-control"
+                  />
                 </div>
               </div>
-
-
             </div>
 
             <div class="row">
-
               <div class="col-md-12">
-                <h3> Seguimientos</h3>
+                <h3>Seguimientos</h3>
               </div>
 
               <div class="col-md-12">
                 <div class="card mt-0">
-
-
-                  <p class="text-center" *ngIf="seguimientos.length === 0">El usuario no registra ningun seguimiento</p>
+                  <p class="text-center" *ngIf="seguimientos.length === 0">
+                    El usuario no registra ningun seguimiento
+                  </p>
 
                   <div class="col-md-6 pt-3">
-                    <table class="table " *ngIf="seguimientos.length > 0">
+                    <table class="table" *ngIf="seguimientos.length > 0">
                       <tbody>
                         <tr *ngFor="let item of seguimientos">
 
@@ -128,26 +166,34 @@
                         </tr>
                       </tbody>
                     </table>
-
                   </div>
                 </div>
               </div>
-
             </div>
 
             <div class="row">
               <div class="col-md-12">
-                <h3> Descripción seguimiento</h3>
+                <h3>Descripción seguimiento</h3>
               </div>
 
               <div class="col-md-10">
                 <div class="form-group">
-                  <textarea class="form-control" formControlName="descripcion" id="desc" rows="4"></textarea>
+                  <textarea
+                    class="form-control"
+                    formControlName="descripcion"
+                    id="desc"
+                    rows="4"
+                  ></textarea>
                 </div>
               </div>
             </div>
 
-            <button type="submit" (click)="setUser()" [disabled]="userForm.invalid" class="btn btn-primary pull-right">
+            <button
+              type="submit"
+              (click)="setUser()"
+              [disabled]="userForm.invalid"
+              class="btn btn-primary pull-right"
+            >
               Actualizar
             </button>
             <div class="clearfix"></div>
@@ -156,15 +202,31 @@
       </div>
     </div>
 
-
-
     <div class="col-md-3">
       <div class="card card-profile">
         <div class="card-avatar">
-          <img class="img" [src]="profilePicture || '../../../assets/imagenPerfil.jpg'" />
+          <img
+            class="img"
+            [src]="profilePicture || '../../../assets/imagenPerfil.jpg'"
+          />
         </div>
         <div class="card-body" *ngIf="profileInfo">
           <h4 class="card-category text-gray">Emprendedor</h4>
+<<<<<<< HEAD
+          <h4 class="card-title">Juan</h4>
+          <h5 class="card-category text-gray">Profesión:</h5>
+          <h5 class="card-category text-gray">Ocupación:</h5>
+          <h4 class="card-title">Habilidades</h4>
+          <h5 class="card-category text-gray">Habilidad</h5>
+          <h4 class="card-title">Intereses</h4>
+          <h5 class="card-category text-gray">Interse-interes</h5>
+          <h4 class="card-title">Tipo de proyecto</h4>
+          <h5 class="card-category text-gray">proyecto-interes</h5>
+          <h4 class="card-title">Acerca de</h4>
+          <h5 class="card-category text-gray">
+            informacion acerca del emprendedor
+          </h5>
+=======
           <h4 class="card-title">{{userForm.get('nombre').value}}</h4>
           <h5 class="card-category text-gray">Profesión: {{profileInfo.profesion}} </h5>
           <h5 class="card-category text-gray">Ocupación: {{profileInfo.ocupacion}} </h5>
@@ -176,9 +238,9 @@
           <h5 class="card-category text-gray">{{profileInfo.tipoProyecto}} </h5>
           <h4 class="card-title">Acerca de </h4>
           <h5 class="card-category text-gray"> {{profileInfo.acercaDe}} </h5>
+>>>>>>> 54a83b4ac5ea12a6ba6dbfa4ae3183780c8db9e1
         </div>
       </div>
     </div>
   </div>
-
 </div>

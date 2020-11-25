@@ -37,7 +37,7 @@
               *ngFor="let program of programs; let i = index"
               class="col-md-2"
             >
-              <div *ngIf="programs.length > 0" class="card card-program">
+              <div *ngIf="flagProgram" class="card card-program">
                 <img
                   class="card-img-top"
                   (click)="navigateProgram(program)"

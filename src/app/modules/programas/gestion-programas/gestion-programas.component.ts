@@ -18,6 +18,7 @@ export class GestionProgramasComponent implements OnInit {
   rol;
   user;
   matriculas;
+  flagProgram = false;
 
   constructor(
     private programServ: ProgramsService,
@@ -55,12 +56,14 @@ export class GestionProgramasComponent implements OnInit {
       )
       .subscribe((resp) => {
         this.programs = resp;
+        this.flagProgram = true;
       });
   }
 
   getPrograms(): void {
     this.programServ.getPrograms().subscribe((resp) => {
       this.programs = resp;
+      this.flagProgram = true;
     });
   }
 
