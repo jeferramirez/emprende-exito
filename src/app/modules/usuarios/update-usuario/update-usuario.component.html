@@ -78,8 +78,26 @@
                   />
                 </div>
               </div>
+<<<<<<< HEAD
+=======
             </div>
 
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Estado</label>
+
+                  <div class="togglebutton">
+                    <label>
+                      <input type="checkbox" formControlName="estado" />
+                      <span class="toggle"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+>>>>>>> 54a83b4ac5ea12a6ba6dbfa4ae3183780c8db9e1
+            </div>
+            <hr>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
@@ -139,17 +157,12 @@
                     <table class="table" *ngIf="seguimientos.length > 0">
                       <tbody>
                         <tr *ngFor="let item of seguimientos">
-                          <td class="text-center" style="width: 15px">
-                            <span class="material-icons">visibility</span>
-                          </td>
-                          <td style="width: 25px">
-                            {{ item.fecha_ultimoseguimiento }}
-                          </td>
-                          <td style="width: 45px">
-                            {{ item.users_permissions_user.nombre }}
-                            {{ item.users_permissions_user.apellido }}
-                          </td>
-                          <td style="width: 65px">{{ item.descripcion }}</td>
+
+                          <td style="width: 100px;">{{item.fecha_ultimoseguimiento}}</td>
+                          <td style="width: 100px;">{{item.users_permissions_user.nombre}}  {{item.users_permissions_user.apellido}} </td>
+                          <td style="width: 200px;">{{item.descripcion}} </td>
+                          <td (click)="openDialog(item.descripcion)" style="width: 50px; cursor: pointer;"> <i class="material-icons text-primary mx-2">edit</i></td>
+
                         </tr>
                       </tbody>
                     </table>
@@ -197,8 +210,9 @@
             [src]="profilePicture || '../../../assets/imagenPerfil.jpg'"
           />
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="profileInfo">
           <h4 class="card-category text-gray">Emprendedor</h4>
+<<<<<<< HEAD
           <h4 class="card-title">Juan</h4>
           <h5 class="card-category text-gray">Profesión:</h5>
           <h5 class="card-category text-gray">Ocupación:</h5>
@@ -212,6 +226,19 @@
           <h5 class="card-category text-gray">
             informacion acerca del emprendedor
           </h5>
+=======
+          <h4 class="card-title">{{userForm.get('nombre').value}}</h4>
+          <h5 class="card-category text-gray">Profesión: {{profileInfo.profesion}} </h5>
+          <h5 class="card-category text-gray">Ocupación: {{profileInfo.ocupacion}} </h5>
+          <h4 class="card-title">Habilidades</h4>
+          <h5 class="card-category text-gray"> {{ profileInfo.habilidades}} </h5>
+          <h4 class="card-title">Intereses</h4>
+          <h5 class="card-category text-gray">{{profileInfo.intereses}}</h5>
+          <h4 class="card-title">Tipo de proyecto </h4>
+          <h5 class="card-category text-gray">{{profileInfo.tipoProyecto}} </h5>
+          <h4 class="card-title">Acerca de </h4>
+          <h5 class="card-category text-gray"> {{profileInfo.acercaDe}} </h5>
+>>>>>>> 54a83b4ac5ea12a6ba6dbfa4ae3183780c8db9e1
         </div>
       </div>
     </div>

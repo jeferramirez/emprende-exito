@@ -172,6 +172,11 @@ export class ModalComponent implements OnInit {
     });
   }
 
+
+  updateFollow(id: string): void {
+    console.log(id);
+  }
+
   updateVideo(): void {
     this.activitySrv
       .updateResourceVideo(this.data.idVideo, {

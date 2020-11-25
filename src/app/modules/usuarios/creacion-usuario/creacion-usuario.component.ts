@@ -39,6 +39,7 @@ export class CreacionUsuarioComponent implements OnInit {
     this.userForm = this.fb.group({
       username: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
+      estado: [false],
       apellido: ['', [Validators.required]],
       fechaNacimiento: ['', [Validators.required]],
       sexo: ['', [Validators.required]],

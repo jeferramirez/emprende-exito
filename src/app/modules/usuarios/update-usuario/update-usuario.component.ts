@@ -10,6 +10,8 @@ import { SeguimientoService } from 'src/app/services/seguimiento.service';
 import { environment } from '../../../../environments/environment';
 import { switchMap } from 'rxjs/operators';
 import { ProgramsService } from '../../../services/programs.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../programas/modal/modal.component';
 
 @Component({
   selector: 'app-update-usuario',
@@ -22,6 +24,7 @@ export class UpdateUsuarioComponent implements OnInit {
   seguimientos = [];
   programas = [];
   profilePicture;
+  profileInfo;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +32,8 @@ export class UpdateUsuarioComponent implements OnInit {
     private fb: FormBuilder,
     private seguimientoSrv: SeguimientoService,
     private generalSrv: GeneralService,
-    private programaSrv: ProgramsService
+    private programaSrv: ProgramsService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -47,12 +51,19 @@ export class UpdateUsuarioComponent implements OnInit {
   }
 
   getUser(id: string): void {
-    this.userSrv.getUser(id).subscribe((resp) => {
-      if (resp.profile) {
-        this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
-      }
-      const user = new User(resp);
-      this.userForm.patchValue(user);
+    this.userSrv.getUser(id).
+    pipe(
+      switchMap( resp => {
+        if (resp.profile) {
+          this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
+        }
+        const user = new User(resp);
+        this.userForm.patchValue(user);
+        return this.userSrv.getProfileUser(id);
+      })).
+    subscribe((resp) => {
+      this.profileInfo = resp;
+      console.log(resp)
     });
   }
 
@@ -68,6 +79,7 @@ export class UpdateUsuarioComponent implements OnInit {
       telefono: [''],
       celular: [''],
       apellido: [''],
+      estado: []
     });
   }
 
@@ -118,6 +130,27 @@ export class UpdateUsuarioComponent implements OnInit {
   getSeguimientos(): void {
     this.seguimientoSrv.getSeguimiento(this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
+
+      if (this.seguimientos.length > 0 ) {
+         // setear fechas
+      }
+    });
+  }
+
+
+  openDialog(descripcion): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        id: 2,
+        showFollow: true,
+        descripcion
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => {
+
+      }, 1500);
     });
   }
 }
