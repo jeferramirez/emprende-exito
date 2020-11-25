@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-update-leccion',
   templateUrl: './update-leccion.component.html',
-  styleUrls: ['./update-leccion.component.css']
+  styleUrls: ['./update-leccion.component.css'],
 })
 export class UpdateLeccionComponent implements OnInit {
   lessonForm: FormGroup;
@@ -29,8 +29,8 @@ export class UpdateLeccionComponent implements OnInit {
     private route: ActivatedRoute,
     private lessonSrv: LessonService,
     private activitySrv: ActivityService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.idLesson = this.route.snapshot.params['id'];
@@ -44,7 +44,7 @@ export class UpdateLeccionComponent implements OnInit {
   initForm(): void {
     this.lessonForm = this.fb.group({
       nombre: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]]
+      descripcion: ['', [Validators.required]],
     });
   }
   getLesson(id: any): void {
@@ -99,28 +99,40 @@ export class UpdateLeccionComponent implements OnInit {
   }
 
   updateLesson(): void {
-    this.lessonSrv
-      .updateLesson(this.lessonForm.value, this.lesson.id)
-      .subscribe(
-        (resp) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Lección actualizada.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        },
-        (error) => {
-          Swal.fire({
-            title: 'Error!',
-            text: 'No se logró actualizar la lección.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        }
-      );
+    Swal.fire({
+      title: '¿Está seguro de actualizar la lección?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.lessonSrv
+          .updateLesson(this.lessonForm.value, this.lesson.id)
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Lección actualizada.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            },
+            (error) => {
+              Swal.fire({
+                title: 'Error!',
+                text: 'No se logró actualizar la lección.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
+          );
+      }
+    });
   }
 
   getActivitys(id: any): void {
@@ -150,24 +162,22 @@ export class UpdateLeccionComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.activitySrv
-          .deleteActividads(id)
-          .subscribe(
-            (resp) => {
-              Swal.fire(
-                '¡Éxito!',
-                'La actividad se eliminó éxitosamente.',
-                'success'
-              );
+        this.activitySrv.deleteActividads(id).subscribe(
+          (resp) => {
+            Swal.fire(
+              '¡Éxito!',
+              'La actividad se eliminó éxitosamente.',
+              'success'
+            );
 
-              setTimeout(() => {
-                this.getActivitys(this.idLesson);
-              }, 1400);
-            },
-            (error) => {
-              Swal.fire('¡Error!', 'La actividad no se logró eliminar.', 'error');
-            }
-          );
+            setTimeout(() => {
+              this.getActivitys(this.idLesson);
+            }, 1400);
+          },
+          (error) => {
+            Swal.fire('¡Error!', 'La actividad no se logró eliminar.', 'error');
+          }
+        );
       }
     });
   }

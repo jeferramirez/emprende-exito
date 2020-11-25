@@ -1,5 +1,4 @@
 import { ProgressService } from './../../../services/progress.service';
-import { switchMap } from 'rxjs/operators';
 import { ModulesService } from './../../../services/modules.service';
 import { environment } from './../../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -113,28 +112,40 @@ export class UpdateProgramaComponent implements OnInit {
   }
 
   updateProgram(): void {
-    this.programSrv
-      .updateProgram(this.programForm.value, this.program.id)
-      .subscribe(
-        (resp) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Programa actualizado!.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        },
-        (error) => {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Programa no actualizado!.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        }
-      );
+    Swal.fire({
+      title: '¿Está seguro de actualizar el programa?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.programSrv
+          .updateProgram(this.programForm.value, this.program.id)
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Programa actualizado!.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            },
+            (error) => {
+              Swal.fire({
+                title: 'Error!',
+                text: 'Programa no actualizado!.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
+          );
+      }
+    });
   }
 
   getModules(id: any): void {

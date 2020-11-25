@@ -5,7 +5,7 @@ import { UsersService } from './../../../services/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-perfil',
@@ -138,71 +138,100 @@ export class GestionPerfilComponent implements OnInit {
   }
 
   setProfileUser(): void {
-    this.userSrv
-      .updateUser(this.userForm.value, this.user.user.id)
-      .pipe(
-        switchMap((data) => {
-          return this.userSrv.updateProfileUser(
-            this.userProfileForm.value,
-            this.idProfile
+    Swal.fire({
+      title: '¿Está seguro de actualizar el usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userSrv
+          .updateUser(this.userForm.value, this.user.user.id)
+          .pipe(
+            switchMap((data) => {
+              this.user.user = data;
+              localStorage.setItem('user', JSON.stringify(this.user));
+              return this.userSrv.updateProfileUser(
+                this.userProfileForm.value,
+                this.idProfile
+              );
+            })
+          )
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Usuario actualizado!.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+
+              this.user.user.profile = resp;
+              localStorage.setItem('user', JSON.stringify(this.user));
+            },
+            (error) => {
+              Swal.fire({
+                title: 'Error!',
+                text: 'Usuario no actualizado!.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
           );
-        })
-      )
-      .subscribe(
-        (resp) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Usuario actualizado!.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        },
-        (error) => {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Usuario no actualizado!.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        }
-      );
+      }
+    });
   }
 
   setPass(): void {
-    const objPass = this.userPassForm.value;
-    this.userSrv
-      .validateHash({
-        idUser: this.user.user.id,
-        currentPass: objPass.currentPass,
-      })
-      .pipe(
-        switchMap((resp) => {
-          return this.validatePass(resp.status);
-        })
-      )
-      .subscribe(
-        (resp) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Constraseña actualizada.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-          this.userPassForm.reset();
-        },
-        (error) => {
-          Swal.fire({
-            title: '¡Error!',
-            text: 'No se actualizó la constraseña.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        }
-      );
+    Swal.fire({
+      title: '¿Está seguro de actualizar la constraseña?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const objPass = this.userPassForm.value;
+        this.userSrv
+          .validateHash({
+            idUser: this.user.user.id,
+            currentPass: objPass.currentPass,
+          })
+          .pipe(
+            switchMap((resp) => {
+              return this.validatePass(resp.status);
+            })
+          )
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Constraseña actualizada.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+              this.userPassForm.reset();
+            },
+            (error) => {
+              Swal.fire({
+                title: '¡Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
+          );
+      }
+    });
   }
 
   validatePass(status): Observable<any> {
@@ -214,22 +243,14 @@ export class GestionPerfilComponent implements OnInit {
           this.user.user.id
         );
       } else {
-        Swal.fire({
-          title: 'Error!',
-          text: 'Las constraseñas no coinciden',
-          icon: 'warning',
-          confirmButtonText: 'Ok',
-          timer: 3000,
-        });
+        return throwError(new Error(
+          'Las constraseñas no coinciden'
+        ));
       }
     } else {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Contraseña actual incorrecta',
-        icon: 'warning',
-        confirmButtonText: 'Ok',
-        timer: 3000,
-      });
+      return throwError(new Error(
+        'Contraseña actual incorrecta'
+      ));
     }
   }
 }

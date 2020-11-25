@@ -3,7 +3,7 @@ import { ModalComponent } from './../modal/modal.component';
 import { switchMap } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
 import { ActivityService } from './../../../services/activity.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { GeneralService } from './../../../services/general.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -155,28 +155,40 @@ export class UpdateActividadComponent implements OnInit {
   }
 
   updateActivity(): void {
-    this.activitySrv
-      .updateActivity(this.activityForm.value, this.activity.id)
-      .subscribe(
-        (resp) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Actividad actualizada.',
-            icon: 'success',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        },
-        (error) => {
-          Swal.fire({
-            title: '¡Error!',
-            text: 'No se logró actualizar la actividad.',
-            icon: 'error',
-            confirmButtonText: 'Ok',
-            timer: 3000,
-          });
-        }
-      );
+    Swal.fire({
+      title: '¿Está seguro de actualizar la actividad?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, actualizar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.activitySrv
+          .updateActivity(this.activityForm.value, this.activity.id)
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Actividad actualizada.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            },
+            (error) => {
+              Swal.fire({
+                title: '¡Error!',
+                text: 'No se logró actualizar la actividad.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
+          );
+      }
+    });
   }
 
   getVideos(id: any): void {
@@ -251,8 +263,8 @@ export class UpdateActividadComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.progressSrv
-                .deleteProgress({ idRecurso: id, campo: 'imagene' })
-                .subscribe();
+          .deleteProgress({ idRecurso: id, campo: 'imagene' })
+          .subscribe();
         this.activitySrv
           .deleteImagen(id)
           .pipe(
@@ -268,7 +280,6 @@ export class UpdateActividadComponent implements OnInit {
                 'success'
               );
               this.getIMG(this.idActivity);
-
             },
             (error) => {
               Swal.fire('¡Error!', 'La imagen no se logró eliminar.', 'error');
@@ -292,23 +303,21 @@ export class UpdateActividadComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.progressSrv
-                .deleteProgress({ idRecurso: id, campo: 'video' })
-                .subscribe();
-        this.activitySrv
-          .deleteVideo(id)
-          .subscribe(
-            (resp) => {
-              Swal.fire(
-                '¡Éxito!',
-                'El vídeo se eliminó éxitosamente.',
-                'success'
-              );
-              this.getVideos(this.idActivity);
-            },
-            (error) => {
-              Swal.fire('¡Error!', 'El vídeo no se logró eliminar.', 'error');
-            }
-          );
+          .deleteProgress({ idRecurso: id, campo: 'video' })
+          .subscribe();
+        this.activitySrv.deleteVideo(id).subscribe(
+          (resp) => {
+            Swal.fire(
+              '¡Éxito!',
+              'El vídeo se eliminó éxitosamente.',
+              'success'
+            );
+            this.getVideos(this.idActivity);
+          },
+          (error) => {
+            Swal.fire('¡Error!', 'El vídeo no se logró eliminar.', 'error');
+          }
+        );
       }
     });
   }
