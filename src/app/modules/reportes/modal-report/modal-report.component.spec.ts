@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CircleProgressComponent } from './circle-progress.component';
+import { ModalReportComponent } from './modal-report.component';
 
-describe('CircleProgressComponent', () => {
-  let component: CircleProgressComponent;
-  let fixture: ComponentFixture<CircleProgressComponent>;
+describe('ModalReportComponent', () => {
+  let component: ModalReportComponent;
+  let fixture: ComponentFixture<ModalReportComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CircleProgressComponent ]
+      declarations: [ ModalReportComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CircleProgressComponent);
+    fixture = TestBed.createComponent(ModalReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

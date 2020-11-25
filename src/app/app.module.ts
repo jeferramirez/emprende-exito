@@ -29,8 +29,8 @@ import { UpdateModuloComponent } from './modules/programas/update-modulo/update-
 import { UpdateLeccionComponent } from './modules/programas/update-leccion/update-leccion.component';
 import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
 import { ModalComponent } from './modules/programas/modal/modal.component';
-import { CircleProgressComponent } from './shared/components/circle-progress/circle-progress.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ModalReportComponent } from './modules/reportes/modal-report/modal-report.component';
 
 
 @NgModule({
@@ -55,7 +55,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     UpdateLeccionComponent,
     UpdateActividadComponent,
     ModalComponent,
-    CircleProgressComponent,
+    ModalReportComponent,
   ],
   imports: [
     BrowserModule,

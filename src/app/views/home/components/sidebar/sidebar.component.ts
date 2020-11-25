@@ -1,5 +1,7 @@
 import { GeneralService } from './../../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalReportComponent } from '../../../../modules/reportes/modal-report/modal-report.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,15 +25,11 @@ export class SidebarComponent implements OnInit {
       icon: 'library_books',
       label: 'Matrículas',
     },
-    {
-      ruta: '/home/',
-      icon: 'pie_chart',
-      label: 'Reportes',
-    },
+
   ];
   rol;
 
-  constructor(private generalSrv: GeneralService) {}
+  constructor(private generalSrv: GeneralService, public dialog: MatDialog,) {}
 
   ngOnInit(): void {
     this.rol = this.generalSrv.getRolUser();
@@ -63,5 +61,20 @@ export class SidebarComponent implements OnInit {
         },
       ];
     }
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalReportComponent, {
+      data: {
+
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      setTimeout(() => {
+
+      }, 1500);
+    });
   }
 }
