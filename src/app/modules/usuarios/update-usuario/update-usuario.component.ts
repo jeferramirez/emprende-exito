@@ -126,10 +126,10 @@ export class UpdateUsuarioComponent implements OnInit {
   }
 
 
-  openDialog(descripcion): void {
+  openDialog(descripcion, id): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: {
-        id: 2,
+        id,
         showFollow: true,
         descripcion
       },
@@ -137,7 +137,7 @@ export class UpdateUsuarioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => {
-
+       this.getSeguimientos();
       }, 1500);
     });
   }

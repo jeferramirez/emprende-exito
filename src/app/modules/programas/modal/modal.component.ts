@@ -5,6 +5,7 @@ import { ActivityService } from './../../../services/activity.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { SeguimientoService } from '../../../services/seguimiento.service';
 
 @Component({
   selector: 'app-modal',
@@ -22,7 +23,8 @@ export class ModalComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private activitySrv: ActivityService,
-    private generalSrv: GeneralService
+    private generalSrv: GeneralService,
+    private segtSrv: SeguimientoService
   ) {}
 
   ngOnInit(): void {}
@@ -174,7 +176,19 @@ export class ModalComponent implements OnInit {
 
 
   updateFollow(id: string): void {
-    console.log(id);
+
+    this.segtSrv.updateSeguimiento( id, { descripcion : this.data.descripcion})
+    .subscribe( resp => {
+
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Se agregaron correctamente los archivos.',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+        timer: 3000,
+      });
+
+    });
   }
 
   updateVideo(): void {

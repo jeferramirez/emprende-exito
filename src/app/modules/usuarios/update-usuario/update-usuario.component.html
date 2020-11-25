@@ -123,7 +123,7 @@
                           <td style="width: 100px;">{{item.fecha_ultimoseguimiento}}</td>
                           <td style="width: 100px;">{{item.users_permissions_user.nombre}}  {{item.users_permissions_user.apellido}} </td>
                           <td style="width: 200px;">{{item.descripcion}} </td>
-                          <td (click)="openDialog(item.descripcion)" style="width: 50px; cursor: pointer;"> <i class="material-icons text-primary mx-2">edit</i></td>
+                          <td (click)="openDialog(item.descripcion, item.id)" style="width: 50px; cursor: pointer;"> <i class="material-icons text-primary mx-2">edit</i></td>
 
                         </tr>
                       </tbody>

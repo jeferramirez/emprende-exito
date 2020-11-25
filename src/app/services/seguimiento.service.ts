@@ -19,4 +19,8 @@ export class SeguimientoService {
     return this.http.get(`${environment.URLAPI}/ficha-seguimientos/user/${idUser}`);
   }
 
+  updateSeguimiento(idUser: string, seguimiento: any): Observable<any> {
+    return this.http.put(`${environment.URLAPI}/ficha-seguimientos/${idUser}`, seguimiento);
+  }
+
 }
