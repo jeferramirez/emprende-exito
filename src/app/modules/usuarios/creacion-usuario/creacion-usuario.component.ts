@@ -40,15 +40,6 @@ export class CreacionUsuarioComponent implements OnInit {
       username: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       estado: [false],
-<<<<<<< HEAD
-      apellido: ['', [Validators.required]],
-      fechaNacimiento: [''],
-      sexo: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      telefono: [''],
-      celular: ['', [Validators.required]],
-      ciudad: ['', [Validators.required]],
-=======
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       fechaNacimiento: ['', [Validators.required]],
       sexo: ['', [Validators.required]],
@@ -56,7 +47,6 @@ export class CreacionUsuarioComponent implements OnInit {
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       ciudad: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
->>>>>>> d4709ad942099ad314b1e5679010c74253370228
       rol: ['', [Validators.required]],
       pais: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       password: ['', [Validators.required]],
