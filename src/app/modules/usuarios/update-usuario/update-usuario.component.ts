@@ -132,6 +132,9 @@ export class UpdateUsuarioComponent implements OnInit {
 
       if (this.seguimientos.length > 0 ) {
          // setear fechas
+         const ultimoSeg = this.seguimientos[this.seguimientos.length - 1]
+         this.userForm.get('fechaUltimoSeguimiento').setValue(ultimoSeg.fecha_ultimoseguimiento);
+         this.userForm.get('fechaProximoSeguimiento').setValue(ultimoSeg.fecha_proximoseguimiento);
       }
     });
   }

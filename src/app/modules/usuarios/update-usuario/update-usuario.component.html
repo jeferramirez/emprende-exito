@@ -88,7 +88,7 @@
                   <div class="togglebutton">
                     <label>
                       <input type="checkbox" formControlName="estado" />
-                      <span class="toggle "></span>
+                      <span class="toggle"></span>
                     </label>
                   </div>
                 </div>
@@ -144,13 +144,13 @@
                 <h3>Seguimientos</h3>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-12" id="seguimientos">
                 <div class="card mt-0">
                   <p class="text-center" *ngIf="seguimientos.length === 0">
                     El usuario no registra ningun seguimiento
                   </p>
 
-                  <div class="col-md-6 pt-3">
+                  <div class="col-md-12 pt-3">
                     <table class="table" *ngIf="seguimientos.length > 0">
                       <tbody>
                         <tr *ngFor="let item of seguimientos">
@@ -226,24 +226,20 @@
           <h4 class="card-text text-left">{{ profileInfo.profesion }}</h4>
           <h5 class="card-title text-left text-gray">Ocupación:</h5>
           <h4 class="card-text text-left">{{ profileInfo.ocupacion }}</h4>
-
           <h5 class="card-title text-left text-gray">Habilidades:</h5>
-          <textarea  rows="3" class="form-control" disabled>{{
+          <textarea rows="4" class="form-control" disabled>{{
             profileInfo.habilidades
           }}</textarea>
-
           <h5 class="card-title text-left text-gray mt-3">Intereses:</h5>
-
-          <textarea rows="3" class="form-control" disabled>{{
+          <textarea rows="5" class="form-control" disabled>{{
             profileInfo.intereses
           }}</textarea>
           <h5 class="card-title text-left text-gray mt-3">Tipo de proyecto:</h5>
           <textarea rows="3" class="form-control" disabled>{{
             profileInfo.tipoProyecto
           }}</textarea>
-
           <h5 class="card-title text-left text-gray mt-3">Acerca de:</h5>
-          <textarea rows="3" class="form-control" disabled>{{
+          <textarea rows="5" class="form-control" disabled>{{
             profileInfo.acercaDe
           }}</textarea>
         </div>

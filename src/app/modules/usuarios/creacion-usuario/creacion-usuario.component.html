@@ -25,11 +25,13 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active" id="infoPersonal">
+              <span style="color: red;">Campos obligatorios (*)</span>
               <form [formGroup]="userForm">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Usuario</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="username"
                         type="text"
@@ -40,6 +42,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Nombre</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="nombre"
                         type="text"
@@ -50,6 +53,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Apellido</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="apellido"
                         type="text"
@@ -75,6 +79,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="cmbSexo">Género</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <div class="form-control">
                         <mat-select
                           formControlName="sexo"
@@ -91,6 +96,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Email</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="email"
                         type="email"
@@ -113,6 +119,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Celular</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="celular"
                         type="text"
@@ -123,6 +130,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Ciudad</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="ciudad"
                         type="text"
@@ -135,6 +143,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Pais</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="pais"
                         type="text"
@@ -145,6 +154,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label for="cmbRol">Rol</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <div class="form-control">
                         <mat-select
                           formControlName="rol"
@@ -163,6 +173,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="bmd-label-floating">Contraseña</label>
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="password"
                         type="password"
@@ -178,6 +189,7 @@
                       <label class="bmd-label-floating"
                         >Confirmar contraseña</label
                       >
+                      <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="confirmPassword"
                         type="password"

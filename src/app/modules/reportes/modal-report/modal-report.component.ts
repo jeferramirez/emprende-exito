@@ -94,7 +94,7 @@ export class ModalReportComponent implements OnInit {
         });
 
         let csvContent =
-          'ID;NOMBRES;APELLIDOS;EMAIL;PROGRAMA;ESTADO;AVANCE_GENERAL_DEL_PROGRAMA' +
+          'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;AVANCE_GENERAL_DEL_PROGRAMA' +
           '\r\n';
         this.actividades.forEach((rowArray) => {
           let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email};${rowArray.estado};${rowArray.programa};${rowArray.progreso}%`;

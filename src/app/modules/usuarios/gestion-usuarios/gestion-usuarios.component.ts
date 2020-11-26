@@ -1,3 +1,5 @@
+import { MatriculaService } from './../../../services/matricula.service';
+import { map, switchMap } from 'rxjs/operators';
 import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
@@ -8,6 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -22,6 +25,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     'email',
     'celular',
     'rol',
+    'programa',
     'estado',
     'fecCreacion',
     'acciones',
@@ -35,7 +39,8 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   constructor(
     private userSrv: UsersService,
     private router: Router,
-    private generalSrv: GeneralService
+    private generalSrv: GeneralService,
+    private matriculaSrv: MatriculaService
   ) {}
 
   ngOnInit(): void {
@@ -85,22 +90,44 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   }
 
   getUser(): void {
-    this.userSrv.getUsers().subscribe((users) => {
-      let userMap = users.map((user: any) => {
-        return {
-          ...user,
-          created_at: moment(user.created_at).format('DD/MM/YYYY HH:MM'),
-        };
-      });
+    this.userSrv
+      .getUsers()
+      .pipe(
+        switchMap((users) => {
+          const reportUsers = this.getUserProgram(users);
+          return combineLatest([...reportUsers]);
+        })
+      )
+      .subscribe((users) => {
+        let userMap = users.map((user: any) => {
+          let programas = [];
+          programas =
+            user.matricula &&
+            user.matricula.map((matricula) => matricula.programa.nombre);
+          return {
+            ...user,
+            created_at: moment(user.created_at).format('DD/MM/YYYY HH:MM'),
+            programa: programas.join(', '),
+          };
+        });
 
-      if (this.rol === 'Tutor') {
-        userMap = userMap.filter((user: any) => user.rol === 'Emprendedor');
-      }
-      this.dataSource = new MatTableDataSource(userMap);
-    });
+        if (this.rol === 'Tutor') {
+          userMap = userMap.filter((user: any) => user.rol === 'Emprendedor');
+        }
+
+        this.dataSource = new MatTableDataSource(userMap);
+      });
   }
 
   navigateUser(item): void {
     this.router.navigate(['home/actualizar-usuario/', item.id]);
+  }
+
+  getUserProgram(users): any {
+    return users.map((user) => {
+      return this.matriculaSrv
+        .getUserMatricula(user.id)
+        .pipe(map((matricula) => Object.assign(user, { matricula })));
+    });
   }
 }

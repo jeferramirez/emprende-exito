@@ -57,11 +57,13 @@ export class GestionMatriculasComponent implements OnInit {
           programa: this.selectProgram
         };
         if (!matricula.id_matricula) {
+          console.log(newmatricula);
           observables.push(this.matriculaSrv.createMatricula(newmatricula));
         }
       });
 
       forkJoin( observables ).subscribe( resp => {
+        console.log(resp);
         Swal.fire({
           title: '¡Éxito!',
           text: 'Matricula creada!.',

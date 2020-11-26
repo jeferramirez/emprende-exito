@@ -87,6 +87,13 @@
                 </td>
               </ng-container>
 
+              <ng-container matColumnDef="programa">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Programas</th>
+                <td (click)="navigateUser(row)" mat-cell *matCellDef="let row">
+                  {{ row.programa }}
+                </td>
+              </ng-container>
+
               <ng-container matColumnDef="estado">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                   Estado
