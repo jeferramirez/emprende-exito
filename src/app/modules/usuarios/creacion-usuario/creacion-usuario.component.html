@@ -37,6 +37,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('username').hasError('pattern') ">
+                        Este campo solo permite texto
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -48,6 +51,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('nombre').hasError('pattern') ">
+                        Este campo solo permite texto
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -59,6 +65,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('apellido').hasError('pattern') ">
+                        Este campo solo permite texto
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -102,6 +111,9 @@
                         type="email"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('email').hasError('email') ">
+                        Ingrese un email válido
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -114,6 +126,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('telefono').hasError('pattern') ">
+                        Este campo solo permite números
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -125,6 +140,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('celular').hasError('pattern') ">
+                        Este campo solo permite números
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -136,6 +154,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('ciudad').hasError('pattern') ">
+                        Este campo solo permite texto
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -149,6 +170,9 @@
                         type="text"
                         class="form-control"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('pais').hasError('pattern') ">
+                        Este campo solo permite texto
+                      </span>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -180,7 +204,7 @@
                         class="form-control"
                         autocomplete="on"
                       />
-                    </div>
+                   </div>
                   </div>
                 </div>
                 <div class="row">

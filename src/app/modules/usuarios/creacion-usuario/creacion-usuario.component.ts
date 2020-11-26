@@ -24,7 +24,7 @@ export class CreacionUsuarioComponent implements OnInit {
     private userSrv: UsersService,
     private router: Router,
     private generalSrv: GeneralService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -37,9 +37,10 @@ export class CreacionUsuarioComponent implements OnInit {
 
   createForm(): void {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       estado: [false],
+<<<<<<< HEAD
       apellido: ['', [Validators.required]],
       fechaNacimiento: [''],
       sexo: ['', [Validators.required]],
@@ -47,16 +48,25 @@ export class CreacionUsuarioComponent implements OnInit {
       telefono: [''],
       celular: ['', [Validators.required]],
       ciudad: ['', [Validators.required]],
+=======
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      fechaNacimiento: ['', [Validators.required]],
+      sexo: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      ciudad: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+>>>>>>> d4709ad942099ad314b1e5679010c74253370228
       rol: ['', [Validators.required]],
-      pais: ['', [Validators.required]],
+      pais: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      profesion: [''],
-      ocupacion: [''],
-      tipoProyecto: [''],
-      habilidades: [''],
-      intereses: [''],
-      acercaDe: [''],
+      profesion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      ocupacion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      tipoProyecto: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      habilidades: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      intereses: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      acercaDe: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
       imagen: [''],
     });
   }
