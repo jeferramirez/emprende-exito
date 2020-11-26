@@ -89,7 +89,7 @@ export class ModalReportComponent implements OnInit {
             programa: actividad.programa.nombre,
             idprograma: actividad.programa.id,
             estado: actividad.users_permissions_user.id ? 'Activo' : 'Inactivo',
-            progreso: actividad.progreso.porcentaje,
+            progreso: actividad.progreso.porcentaje == null ? '0' : actividad.progreso.porcentaje,
           };
         });
 
