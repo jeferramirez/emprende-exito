@@ -63,7 +63,6 @@ export class UpdateUsuarioComponent implements OnInit {
       })).
     subscribe((resp) => {
       this.profileInfo = resp;
-      console.log(resp)
     });
   }
 
