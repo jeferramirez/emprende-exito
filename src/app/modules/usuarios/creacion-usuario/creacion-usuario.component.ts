@@ -40,7 +40,11 @@ export class CreacionUsuarioComponent implements OnInit {
       username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       estado: [false],
+<<<<<<< HEAD
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+=======
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]*$')]],
+>>>>>>> f6bb9e24b0cfee1aed82d1b2650b7a04b4787ec1
       fechaNacimiento: ['', [Validators.required]],
       sexo: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
