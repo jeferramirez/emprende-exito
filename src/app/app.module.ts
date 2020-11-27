@@ -31,6 +31,7 @@ import { UpdateActividadComponent } from './modules/programas/update-actividad/u
 import { ModalComponent } from './modules/programas/modal/modal.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ModalReportComponent } from './modules/reportes/modal-report/modal-report.component';
+import { ListaReportesComponent } from './modules/reportes/lista-reportes/lista-reportes.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ModalReportComponent } from './modules/reportes/modal-report/modal-repo
     UpdateActividadComponent,
     ModalComponent,
     ModalReportComponent,
+    ListaReportesComponent,
   ],
   imports: [
     BrowserModule,

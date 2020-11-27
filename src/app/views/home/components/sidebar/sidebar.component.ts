@@ -25,6 +25,11 @@ export class SidebarComponent implements OnInit {
       icon: 'library_books',
       label: 'Matrículas',
     },
+    {
+      ruta: '/home/lista-reportes',
+      icon: 'pie_chart',
+      label: 'Reportes',
+    }
 
   ];
   rol;
