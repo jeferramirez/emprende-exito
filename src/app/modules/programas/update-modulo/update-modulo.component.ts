@@ -66,7 +66,7 @@ export class UpdateModuloComponent implements OnInit {
 
   initForm(): void {
     this.moduleForm = this.fb.group({
-      nombre: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       descripcion: ['', [Validators.required]],
       users_permissions_user: ['', [Validators.required]],
     });

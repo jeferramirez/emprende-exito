@@ -29,7 +29,7 @@ export class CreacionProgramaComponent implements OnInit {
 
   createProgramForm(): void {
     this.programForm = this.fb.group({
-      nombre: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       descripcion: ['', [Validators.required]],
       imagen: ['', [Validators.required]],
     });
