@@ -40,8 +40,8 @@ export class UpdateUsuarioComponent implements OnInit {
     this.initForm();
     this.idUser = this.route.snapshot.params['id'];
     this.getUser(this.idUser);
-    this.getSeguimientos();
     this.getPrograms();
+    this.getSeguimientos();
   }
 
   getPrograms(): void {
@@ -68,7 +68,7 @@ export class UpdateUsuarioComponent implements OnInit {
 
   initForm(): void {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required],[ Validators.pattern('^[a-zA-Z ]*$')]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       fechaProximoSeguimiento: ['', [Validators.required]],
       fechaUltimoSeguimiento: ['', [Validators.required]],
       descripcion: ['', [Validators.maxLength(100)]],
