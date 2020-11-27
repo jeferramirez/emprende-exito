@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.mat-row:hover{
+  background: #19537c1f;
+  cursor: pointer;
+}
+.table-users {
+  max-width: 100%;
+  overflow: auto;
+  max-height: 400px;
+}

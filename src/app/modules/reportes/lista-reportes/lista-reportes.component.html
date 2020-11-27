@@ -1,0 +1,372 @@
+<div class="container-fluid animate__animated animate__fadeIn animate__faster">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-header card-header-tabs card-header-info">
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <ul class="nav nav-tabs" data-tabs="tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#estado" data-toggle="tab">
+                    <i class="material-icons">contacts</i> Estado
+                    <div class="ripple-container"></div>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    name="continuar"
+                    id="continuar"
+                    href="#matricula"
+                    data-toggle="tab"
+                  >
+                    <i class="material-icons">library_books</i> Matricula
+                    <div class="ripple-container"></div>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    name="continuar"
+                    id="continuar"
+                    href="#programas"
+                    data-toggle="tab"
+                  >
+                    <i class="material-icons">style</i> Programa
+                    <div class="ripple-container"></div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active" id="estado">
+              <div class="card-body table-responsive">
+                <mat-form-field>
+                  <mat-label>Filtrar</mat-label>
+                  <input
+                    matInput
+                    (keydown)="applyFilterStatus($event)"
+                    placeholder="Busqueda..."
+                    #input
+                  />
+                </mat-form-field>
+                <div class="table-users mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSourceStatus" matSort>
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        ID usuario
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.id }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombres">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Nombres
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.nombres }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apellidos">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Apellidos
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.apellidos }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Email
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.email }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estado">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Estado
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.estado }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="intereses">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Intereses
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.intereses }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="habilidades">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Habilidades
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.habilidades }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="tipoProyecto">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Tipo de proyecto
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.tipoProyecto }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="profesion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Profesion
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.profesion }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ocupacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Ocupación
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.ocupacion }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fechaUltimoSeg">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Fecha de ultimo seguimiento
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.fechaSeguimiento }}
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="fieldsStatus"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: fieldsStatus"
+                    ></tr>
+                  </table>
+                </div>
+                <!-- <mat-paginator
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                ></mat-paginator> -->
+                <div class="mx-auto text-center mt-4">
+                  <button
+                    class="btn btn-primary"
+                    (click)="downloadReportStatus()"
+                  >
+                    Descargar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="matricula">
+              <div class="card-body table-responsive">
+                <mat-form-field>
+                  <mat-label>Filtrar</mat-label>
+                  <input
+                    matInput
+                    (keydown)="applyFilterEnrollment($event)"
+                    placeholder="Busqueda..."
+                    #input
+                  />
+                </mat-form-field>
+                <div class="table-users mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSourceEnrollment" matSort>
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        ID usuario
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.id }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombres">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Nombres
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.nombres }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apellidos">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Apellidos
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.apellidos }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Email
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.email }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="programa">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Programa
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.programa }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estado">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Estado
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.estado }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fechaMatricula">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Fecha de matrícula
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.fecha_matricula }}
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="fieldsEnrollment"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: fieldsEnrollment"
+                    ></tr>
+                  </table>
+                </div>
+                <!-- <mat-paginator
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                ></mat-paginator> -->
+                <div class="mx-auto text-center mt-4">
+                  <button
+                    class="btn btn-primary"
+                    (click)="downloadEnrollment()"
+                  >
+                    Descargar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="programas">
+              <div class="card-body table-responsive">
+                <mat-form-field>
+                  <mat-label>Filtrar</mat-label>
+                  <input
+                    matInput
+                    (keydown)="applyFilterPrograms($event)"
+                    placeholder="Busqueda..."
+                    #input
+                  />
+                </mat-form-field>
+                <div class="table-users mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSourcePrograms" matSort>
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        ID usuario
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.id }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nombres">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Nombres
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.nombres }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apellidos">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Apellidos
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.apellidos }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Email
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.email }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estado">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Estado
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.estado }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="programa">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Programa
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.programa }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="progreso">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Avance general del programa
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        {{ row.progreso }}
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="fieldsPrograms"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: fieldsPrograms"
+                    ></tr>
+                  </table>
+                </div>
+                <!-- <mat-paginator
+                  [pageSizeOptions]="[5, 10, 25, 100]"
+                ></mat-paginator> -->
+                <div class="mx-auto text-center mt-4">
+                  <button class="btn btn-primary" (click)="downloadPrograms()">
+                    Descargar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

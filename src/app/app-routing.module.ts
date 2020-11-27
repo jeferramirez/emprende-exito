@@ -1,3 +1,4 @@
+import { ListaReportesComponent } from './modules/reportes/lista-reportes/lista-reportes.component';
 import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
 import { UpdateModuloComponent } from './modules/programas/update-modulo/update-modulo.component';
 import { UpdateProgramaComponent } from './modules/programas/update-programa/update-programa.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
     { path: 'update-modulo/:id', component: UpdateModuloComponent  },
     { path: 'update-leccion/:id', component: UpdateLeccionComponent  },
     { path: 'update-actividad/:id', component: UpdateActividadComponent  },
+    { path: 'lista-reportes', component: ListaReportesComponent  },
 
   ], canActivate: [AuthGuard] },
 ];
