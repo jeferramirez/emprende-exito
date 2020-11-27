@@ -77,7 +77,7 @@ export class ListaReportesComponent implements OnInit {
 
   applyFilterPrograms(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSourceEnrollment.filter = filterValue.trim().toLowerCase();
+    this.dataSourcePrograms.filter = filterValue.trim().toLowerCase();
   }
 
   reportStatus(): void {
