@@ -68,16 +68,16 @@ export class UpdateUsuarioComponent implements OnInit {
 
   initForm(): void {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required],[ Validators.pattern('^[a-zA-Z 0-9]*$')]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
       fechaProximoSeguimiento: ['', [Validators.required]],
       fechaUltimoSeguimiento: ['', [Validators.required]],
       descripcion: ['', [Validators.maxLength(100)]],
       id: [''],
-      email: ['', [Validators.email]],
-      nombre: ['', [ Validators.pattern('^[a-zA-Z ]*$')]],
+      email: ['', [Validators.required, Validators.email]],
+      nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-Z ]*$')]],
       telefono: ['', [Validators.pattern('^[0-9]*$')]],
       celular: ['', [Validators.pattern('^[0-9]*$')]],
-      apellido: ['', [ Validators.pattern('^[a-zA-Z ]*$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       estado: []
     });
   }
