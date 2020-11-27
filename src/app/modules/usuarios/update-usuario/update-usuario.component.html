@@ -207,8 +207,8 @@
                     id="desc"
                     rows="4"
                   ></textarea>
-                  <span style="color: red;" *ngIf="this.userForm.get('descripcion').hasError('maxLength') ">
-                    Este campo solo permite max 100 caracteres
+                  <span style="color: red;" *ngIf="userForm.get('descripcion').hasError('maxlength')" >
+                    La descripción debe contener maximo 100 carácteres
                   </span>
                 </div>
               </div>

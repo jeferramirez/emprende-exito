@@ -40,8 +40,8 @@ export class UpdateUsuarioComponent implements OnInit {
     this.initForm();
     this.idUser = this.route.snapshot.params['id'];
     this.getUser(this.idUser);
-    this.getSeguimientos();
     this.getPrograms();
+    this.getSeguimientos();
   }
 
   getPrograms(): void {
