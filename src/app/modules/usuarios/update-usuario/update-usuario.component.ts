@@ -73,19 +73,11 @@ export class UpdateUsuarioComponent implements OnInit {
       fechaUltimoSeguimiento: ['', [Validators.required]],
       descripcion: ['', [Validators.maxLength(500)]],
       id: [''],
-<<<<<<< HEAD
       email: ['', [Validators.email]],
       nombre: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       telefono: ['', [Validators.pattern('^[0-9]*$')]],
       celular: ['', [Validators.pattern('^[0-9]*$')]],
       apellido: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
-=======
-      email: ['', [Validators.required, Validators.email]],
-      nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-Z ]*$')]],
-      telefono: ['', [Validators.pattern('^[0-9]*$')]],
-      celular: ['', [Validators.pattern('^[0-9]*$')]],
-      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]*$')]],
->>>>>>> f6bb9e24b0cfee1aed82d1b2650b7a04b4787ec1
       estado: []
     });
   }
