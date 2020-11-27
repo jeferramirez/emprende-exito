@@ -91,7 +91,7 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('telefono').hasError('pattern') ">
+                  <span style="color: red;" *ngIf="this.userForm.get('celular').hasError('pattern') ">
                     Este campo solo permite números
                   </span>
                 </div>
@@ -236,7 +236,7 @@
             [src]="profilePicture || '../../../assets/imagenPerfil.jpg'"
           />
         </div>
-        <div class="card-body" *ngIf="profileInfo">
+        <div class="card-body">
           <h4 class="card-text text-center">Emprendedor</h4>
           <h5 class="card-title text-left text-gray">Nombre:</h5>
           <h4 class="card-title text-left">
@@ -244,23 +244,23 @@
             {{ userForm.get("apellido").value }}
           </h4>
           <h5 class="card-title text-left text-gray">Profesión:</h5>
-          <h4 class="card-text text-left">{{ profileInfo.profesion }}</h4>
+          <h4 *ngIf="profileInfo" class="card-text text-left">{{ profileInfo.profesion }}</h4>
           <h5 class="card-title text-left text-gray">Ocupación:</h5>
-          <h4 class="card-text text-left">{{ profileInfo.ocupacion }}</h4>
+          <h4 *ngIf="profileInfo" class="card-text text-left">{{ profileInfo.ocupacion }}</h4>
           <h5 class="card-title text-left text-gray">Habilidades:</h5>
-          <textarea rows="4" class="form-control" disabled>{{
+          <textarea *ngIf="profileInfo" rows="4" class="form-control" disabled>{{
             profileInfo.habilidades
           }}</textarea>
           <h5 class="card-title text-left text-gray mt-3">Intereses:</h5>
-          <textarea rows="5" class="form-control" disabled>{{
+          <textarea *ngIf="profileInfo" rows="5" class="form-control" disabled>{{
             profileInfo.intereses
           }}</textarea>
           <h5 class="card-title text-left text-gray mt-3">Tipo de proyecto:</h5>
-          <textarea rows="3" class="form-control" disabled>{{
+          <textarea  *ngIf="profileInfo" rows="3" class="form-control" disabled>{{
             profileInfo.tipoProyecto
           }}</textarea>
           <h5 class="card-title text-left text-gray mt-3">Acerca de:</h5>
-          <textarea rows="5" class="form-control" disabled>{{
+          <textarea *ngIf="profileInfo" rows="5" class="form-control" disabled>{{
             profileInfo.acercaDe
           }}</textarea>
         </div>

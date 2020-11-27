@@ -42,7 +42,7 @@ export class GestionPerfilComponent implements OnInit {
     this.userForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]*$')]],
       fechaNacimiento: [''],
       sexo: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
