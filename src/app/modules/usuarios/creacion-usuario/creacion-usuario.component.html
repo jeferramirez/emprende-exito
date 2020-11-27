@@ -38,7 +38,7 @@
                         class="form-control"
                       />
                       <span style="color: red;" *ngIf="this.userForm.get('username').hasError('pattern') ">
-                        Este campo solo permite texto
+                        Este campo solo permite texto y números
                       </span>
                     </div>
                   </div>
@@ -204,6 +204,9 @@
                         class="form-control"
                         autocomplete="on"
                       />
+                      <span style="color: red;" *ngIf="this.userForm.get('password').hasError('pattern') ">
+                        La contraseña debe tener entre 5 y 16 caracteres, al menos un dígito, al menos una minúscula y comenzar con una mayúscula.
+                      </span>
                    </div>
                   </div>
                 </div>

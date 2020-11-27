@@ -40,23 +40,23 @@ export class GestionPerfilComponent implements OnInit {
 
   initForm(): void {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required]],
-      nombre: [''],
-      apellido: [''],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       fechaNacimiento: [''],
-      sexo: [''],
-      email: [''],
-      telefono: [''],
-      celular: [''],
-      ciudad: [''],
-      pais: [''],
-      rol: [''],
+      sexo: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      ciudad: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      pais: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      rol: ['', [Validators.required]],
     });
 
     this.userProfileForm = this.fb.group({
-      profesion: [''],
-      ocupacion: [''],
-      tipoProyecto: [''],
+      profesion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      ocupacion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      tipoProyecto: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
       habilidades: [''],
       intereses: [''],
       acercaDe: [''],
@@ -64,13 +64,13 @@ export class GestionPerfilComponent implements OnInit {
 
     this.userPassForm = this.fb.group({
       currentPass: ['', Validators.required],
-      passNew: ['', Validators.required],
+      passNew: ['', [Validators.required, Validators.pattern(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{5,16}$/)]],
       passNewConfirm: ['', Validators.required],
     });
   }
 
   get disabledButton(): boolean {
-    return this.userForm.invalid && this.userProfileForm ? true : false;
+    return this.userForm.invalid || this.userProfileForm.invalid ? true : false;
   }
 
   setUser(): void {

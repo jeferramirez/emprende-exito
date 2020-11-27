@@ -37,7 +37,7 @@ export class CreacionUsuarioComponent implements OnInit {
 
   createForm(): void {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       estado: [false],
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
@@ -49,7 +49,7 @@ export class CreacionUsuarioComponent implements OnInit {
       ciudad: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       rol: ['', [Validators.required]],
       pais: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{5,16}$/)]],
       confirmPassword: ['', [Validators.required]],
       profesion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
       ocupacion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
