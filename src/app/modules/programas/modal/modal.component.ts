@@ -182,7 +182,7 @@ export class ModalComponent implements OnInit {
 
       Swal.fire({
         title: '¡Éxito!',
-        text: 'Se agregaron correctamente los archivos.',
+        text: 'Se actualizó correctamente el seguimiento.',
         icon: 'success',
         confirmButtonText: 'Ok',
         timer: 3000,
