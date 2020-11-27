@@ -56,7 +56,7 @@ export class UpdateProgramaComponent implements OnInit {
 
   initForm(): void {
     this.programForm = this.fb.group({
-      nombre: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       descripcion: ['', [Validators.required]],
     });
   }

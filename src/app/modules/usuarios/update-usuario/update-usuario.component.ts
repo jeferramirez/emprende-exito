@@ -71,7 +71,7 @@ export class UpdateUsuarioComponent implements OnInit {
       username: ['', [Validators.required]],
       fechaProximoSeguimiento: ['', [Validators.required]],
       fechaUltimoSeguimiento: ['', [Validators.required]],
-      descripcion: [''],
+      descripcion: ['', [Validators.maxLength(100)]],
       id: [''],
       email: [''],
       nombre: [''],

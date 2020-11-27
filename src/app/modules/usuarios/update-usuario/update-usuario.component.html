@@ -189,6 +189,9 @@
                     id="desc"
                     rows="4"
                   ></textarea>
+                  <span style="color: red;" *ngIf="this.userForm.get('nombre').hasError('maxLength') ">
+                    Este campo solo permite max 100 caracteres
+                  </span>
                 </div>
               </div>
             </div>
