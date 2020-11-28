@@ -42,6 +42,7 @@ export class GestionMatriculasComponent implements OnInit {
 
         const find = this.currentmatricula.findIndex(matricula => matricula.id == user.id);
         if (find == -1) {
+          user.fechamatricula = moment().format('YYYY-MM-DD');
           this.currentmatricula.push(user);
         }
       });
