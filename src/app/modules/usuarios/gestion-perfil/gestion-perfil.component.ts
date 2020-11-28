@@ -41,22 +41,22 @@ export class GestionPerfilComponent implements OnInit {
   initForm(): void {
     this.userForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
-      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]*$')]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       fechaNacimiento: [''],
       sexo: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      ciudad: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      pais: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      ciudad: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+      pais: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       rol: ['', [Validators.required]],
     });
 
     this.userProfileForm = this.fb.group({
-      profesion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
-      ocupacion: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
-      tipoProyecto: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      profesion: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ  ]*$')]],
+      ocupacion: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+      tipoProyecto: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       habilidades: [''],
       intereses: [''],
       acercaDe: [''],
@@ -76,7 +76,6 @@ export class GestionPerfilComponent implements OnInit {
   setUser(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userForm.patchValue(this.user.user);
-
     if (this.user.user.profile != null) {
       this.urlImage = `${environment.URLAPI}` + this.user.user.profile?.url;
     } else {

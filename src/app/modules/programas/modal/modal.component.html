@@ -2,7 +2,8 @@
   <h3 *ngIf="data.showVideos || data.showImages || data.showFiles">
     Añade tus recursos.
   </h3>
-  <h3 *ngIf="data.showFollow">Actualizar seguimiento.</h3>
+  <h2 *ngIf="data.showFollow">Actualizar seguimiento.</h2>
+  <h3 *ngIf="data.showFollow">Solo se admiten 500 caracteres</h3>
 
   <div class="card">
     <div class="card-body">
@@ -132,8 +133,9 @@
                 class="form-control"
                 [(ngModel)]="data.descripcion"
                 id="desc"
-                rows="1"
+                rows="6"
                 style="width: 700px;"
+                maxlength="500"
               ></textarea>
             </div>
           </div>

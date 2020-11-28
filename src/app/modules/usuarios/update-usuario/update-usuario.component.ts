@@ -71,13 +71,13 @@ export class UpdateUsuarioComponent implements OnInit {
       username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
       fechaProximoSeguimiento: ['', [Validators.required]],
       fechaUltimoSeguimiento: ['', [Validators.required]],
-      descripcion: ['', [Validators.maxLength(100)]],
+      descripcion: ['', [Validators.maxLength(500)]],
       id: [''],
-      email: ['', [Validators.required, Validators.email]],
-      nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-Z ]*$')]],
+      email: ['', [Validators.email]],
+      nombre: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       telefono: ['', [Validators.pattern('^[0-9]*$')]],
       celular: ['', [Validators.pattern('^[0-9]*$')]],
-      apellido: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ ]*$')]],
+      apellido: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       estado: []
     });
   }

@@ -95,7 +95,7 @@ export class UpdateActividadComponent implements OnInit {
 
   initForm(): void {
     this.activityForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ ñÑ]*$')]],
       descripcion: ['', [Validators.required]],
     });
   }
