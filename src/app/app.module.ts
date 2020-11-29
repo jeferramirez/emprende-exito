@@ -32,6 +32,7 @@ import { ModalComponent } from './modules/programas/modal/modal.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ModalReportComponent } from './modules/reportes/modal-report/modal-report.component';
 import { ListaReportesComponent } from './modules/reportes/lista-reportes/lista-reportes.component';
+import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { ListaReportesComponent } from './modules/reportes/lista-reportes/lista-
     ModalComponent,
     ModalReportComponent,
     ListaReportesComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

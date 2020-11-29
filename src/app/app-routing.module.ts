@@ -1,3 +1,4 @@
+import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { ListaReportesComponent } from './modules/reportes/lista-reportes/lista-reportes.component';
 import { UpdateActividadComponent } from './modules/programas/update-actividad/update-actividad.component';
 import { UpdateModuloComponent } from './modules/programas/update-modulo/update-modulo.component';
@@ -27,6 +28,7 @@ import { UpdateLeccionComponent } from './modules/programas/update-leccion/updat
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+  { path: 'reset-pass', component: ResetPasswordComponent, canActivate: [NotAuthGuard] },
   { path: 'home', component: HomeComponent, children: [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
     { path: 'actualizar-usuario/:id', component: UpdateUsuarioComponent },

@@ -1,3 +1,5 @@
+import { UsersService } from 'src/app/services/users.service';
+import { ModalComponent } from './../../modules/programas/modal/modal.component';
 import { ProgressService } from './../../services/progress.service';
 import { switchMap } from 'rxjs/operators';
 import { LoginService } from './../../services/login.service';
@@ -6,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +17,13 @@ import { of } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+
   constructor(
     private fb: FormBuilder,
     private loginSrv: LoginService,
     private router: Router,
-    private progressSrv: ProgressService
+    private progressSrv: ProgressService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -58,5 +63,14 @@ export class LoginComponent implements OnInit {
           });
         }
       );
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        showResetPass: true
+      }
+    });
+    // dialogRef.afterClosed().subscribe();
   }
 }

@@ -47,4 +47,8 @@ export class UsersService {
   validateHash(params): Observable<any> {
     return this.http.post(`${environment.URLAPI}/validatePass`, params);
   }
+
+  resetPass(params): Observable<any> {
+    return this.http.post(`${environment.URLAPI}/resetPass`, params);
+  }
 }

@@ -1,3 +1,4 @@
+import { UsersService } from 'src/app/services/users.service';
 import { switchMap } from 'rxjs/operators';
 import { GeneralService } from './../../../services/general.service';
 import { forkJoin } from 'rxjs';
@@ -18,13 +19,15 @@ export class ModalComponent implements OnInit {
   filesIMG = [];
   filesDOC = [];
   nameDOC;
+  userEmail = '';
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private activitySrv: ActivityService,
     private generalSrv: GeneralService,
-    private segtSrv: SeguimientoService
+    private segtSrv: SeguimientoService,
+    private userSrv: UsersService
   ) {}
 
   ngOnInit(): void {}
@@ -174,21 +177,18 @@ export class ModalComponent implements OnInit {
     });
   }
 
-
   updateFollow(id: string): void {
-
-    this.segtSrv.updateSeguimiento( id, { descripcion : this.data.descripcion})
-    .subscribe( resp => {
-
-      Swal.fire({
-        title: '¡Éxito!',
-        text: 'Se actualizó correctamente el seguimiento.',
-        icon: 'success',
-        confirmButtonText: 'Ok',
-        timer: 3000,
+    this.segtSrv
+      .updateSeguimiento(id, { descripcion: this.data.descripcion })
+      .subscribe((resp) => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Se actualizó correctamente el seguimiento.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          timer: 3000,
+        });
       });
-
-    });
   }
 
   updateVideo(): void {
@@ -219,5 +219,28 @@ export class ModalComponent implements OnInit {
           });
         }
       );
+  }
+
+  sendEmail(): void {
+    this.userSrv.resetPass({ userEmail: this.userEmail }).subscribe(
+      (resp) => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Email enviado.',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+          timer: 3000,
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Email no enviado',
+          icon: 'error',
+          confirmButtonText: 'Ok',
+          timer: 3000,
+        });
+      }
+    );
   }
 }
