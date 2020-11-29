@@ -42,7 +42,7 @@ export class GestionMatriculasComponent implements OnInit {
 
         const find = this.currentmatricula.findIndex(matricula => matricula.id == user.id);
         if (find == -1) {
-          user.fechaMatricula = moment().format('YYYY-MM-DD'),
+          user.fechamatricula = moment().format('YYYY-MM-DD');
           this.currentmatricula.push(user);
         }
       });
@@ -50,10 +50,10 @@ export class GestionMatriculasComponent implements OnInit {
       this.currentmatricula = this.currentmatricula.map(matricula => ({ ...matricula, checked: false }));
 
       const observables =  [];
-      this.currentmatricula.map(matricula => {
+      this.currentmatricula.forEach(matricula => {
         const newmatricula = {
           users_permissions_user: matricula.id,
-          fechamatricula: moment().toDate(),
+          fechamatricula:  moment (moment().toDate()).add(1, 'days').toDate(),
           programa: this.selectProgram
         };
         if (!matricula.id_matricula) {
