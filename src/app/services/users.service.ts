@@ -48,6 +48,10 @@ export class UsersService {
     return this.http.post(`${environment.URLAPI}/validatePass`, params);
   }
 
+  sendmail(params): Observable<any> {
+    return this.http.post(`${environment.URLAPI}/sendmail`, params);
+  }
+
   resetPass(params): Observable<any> {
     return this.http.post(`${environment.URLAPI}/resetPass`, params);
   }

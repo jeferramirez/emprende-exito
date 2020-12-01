@@ -28,7 +28,7 @@ import { UpdateLeccionComponent } from './modules/programas/update-leccion/updat
 const routes: Routes = [
   { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
-  { path: 'reset-pass', component: ResetPasswordComponent, canActivate: [NotAuthGuard] },
+  { path: 'reset-pass/:hash', component: ResetPasswordComponent, canActivate: [NotAuthGuard] },
   { path: 'home', component: HomeComponent, children: [
     { path: 'gestion-usuarios', component: GestionUsuariosComponent  },
     { path: 'actualizar-usuario/:id', component: UpdateUsuarioComponent },

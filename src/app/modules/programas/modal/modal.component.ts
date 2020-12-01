@@ -222,7 +222,7 @@ export class ModalComponent implements OnInit {
   }
 
   sendEmail(): void {
-    this.userSrv.resetPass({ userEmail: this.userEmail }).subscribe(
+    this.userSrv.sendmail({ userEmail: this.userEmail }).subscribe(
       (resp) => {
         Swal.fire({
           title: '¡Éxito!',
