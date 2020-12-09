@@ -28,7 +28,7 @@ export class GestionProgramasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getPrograms();
+    //this.getPrograms();
     this.rol = this.generalSrv.getRolUser();
     this.user = this.generalSrv.getUser();
     this.loadProgram();

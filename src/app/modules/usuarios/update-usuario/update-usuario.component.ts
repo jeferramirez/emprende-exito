@@ -75,8 +75,8 @@ export class UpdateUsuarioComponent implements OnInit {
       id: [''],
       email: ['', [Validators.email]],
       nombre: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
-      telefono: ['', [Validators.pattern('^[0-9]*$')]],
-      celular: ['', [Validators.pattern('^[0-9]*$')]],
+      telefono: ['', [Validators.pattern(/^[1-9]\d{6}$/)]],
+      celular: ['', [Validators.pattern(/^[1-9]\d{9}$/)]],
       apellido: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       estado: []
     });

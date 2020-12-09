@@ -23,7 +23,7 @@
                         class="form-control"
                       />
                       <span style="color: red;" *ngIf="this.activityForm.get('nombre').hasError('pattern') ">
-                        Este campo solo permite texto
+                        Este campo sólo permite caracteres alfanuméricos
                       </span>
                     </div>
                   </div>
@@ -46,7 +46,7 @@
             <div class="col-md-2 col-sm-12">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <label *ngIf="rol === 'Mentor'" for="imageuser">
+                  <label *ngIf="rol !== 'Emprendedor'" for="imageuser">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -54,7 +54,7 @@
                       style="max-width: 200px; max-width: 200px"
                     />
                   </label>
-                  <label *ngIf="rol !== 'Mentor'">
+                  <label *ngIf="rol === 'Emprendedor'">
                     <img
                       class="card-img-top"
                       [src]="previewimage || urlImage"
@@ -69,7 +69,7 @@
                     id="imageuser"
                   />
                 </div>
-                <div *ngIf="rol === 'Mentor'" class="card-body text-center">
+                <div *ngIf="rol !== 'Emprendedor'" class="card-body text-center">
                   <label class="photo-book" for="imageuser">
                     Cambiar imagen
                   </label>
@@ -179,7 +179,7 @@
                         >
                           <i class="material-icons">visibility</i>
                         </a>
-                        <a *ngIf="rol === 'Mentor'"
+                        <a *ngIf="rol !== 'Emprendedor'"
                           title="Editar"
                           class="btn btn-warning btn-fab btn-fab-mini btn-round"
                           (click)="modalVideo(video.id, video.titulo, video.URL)"

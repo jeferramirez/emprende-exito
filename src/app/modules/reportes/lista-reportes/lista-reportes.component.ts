@@ -146,7 +146,7 @@ export class ListaReportesComponent implements OnInit {
   downloadEnrollment(): void {
     this.reporteSrv.reporteMatricula().subscribe((resp) => {
       let csvContent =
-        'ID;NOMBRES;APELLIDOS;EMAIL;PROGRAMA;ESTADO;FECHA_DE_MATRICULA' +
+        'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;FECHA_DE_MATRICULA' +
         '\r\n';
       resp.forEach((rowArray) => {
         let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${

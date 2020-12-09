@@ -23,7 +23,7 @@
                         class="form-control"
                       />
                       <span style="color: red;" *ngIf="this.moduleForm.get('nombre').hasError('pattern') ">
-                        Este campo solo permite texto
+                        Este campo sólo permite caracteres alfanuméricos
                       </span>
                     </div>
                   </div>
@@ -67,9 +67,10 @@
             <div class="col-md-2 col-sm-12">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <circle-progress *ngIf="rol === 'Emprendedor'" [(percent)]="porcentaje" [radius]="90" [outerStrokeWidth]="16" [innerStrokeWidth]="8"
+                  <circle-progress *ngIf="rol === 'Emprendedor'" [(percent)]="porcentaje" [radius]="70" [outerStrokeWidth]="10" [innerStrokeWidth]="7"
                   [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="1000">
                  </circle-progress>
+                 <label *ngIf="rol === 'Emprendedor'" class="text-right" style="font-size: 1rem;">Mi progreso</label>
                   <label *ngIf="rol === 'Mentor'" for="imageuser">
                     <img
                       class="card-img-top"
