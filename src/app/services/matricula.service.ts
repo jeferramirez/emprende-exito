@@ -16,7 +16,6 @@ export class MatriculaService {
   }
 
   createMatricula(matricula): Observable<any> {
-    console.log(matricula)
     return this.http.post(`${environment.URLAPI}/matriculas`, matricula);
   }
 

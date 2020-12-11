@@ -102,7 +102,7 @@
             </div>
             <!-- *ngIf="idModule !== null" -->
             <div
-              *ngIf="rol === 'Mentor'"
+              *ngIf="rol !== 'Emprendedor'"
               class="col-lg-6 col-md-6 s text-right align-self-center"
             >
               <a
@@ -144,7 +144,7 @@
                 <div class="card-body">
                   <h3 class="card-title text-center">{{ activity.nombre }}</h3>
                   <div
-                    *ngIf="rol === 'Mentor'"
+                    *ngIf="rol !== 'Emprendedor'"
                     class="card-footer justify-content-center"
                   >
                     <a

@@ -77,6 +77,7 @@ export class GestionPerfilComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userForm.patchValue(this.user.user);
     if (this.user.user.profile != null) {
+      console.log(this.user);
       this.urlImage = `${environment.URLAPI}` + this.user.user.profile?.url;
     } else {
       this.urlImage = '../../../assets/imagenPerfil.jpg';
@@ -118,6 +119,7 @@ export class GestionPerfilComponent implements OnInit {
           title: 'Se actualizó la foto de perfil',
         });
         this.user.user.profile = resp[0];
+        //console.log(resp[0]);
         localStorage.setItem('user', JSON.stringify(this.user));
       },
       (error) => {
@@ -151,6 +153,8 @@ export class GestionPerfilComponent implements OnInit {
           .updateUser(this.userForm.value, this.user.user.id)
           .pipe(
             switchMap((data) => {
+              console.log('*************************');
+              console.log(data);
               this.user.user = data;
               localStorage.setItem('user', JSON.stringify(this.user));
               return this.userSrv.updateProfileUser(
@@ -170,7 +174,7 @@ export class GestionPerfilComponent implements OnInit {
               });
 
               this.user.user.profile = resp;
-              localStorage.setItem('user', JSON.stringify(this.user));
+              //localStorage.setItem('user', JSON.stringify(this.user));
             },
             (error) => {
               Swal.fire({

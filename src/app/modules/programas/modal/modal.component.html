@@ -184,13 +184,37 @@
       <div class="ml-3">
         <div class="form-group">
           <label class="bmd-label-floating">Email</label>
-          <input class="form-control" [(ngModel)]="userEmail" type="email" style="width: 400px; font-size: 25px;" />
+          <input
+            class="form-control"
+            [(ngModel)]="userEmail"
+            type="email"
+            style="width: 400px; font-size: 25px"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="data.showProgram">
+      <div class="">
+        <div class="form-group">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th style="width: 300px" scope="col">Nombre programa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let program of data.programas; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td style="width: 300px">{{ program }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-
-
 
   <div *ngIf="data.showVideos" class="pull-right">
     <button class="btn btn-danger mr-2" mat-button mat-dialog-close>

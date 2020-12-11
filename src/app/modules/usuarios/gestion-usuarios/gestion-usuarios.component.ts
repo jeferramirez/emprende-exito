@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from './../../programas/modal/modal.component';
 import { MatriculaService } from './../../../services/matricula.service';
 import { map, switchMap } from 'rxjs/operators';
 import { GeneralService } from './../../../services/general.service';
@@ -32,6 +34,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   ];
   dataSource: MatTableDataSource<any>;
   rol;
+  programas;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -40,7 +43,8 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     private userSrv: UsersService,
     private router: Router,
     private generalSrv: GeneralService,
-    private matriculaSrv: MatriculaService
+    private matriculaSrv: MatriculaService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -100,14 +104,14 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
       )
       .subscribe((users) => {
         let userMap = users.map((user: any) => {
-          let programas = [];
-          programas =
+          this.programas = [];
+          this.programas =
             user.matricula &&
             user.matricula.map((matricula) => matricula.programa.nombre);
           return {
             ...user,
             created_at: moment(user.created_at).format('DD/MM/YYYY HH:MM'),
-            programa: programas.join(', '),
+            programa: this.programas,
           };
         });
 
@@ -128,6 +132,15 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
       return this.matriculaSrv
         .getUserMatricula(user.id)
         .pipe(map((matricula) => Object.assign(user, { matricula })));
+    });
+  }
+
+  openDialog(programas): void {
+    const dialogRef = this.dialog.open(ModalComponent, {
+      data: {
+        showProgram: true,
+        programas
+      },
     });
   }
 }

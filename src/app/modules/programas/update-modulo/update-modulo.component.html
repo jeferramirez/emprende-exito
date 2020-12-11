@@ -163,7 +163,7 @@
                 <div class="card-body">
                   <h3 class="card-title text-center">{{ lesson.nombre }}</h3>
                   <div
-                    *ngIf="rol === 'Mentor'"
+                    *ngIf="rol !== 'Emprendedor'"
                     class="card-footer justify-content-center"
                   >
                     <a title="Editar lección" (click)="navigateLesson(module)">
