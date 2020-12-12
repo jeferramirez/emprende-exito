@@ -33,6 +33,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ModalReportComponent } from './modules/reportes/modal-report/modal-report.component';
 import { ListaReportesComponent } from './modules/reportes/lista-reportes/lista-reportes.component';
 import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
+import { BackButtonComponent } from './shared/components/back-button/back-button.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { ResetPasswordComponent } from './views/reset-password/reset-password.co
     ModalReportComponent,
     ListaReportesComponent,
     ResetPasswordComponent,
+    BackButtonComponent,
   ],
   imports: [
     BrowserModule,
