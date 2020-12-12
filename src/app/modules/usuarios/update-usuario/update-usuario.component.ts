@@ -23,6 +23,7 @@ import * as moment from 'moment';
 export class UpdateUsuarioComponent implements OnInit {
   userForm: FormGroup;
   idUser;
+  idProgram;
   seguimientos = [];
   programas = [];
   rol;
@@ -47,7 +48,6 @@ export class UpdateUsuarioComponent implements OnInit {
     this.idUser = this.route.snapshot.params['id'];
     this.getUser(this.idUser);
     this.getPrograms();
-    this.getSeguimientos();
     this.rol = this.generalSrv.getRolUser();
     this.haspermissions();
     this.user = this.generalSrv.getUser();
@@ -58,6 +58,9 @@ export class UpdateUsuarioComponent implements OnInit {
       this.programas = resp;
     });
   }
+
+
+
 
   getUser(id: string): void {
     this.userSrv
@@ -135,7 +138,7 @@ export class UpdateUsuarioComponent implements OnInit {
                 confirmButtonText: 'Ok',
                 timer: 3000,
               });
-              this.getSeguimientos();
+              this.getSeguimientos(this.idProgram);
             },
             (error) => {
               Swal.fire({
@@ -151,8 +154,10 @@ export class UpdateUsuarioComponent implements OnInit {
     });
   }
 
-  getSeguimientos(): void {
-    this.seguimientoSrv.getSeguimiento(this.idUser).subscribe((resp) => {
+  getSeguimientos( idProgram: string ): void {
+    console.log(idProgram)
+    this.idProgram = idProgram;
+    this.seguimientoSrv.getSeguimientoByProgram(idProgram, this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
 
       if (this.seguimientos.length > 0) {
@@ -179,7 +184,7 @@ export class UpdateUsuarioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => {
-        this.getSeguimientos();
+        this.getSeguimientos(this.idProgram);
       }, 1500);
     });
   }
