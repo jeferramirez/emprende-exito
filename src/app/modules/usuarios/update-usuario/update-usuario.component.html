@@ -116,7 +116,7 @@
 
             <div *ngIf="programas.length <= 0" class="row">
               <div class="col-md-12 ">
-                <h3 style="color: brown;">No es posible realizar seguimientos, él usuario no cuenta con programas matriculados.</h3>
+                <h3 style="color: red;">No es posible realizar seguimientos, él usuario no cuenta con programas matriculados.</h3>
               </div>
             </div>
 
@@ -174,7 +174,7 @@
 
               <div class="col-md-12" id="seguimientos">
                 <div class="card mt-0">
-                  <p style="color: brown;" class="text-center" *ngIf="seguimientos.length === 0">
+                  <p style="color: red;" class="text-center" *ngIf="seguimientos.length === 0">
                     El usuario no registra ningún seguimiento
                   </p>
 
