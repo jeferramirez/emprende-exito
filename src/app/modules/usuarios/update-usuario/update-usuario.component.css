@@ -2,3 +2,8 @@
   max-height: 400px;
   overflow-y: auto;
 }
+
+.tituloSeguimiento{
+  font-size: 1em;
+  font-family: bold;
+}
