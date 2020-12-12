@@ -6,6 +6,7 @@ import { MatriculaService } from 'src/app/services/matricula.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-gestion-matriculas',
@@ -71,6 +72,14 @@ export class GestionMatriculasComponent implements OnInit {
         });
       });
 
+    } else {
+      Swal.fire({
+        title: 'Seleccionar un programa!',
+        text: 'Debe seleccionar al menos un programa!',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+        timer: 3000,
+      });
     }
   }
 
@@ -87,7 +96,18 @@ export class GestionMatriculasComponent implements OnInit {
   }
 
   removeMatricula(): void {
-    // this.currentmatricula = this.currentmatricula.filter(matricula => !matricula.checked);
+    if (!this.selectProgram) {
+
+      Swal.fire({
+        title: 'Seleccionar un programa!',
+        text: 'Debe seleccionar al menos un programa!',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+        timer: 3000,
+      });
+
+      return;
+    }
 
     const observables = [];
     this.currentmatricula.map( matricula =>  {
@@ -160,5 +180,10 @@ export class GestionMatriculasComponent implements OnInit {
       this.matriculas = resp;
     });
 
+  }
+
+
+  goBack() {
+    // this.location.back();
   }
 }

@@ -63,8 +63,14 @@ export class CreacionUsuarioComponent implements OnInit {
 
   createUser(): void {
     const user = this.userForm.value;
+    if (this.userForm.invalid) {
+      Object.values(this.userForm.controls).forEach((field: any) => {
+        field.markAllAsTouched();
+        field.setValue(field.value);
+      });
+    }
 
-    if (user.confirmPassword === user.password) {
+    /*if (user.confirmPassword === user.password) {
       user.estado = true;
       this.userSrv
         .createUser(this.userForm.value)
@@ -126,7 +132,7 @@ export class CreacionUsuarioComponent implements OnInit {
         confirmButtonText: 'Ok',
         timer: 4000,
       });
-    }
+    } */
   }
 
   async onFileSelect(event): Promise<any> {
@@ -134,5 +140,10 @@ export class CreacionUsuarioComponent implements OnInit {
     this.userForm.get('imagen').setValue(file);
     this.file = file;
     this.previewimage = previewimage;
+  }
+
+
+  showError() {
+
   }
 }

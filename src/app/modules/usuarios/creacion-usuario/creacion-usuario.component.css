@@ -12,7 +12,11 @@
     text-align: right;
     filter: alpha(opacity=0);
     opacity: 0;
-    outline: none;   
+    outline: none;
     cursor: inherit;
     display: block;
+}
+.error-input {
+  /* border-bottom: 3px solid #f33527; */
+  color: #f44336;
 }

@@ -29,7 +29,7 @@
               <form [formGroup]="userForm">
                 <div class="row">
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('username').errors && userForm.get('username').touched ) &&'has-danger'" >
                       <label class="bmd-label-floating">Usuario</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
@@ -37,27 +37,30 @@
                         type="text"
                         class="form-control"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                       <span style="color: red;" *ngIf="this.userForm.get('username').hasError('pattern') ">
                         Este campo sólo permite texto y números
                       </span>
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Nombre</label>
+                    <div class="form-group" [ngClass]="(userForm.get('nombre').errors && userForm.get('nombre').touched ) &&'has-danger'" >
+                      <label class="bmd-label-floating control-label" >Nombre</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="nombre"
                         type="text"
                         class="form-control"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                       <span style="color: red;" *ngIf="this.userForm.get('nombre').hasError('pattern') ">
                         Este campo sólo permite texto
                       </span>
+
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('apellido').errors && userForm.get('apellido').touched ) &&'has-danger'">
                       <label class="bmd-label-floating">Apellido</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
@@ -65,9 +68,11 @@
                         type="text"
                         class="form-control"
                       />
-                      <span style="color: red;" *ngIf="this.userForm.get('apellido').hasError('pattern') ">
+                      <span class="material-icons form-control-feedback">clear</span>
+                      <span style="color: red;" *ngIf="userForm.get('apellido').hasError('pattern') ">
                         Este campo sólo permite texto
                       </span>
+
                     </div>
                   </div>
                 </div>
@@ -86,8 +91,8 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="cmbSexo">Género</label>
+                    <div class="form-group" >
+                      <label for="cmbSexo"  [ngClass]="(userForm.get('sexo').errors && userForm.get('sexo').touched ) &&'error-input'" >Género</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <div class="form-control">
                         <mat-select
@@ -103,14 +108,16 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('email').errors && userForm.get('email').touched ) &&'has-danger'">
                       <label class="bmd-label-floating">Email</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
                         formControlName="email"
                         type="email"
                         class="form-control"
+                        [ngClass]="(userForm.get('email').errors && userForm.get('email').touched ) &&'error-input'"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                       <span style="color: red;" *ngIf="this.userForm.get('email').hasError('email') ">
                         Ingrese un email válido
                       </span>
@@ -125,6 +132,7 @@
                         formControlName="telefono"
                         type="text"
                         class="form-control"
+
                       />
                       <span style="color: red;" *ngIf="this.userForm.get('telefono').hasError('pattern') ">
                         Este campo sólo permite 7 números
@@ -132,7 +140,7 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group"  [ngClass]="(userForm.get('celular').errors && userForm.get('celular').touched ) &&'has-danger'">
                       <label class="bmd-label-floating">Celular</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
@@ -140,13 +148,15 @@
                         type="text"
                         class="form-control"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
+
                       <span style="color: red;" *ngIf="this.userForm.get('celular').hasError('pattern') ">
                         Este campo sólo permite 10 números
                       </span>
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('ciudad').errors && userForm.get('ciudad').touched ) &&'has-danger'">
                       <label class="bmd-label-floating">Ciudad</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
@@ -154,6 +164,7 @@
                         type="text"
                         class="form-control"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                       <span style="color: red;" *ngIf="this.userForm.get('ciudad').hasError('pattern') ">
                         Este campo sólo permite texto
                       </span>
@@ -162,7 +173,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('pais').errors && userForm.get('pais').touched ) &&'has-danger'">
                       <label class="bmd-label-floating">Pais</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
@@ -170,6 +181,7 @@
                         type="text"
                         class="form-control"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                       <span style="color: red;" *ngIf="this.userForm.get('pais').hasError('pattern') ">
                         Este campo sólo permite texto
                       </span>
@@ -177,7 +189,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="cmbRol">Rol</label>
+                      <label for="cmbRol" [ngClass]="(userForm.get('rol').errors && userForm.get('rol').touched ) &&'error-input'" >Rol</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <div class="form-control">
                         <mat-select
@@ -195,7 +207,7 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('password').errors && userForm.get('password').touched ) &&'has-danger'">
                       <label class="bmd-label-floating">Contraseña</label>
                       <label style="color: red;" class="ml-2"> *</label>
                       <input
@@ -204,6 +216,7 @@
                         class="form-control"
                         autocomplete="on"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                       <span style="color: red;" *ngIf="this.userForm.get('password').hasError('pattern') ">
                         La contraseña debe tener entre 5 y 16 caracteres, al menos un dígito, al menos una minúscula y comenzar con una mayúscula.
                       </span>
@@ -212,7 +225,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="(userForm.get('confirmPassword').errors && userForm.get('confirmPassword').touched ) &&'has-danger'">
                       <label class="bmd-label-floating"
                         >Confirmar contraseña</label
                       >
@@ -223,11 +236,11 @@
                         class="form-control"
                         autocomplete="on"
                       />
+                      <span class="material-icons form-control-feedback">clear</span>
                     </div>
                   </div>
                 </div>
                 <button
-                  [disabled]="userForm.invalid"
                   (click)="createUser()"
                   class="btn btn-primary pull-right"
                 >

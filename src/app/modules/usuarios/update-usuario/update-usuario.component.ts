@@ -12,6 +12,7 @@ import { switchMap } from 'rxjs/operators';
 import { ProgramsService } from '../../../services/programs.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../programas/modal/modal.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-update-usuario',
@@ -23,8 +24,10 @@ export class UpdateUsuarioComponent implements OnInit {
   idUser;
   seguimientos = [];
   programas = [];
+  rol;
   profilePicture;
   profileInfo;
+  datenow: string = moment().format('YYYY-MM-DD');
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +45,8 @@ export class UpdateUsuarioComponent implements OnInit {
     this.getUser(this.idUser);
     this.getPrograms();
     this.getSeguimientos();
+    this.rol = this.generalSrv.getRolUser();
+    this.haspermissions();
   }
 
   getPrograms(): void {
@@ -70,14 +75,15 @@ export class UpdateUsuarioComponent implements OnInit {
     this.userForm = this.fb.group({
       username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
       fechaProximoSeguimiento: ['', [Validators.required]],
-      fechaUltimoSeguimiento: ['', [Validators.required]],
-      descripcion: ['', [Validators.maxLength(500)]],
+      fechaUltimoSeguimiento: [''],
+      descripcion: ['', [Validators.required,Validators.maxLength(500)]],
       id: [''],
       email: ['', [Validators.email]],
       nombre: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       telefono: ['', [Validators.pattern(/^[1-9]\d{6}$/)]],
       celular: ['', [Validators.pattern(/^[1-9]\d{9}$/)]],
       apellido: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+      programa: ['', [Validators.required]],
       estado: []
     });
   }
@@ -154,5 +160,18 @@ export class UpdateUsuarioComponent implements OnInit {
        this.getSeguimientos();
       }, 1500);
     });
+  }
+
+
+  haspermissions(): void {
+    if (this.rol === 'Tutor') {
+      this.userForm.get('username').disable();
+      this.userForm.get('email').disable();
+      this.userForm.get('nombre').disable();
+      this.userForm.get('telefono').disable();
+      this.userForm.get('celular').disable();
+      this.userForm.get('apellido').disable();
+      this.userForm.get('estado').disable();
+    }
   }
 }
