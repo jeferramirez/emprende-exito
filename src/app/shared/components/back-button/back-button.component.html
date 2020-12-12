@@ -1,0 +1,15 @@
+
+
+
+<button class="btn btn-danger btn-sm" (click)= "goBack()" *ngIf="back">
+  <span class="material-icons">
+    arrow_back
+    </span>
+</button>
+
+
+<button class="btn btn-primary btn-sm"  (click)= "goForward()" *ngIf="!back">
+  <span class="material-icons">
+    arrow_forward
+    </span>
+</button>

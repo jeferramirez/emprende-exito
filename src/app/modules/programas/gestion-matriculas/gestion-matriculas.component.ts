@@ -183,7 +183,4 @@ export class GestionMatriculasComponent implements OnInit {
   }
 
 
-  goBack() {
-    // this.location.back();
-  }
 }
