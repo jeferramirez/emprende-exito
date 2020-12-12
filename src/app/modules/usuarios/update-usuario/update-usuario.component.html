@@ -113,7 +113,14 @@
               </div>
             </div>
             <hr />
-            <div class="row">
+
+            <div *ngIf="programas.length <= 0" class="row">
+              <div class="col-md-12 ">
+                <h3 style="color: brown;">No es posible realizar seguimientos, él usuario no cuenta con programas matriculados.</h3>
+              </div>
+            </div>
+
+            <div *ngIf="programas.length > 0" class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="cmbRol">Programa</label>
@@ -121,9 +128,9 @@
                     <mat-select id="cmbRol" class="px-3" formControlName="programa">
                       <mat-option
                         *ngFor="let item of programas"
-                        [value]="item.id"
+                        [value]="item.programa.id"
                       >
-                        {{ item.nombre }}
+                        {{ item.programa.nombre }}
                       </mat-option>
                     </mat-select>
                   </div>
@@ -160,7 +167,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div *ngIf="programas.length > 0" class="row">
               <div class="col-md-12">
                 <h3>Seguimientos</h3>
               </div>
@@ -197,7 +204,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div *ngIf="programas.length > 0" class="row">
               <div class="col-md-12">
                 <h3>Descripción seguimiento</h3>
               </div>

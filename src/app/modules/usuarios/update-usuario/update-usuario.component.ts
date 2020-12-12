@@ -1,3 +1,4 @@
+import { MatriculaService } from './../../../services/matricula.service';
 import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -28,6 +29,7 @@ export class UpdateUsuarioComponent implements OnInit {
   profilePicture;
   profileInfo;
   datenow: string = moment().format('YYYY-MM-DD');
+  user;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,7 @@ export class UpdateUsuarioComponent implements OnInit {
     private generalSrv: GeneralService,
     private programaSrv: ProgramsService,
     public dialog: MatDialog,
+    private matriculaSrv: MatriculaService
   ) {}
 
   ngOnInit(): void {
@@ -47,44 +50,50 @@ export class UpdateUsuarioComponent implements OnInit {
     this.getSeguimientos();
     this.rol = this.generalSrv.getRolUser();
     this.haspermissions();
+    this.user = this.generalSrv.getUser();
   }
 
   getPrograms(): void {
-    this.programaSrv.getPrograms().subscribe((resp) => {
+    this.matriculaSrv.getUserMatricula(this.idUser).subscribe((resp) => {
       this.programas = resp;
     });
   }
 
   getUser(id: string): void {
-    this.userSrv.getUser(id).
-    pipe(
-      switchMap( resp => {
-        if (resp.profile) {
-          this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
-        }
-        const user = new User(resp);
-        this.userForm.patchValue(user);
-        return this.userSrv.getProfileUser(id);
-      })).
-    subscribe((resp) => {
-      this.profileInfo = resp;
-    });
+    this.userSrv
+      .getUser(id)
+      .pipe(
+        switchMap((resp) => {
+          if (resp.profile) {
+            this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
+          }
+          const user = new User(resp);
+          this.userForm.patchValue(user);
+          return this.userSrv.getProfileUser(id);
+        })
+      )
+      .subscribe((resp) => {
+        this.profileInfo = resp;
+      });
   }
 
   initForm(): void {
     this.userForm = this.fb.group({
-      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')]],
+      username: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')],
+      ],
       fechaProximoSeguimiento: ['', [Validators.required]],
-      fechaUltimoSeguimiento: [''],
-      descripcion: ['', [Validators.required,Validators.maxLength(500)]],
+      fechaUltimoSeguimiento: [this.datenow],
+      descripcion: ['', [Validators.required, Validators.maxLength(500)]],
       id: [''],
       email: ['', [Validators.email]],
-      nombre: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+      nombre: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       telefono: ['', [Validators.pattern(/^[1-9]\d{6}$/)]],
       celular: ['', [Validators.pattern(/^[1-9]\d{9}$/)]],
-      apellido: ['', [ Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
+      apellido: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       programa: ['', [Validators.required]],
-      estado: []
+      estado: [],
     });
   }
 
@@ -107,27 +116,37 @@ export class UpdateUsuarioComponent implements OnInit {
             switchMap(() =>
               this.seguimientoSrv.createSeguimiento({
                 descripcion: this.userForm.get('descripcion').value,
-                fecha_proximoseguimiento: this.userForm.get(
-                  'fechaProximoSeguimiento'
-                ).value,
-                fecha_ultimoseguimiento: this.userForm.get(
-                  'fechaUltimoSeguimiento'
-                ).value,
+                fecha_proximoseguimiento: moment(this.userForm.get(
+                  'fechaProximoSeguimiento').value).add(1, 'days').toDate(),
+                fecha_ultimoseguimiento: moment(this.userForm.get(
+                  'fechaUltimoSeguimiento').value).add(1, 'days').toDate(),
                 users_permissions_user: this.idUser,
+                create_user: this.user.user.id,
+                programa: this.userForm.get('programa').value,
               })
             )
           )
-          .subscribe((resp) => {
-            Swal.fire({
-              title: '¡Éxito!',
-              text: 'Usuario actualizado!.',
-              icon: 'success',
-              confirmButtonText: 'Ok',
-              timer: 3000,
-            });
-
-            this.getSeguimientos();
-          });
+          .subscribe(
+            (resp) => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Usuario actualizado!.',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+              this.getSeguimientos();
+            },
+            (error) => {
+              Swal.fire({
+                title: '¡Error!',
+                text: 'Usuario no actualizado.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 3000,
+              });
+            }
+          );
       }
     });
   }
@@ -136,32 +155,34 @@ export class UpdateUsuarioComponent implements OnInit {
     this.seguimientoSrv.getSeguimiento(this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
 
-      if (this.seguimientos.length > 0 ) {
-         // setear fechas
-         const ultimoSeg = this.seguimientos[this.seguimientos.length - 1]
-         this.userForm.get('fechaUltimoSeguimiento').setValue(ultimoSeg.fecha_ultimoseguimiento);
-         this.userForm.get('fechaProximoSeguimiento').setValue(ultimoSeg.fecha_proximoseguimiento);
+      if (this.seguimientos.length > 0) {
+        // setear fechas
+        const ultimoSeg = this.seguimientos[this.seguimientos.length - 1];
+        this.userForm
+          .get('fechaUltimoSeguimiento')
+          .setValue(ultimoSeg.fecha_ultimoseguimiento);
+        this.userForm
+          .get('fechaProximoSeguimiento')
+          .setValue(ultimoSeg.fecha_proximoseguimiento);
       }
     });
   }
-
 
   openDialog(descripcion, id): void {
     const dialogRef = this.dialog.open(ModalComponent, {
       data: {
         id,
         showFollow: true,
-        descripcion
+        descripcion,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       setTimeout(() => {
-       this.getSeguimientos();
+        this.getSeguimientos();
       }, 1500);
     });
   }
-
 
   haspermissions(): void {
     if (this.rol === 'Tutor') {
