@@ -41,10 +41,19 @@ export class GestionMatriculasComponent implements OnInit {
       this.selectedUsers = this.usuarios.filter(usuario => usuario.checked);
       this.selectedUsers.forEach(user => {
 
-        const find = this.currentmatricula.findIndex(matricula => matricula.id == user.id);
-        if (find == -1) {
+        const find = this.currentmatricula.find(matricula => matricula.id == user.id);
+        if (!find) {
           user.fechamatricula = moment().format('YYYY-MM-DD');
           this.currentmatricula.push(user);
+        }
+        if (find) {
+          Swal.fire({
+            title: 'Usuario matriculado!',
+            text: 'El usuario ya se encuentra matriculado!',
+            icon: 'warning',
+            confirmButtonText: 'Ok',
+            timer: 3000,
+          });
         }
       });
 
