@@ -1,3 +1,4 @@
+import { ProgressService } from './../../../services/progress.service';
 import { MatriculaService } from './../../../services/matricula.service';
 import { GeneralService } from './../../../services/general.service';
 import { Component, OnInit } from '@angular/core';
@@ -31,6 +32,7 @@ export class UpdateUsuarioComponent implements OnInit {
   profileInfo;
   datenow: string = moment().format('YYYY-MM-DD');
   user;
+  porcentaje = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,7 +42,8 @@ export class UpdateUsuarioComponent implements OnInit {
     private generalSrv: GeneralService,
     private programaSrv: ProgramsService,
     public dialog: MatDialog,
-    private matriculaSrv: MatriculaService
+    private matriculaSrv: MatriculaService,
+    private progressSrv: ProgressService
   ) {}
 
   ngOnInit(): void {
@@ -58,9 +61,6 @@ export class UpdateUsuarioComponent implements OnInit {
       this.programas = resp;
     });
   }
-
-
-
 
   getUser(id: string): void {
     this.userSrv
@@ -155,7 +155,6 @@ export class UpdateUsuarioComponent implements OnInit {
   }
 
   getSeguimientos( idProgram: string ): void {
-    console.log(idProgram)
     this.idProgram = idProgram;
     this.seguimientoSrv.getSeguimientoByProgram(idProgram, this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
@@ -171,6 +170,7 @@ export class UpdateUsuarioComponent implements OnInit {
           .setValue(ultimoSeg.fecha_proximoseguimiento);
       }
     });
+    this.setPorcentaje();
   }
 
   openDialog(descripcion, id): void {
@@ -200,4 +200,13 @@ export class UpdateUsuarioComponent implements OnInit {
       this.userForm.get('estado').disable();
     }
   }
+
+  setPorcentaje(): void {
+    this.progressSrv
+      .progressProgram(this.idUser, this.idProgram)
+      .subscribe(({ porcentaje }) => {
+        this.porcentaje = porcentaje? porcentaje : 0;
+      });
+  }
+
 }
