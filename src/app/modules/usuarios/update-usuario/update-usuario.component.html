@@ -125,7 +125,7 @@
                 <div class="form-group">
                   <label for="cmbRol">Programa</label>
                   <div class="form-control">
-                    <mat-select id="cmbRol" class="px-3" formControlName="programa">
+                    <mat-select id="cmbRol" class="px-3" formControlName="programa" (selectionChange)="getSeguimientos($event.value)">
                       <mat-option
                         *ngFor="let item of programas"
                         [value]="item.programa.id"
