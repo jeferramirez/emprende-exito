@@ -15,7 +15,6 @@ import { combineLatest } from 'rxjs';
 })
 export class ListaReportesComponent implements OnInit {
   fieldsStatus: string[] = [
-    'id',
     'nombres',
     'apellidos',
     'email',
@@ -28,7 +27,6 @@ export class ListaReportesComponent implements OnInit {
     'fechaUltimoSeg',
   ];
   fieldsEnrollment: string[] = [
-    'id',
     'nombres',
     'apellidos',
     'email',
@@ -37,7 +35,6 @@ export class ListaReportesComponent implements OnInit {
     'fechaMatricula',
   ];
   fieldsPrograms: string[] = [
-    'id',
     'nombres',
     'apellidos',
     'email',

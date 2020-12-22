@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Location } from '@angular/common';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +10,24 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  showNavigateButtons = false;
+
+  constructor(public router: Router , private location:Location) { }
 
   ngOnInit(): void {
+
+   this.router.events
+     .pipe(filter(e => e instanceof NavigationEnd))
+     .subscribe( ()=> {
+      this.showNavigateButtons = true;
+      if (this.location.path() == '/home/lista-reportes') {
+        this.showNavigateButtons = false;
+      }
+      if (this.location.path() == '/home/gestion-matriculas') {
+        this.showNavigateButtons = false;
+
+      }
+   })
   }
 
   logOut(): void{

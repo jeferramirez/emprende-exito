@@ -214,19 +214,15 @@
               </div>
             </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <h3>Seguimientos</h3>
-                </div>
+              <div class="col-md-12" id="seguimientos">
+                <div class="card mt-0">
+                  <p style="color: red;" class="text-center" *ngIf="seguimientos.length === 0 && userForm.get('programa').value">
+                    El usuario no registra ningún seguimiento para el programa seleccionado.
+                  </p>
 
-                <div class="col-md-12" id="seguimientos">
-                  <div class="card mt-0">
-                    <p
-                      style="color: red"
-                      class="text-center"
-                      *ngIf="seguimientos.length === 0">
-                      El usuario no registra ningún seguimiento
-                    </p>
+                  <p style="color: red;" class="text-center" *ngIf="!userForm.get('programa').value">
+                    Seleccione un programa para visualizar los seguimientos.
+                  </p>
 
                     <div class="col-md-12 pt-3">
                       <table class="table" *ngIf="seguimientos.length > 0">
@@ -264,7 +260,6 @@
                   </div>
                 </div>
               </div>
-            </div>
 
             <div *ngIf="programas.length > 0" class="row">
               <div class="col-md-12">

@@ -39,6 +39,7 @@ export class GestionMatriculasComponent implements OnInit {
   addMatricula(): void {
     if (this.selectProgram) {
       this.selectedUsers = this.usuarios.filter(usuario => usuario.checked);
+      const registrados =  [];
       this.selectedUsers.forEach(user => {
 
         const find = this.currentmatricula.find(matricula => matricula.id == user.id);
@@ -47,26 +48,36 @@ export class GestionMatriculasComponent implements OnInit {
           this.currentmatricula.push(user);
         }
         if (find) {
+
           Swal.fire({
             title: 'Usuario matriculado!',
             text: 'El usuario ya se encuentra matriculado!',
             icon: 'warning',
             confirmButtonText: 'Ok',
-            timer: 3000,
+            timer: 5000,
           });
+
+          registrados.push( find )
+
         }
       });
 
       this.currentmatricula = this.currentmatricula.map(matricula => ({ ...matricula, checked: false }));
 
+
       const observables =  [];
+
       this.currentmatricula.forEach(matricula => {
         const newmatricula = {
           users_permissions_user: matricula.id,
           fechamatricula:  moment (moment().toDate()).add(1, 'days').toDate(),
           programa: this.selectProgram
         };
-        if (!matricula.id_matricula) {
+
+        const registrado = registrados.find( registrado =>  registrado.id === matricula.id);
+
+        if (!matricula.id_matricula &&  !registrado) {
+
           observables.push(this.matriculaSrv.createMatricula(newmatricula));
         }
       });
@@ -77,9 +88,13 @@ export class GestionMatriculasComponent implements OnInit {
           text: 'Matricula creada!.',
           icon: 'success',
           confirmButtonText: 'Ok',
-          timer: 3000,
+          timer: 5000,
         });
+
+        // this.currentmatricula = [];
+
       });
+
 
     } else {
       Swal.fire({
@@ -87,7 +102,7 @@ export class GestionMatriculasComponent implements OnInit {
         text: 'Debe seleccionar al menos un programa!',
         icon: 'warning',
         confirmButtonText: 'Ok',
-        timer: 3000,
+        timer: 5000,
       });
     }
   }
@@ -136,7 +151,7 @@ export class GestionMatriculasComponent implements OnInit {
         text: 'Matricula eliminada!.',
         icon: 'success',
         confirmButtonText: 'Ok',
-        timer: 3000,
+        timer: 5000,
       });
 
       this.currentmatricula = this.matriculas.filter(matricula => matricula.programa.id == this.selectProgram)

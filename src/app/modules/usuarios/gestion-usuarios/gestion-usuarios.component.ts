@@ -110,7 +110,6 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
             user.matricula.map((matricula) => matricula.programa.nombre);
           return {
             ...user,
-            created_at: moment(user.created_at).format('DD/MM/YYYY HH:MM'),
             programa: this.programas,
           };
         });
@@ -120,6 +119,10 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
         }
 
         this.dataSource = new MatTableDataSource(userMap);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+
       });
   }
 
