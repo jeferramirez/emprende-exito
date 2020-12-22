@@ -55,14 +55,6 @@
                 </mat-form-field>
                 <div class="table-users mat-elevation-z8">
                   <table mat-table [dataSource]="dataSourceStatus" matSort>
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        ID usuario
-                      </th>
-                      <td mat-cell *matCellDef="let row">
-                        {{ row.id }}
-                      </td>
-                    </ng-container>
 
                     <ng-container matColumnDef="nombres">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -187,15 +179,6 @@
                 </mat-form-field>
                 <div class="table-users mat-elevation-z8">
                   <table mat-table [dataSource]="dataSourceEnrollment" matSort>
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        ID usuario
-                      </th>
-                      <td mat-cell *matCellDef="let row">
-                        {{ row.id }}
-                      </td>
-                    </ng-container>
-
                     <ng-container matColumnDef="nombres">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Nombres
@@ -246,7 +229,7 @@
                         Fecha de matrícula
                       </th>
                       <td mat-cell *matCellDef="let row">
-                        {{ row.fecha_matricula }}
+                        {{ row.fecha_matricula | date: 'yyyy-MM-dd'}}
                       </td>
                     </ng-container>
 
@@ -283,14 +266,6 @@
                 </mat-form-field>
                 <div class="table-users mat-elevation-z8">
                   <table mat-table [dataSource]="dataSourcePrograms" matSort>
-                    <ng-container matColumnDef="id">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        ID usuario
-                      </th>
-                      <td mat-cell *matCellDef="let row">
-                        {{ row.id }}
-                      </td>
-                    </ng-container>
 
                     <ng-container matColumnDef="nombres">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>

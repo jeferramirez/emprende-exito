@@ -6,10 +6,10 @@
       <a class="navbar-brand"></a>
     </div>
 
-    <ng-container *ngIf="router.url != '/home'" >
+    <div *ngIf="showNavigateButtons">
       <app-back-button></app-back-button>
       <app-back-button [back]="false"></app-back-button>
-    </ng-container>
+    </div>
 
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">

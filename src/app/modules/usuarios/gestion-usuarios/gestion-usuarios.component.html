@@ -121,7 +121,7 @@
                   Fecha de creación
                 </th>
                 <td (click)="navigateUser(row)" mat-cell *matCellDef="let row">
-                  {{ row.created_at }}
+                  {{ row.created_at | date: 'yyyy-MM-dd' }}
                 </td>
               </ng-container>
 
@@ -160,7 +160,7 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
           </div>
-          <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+          <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
         </div>
       </div>
     </div>

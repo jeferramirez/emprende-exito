@@ -174,8 +174,12 @@
 
               <div class="col-md-12" id="seguimientos">
                 <div class="card mt-0">
-                  <p style="color: red;" class="text-center" *ngIf="seguimientos.length === 0">
-                    El usuario no registra ningún seguimiento
+                  <p style="color: red;" class="text-center" *ngIf="seguimientos.length === 0 && userForm.get('programa').value">
+                    El usuario no registra ningún seguimiento para el programa seleccionado.
+                  </p>
+
+                  <p style="color: red;" class="text-center" *ngIf="!userForm.get('programa').value">
+                    Seleccione un programa para visualizar los seguimientos.
                   </p>
 
                   <div class="col-md-12 pt-3">
