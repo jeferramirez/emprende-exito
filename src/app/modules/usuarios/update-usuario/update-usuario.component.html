@@ -19,7 +19,10 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('username').hasError('pattern') ">
+                  <span
+                    style="color: red"
+                    *ngIf="this.userForm.get('username').hasError('pattern')"
+                  >
                     Este campo sólo permite texto y números
                   </span>
                 </div>
@@ -33,7 +36,10 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('nombre').hasError('pattern') ">
+                  <span
+                    style="color: red"
+                    *ngIf="this.userForm.get('nombre').hasError('pattern')"
+                  >
                     Este campo sólo permite texto
                   </span>
                 </div>
@@ -47,7 +53,10 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('email').hasError('pattern') ">
+                  <span
+                    style="color: red"
+                    *ngIf="this.userForm.get('email').hasError('pattern')"
+                  >
                     Ingrese un email válido
                   </span>
                 </div>
@@ -63,7 +72,10 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('email').hasError('pattern') ">
+                  <span
+                    style="color: red"
+                    *ngIf="this.userForm.get('email').hasError('pattern')"
+                  >
                     Ingrese un email válido
                   </span>
                 </div>
@@ -77,7 +89,10 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('telefono').hasError('pattern') ">
+                  <span
+                    style="color: red"
+                    *ngIf="this.userForm.get('telefono').hasError('pattern')"
+                  >
                     Este campo sólo permite 7 números
                   </span>
                 </div>
@@ -91,7 +106,10 @@
                     type="text"
                     class="form-control"
                   />
-                  <span style="color: red;" *ngIf="this.userForm.get('celular').hasError('pattern') ">
+                  <span
+                    style="color: red"
+                    *ngIf="this.userForm.get('celular').hasError('pattern')"
+                  >
                     Este campo sólo permite 10 números
                   </span>
                 </div>
@@ -115,8 +133,11 @@
             <hr />
 
             <div *ngIf="programas.length <= 0" class="row">
-              <div class="col-md-12 ">
-                <h3 style="color: red;">No es posible realizar seguimientos, él usuario no cuenta con programas matriculados.</h3>
+              <div class="col-md-12">
+                <h3 style="color: red">
+                  No es posible realizar seguimientos, él usuario no cuenta con
+                  programas matriculados.
+                </h3>
               </div>
             </div>
 
@@ -125,7 +146,12 @@
                 <div class="form-group">
                   <label for="cmbRol">Programa</label>
                   <div class="form-control">
-                    <mat-select id="cmbRol" class="px-3" formControlName="programa" (selectionChange)="getSeguimientos($event.value)">
+                    <mat-select
+                      id="cmbRol"
+                      class="px-3"
+                      formControlName="programa"
+                      (selectionChange)="getSeguimientos($event.value)"
+                    >
                       <mat-option
                         *ngFor="let item of programas"
                         [value]="item.programa.id"
@@ -160,17 +186,33 @@
                     formControlName="fechaProximoSeguimiento"
                     type="date"
                     class="form-control"
-                    min="{{datenow}}"
-
+                    min="{{ datenow }}"
                   />
                 </div>
               </div>
             </div>
 
-            <div *ngIf="programas.length > 0" class="row">
-              <div class="col-md-12">
-                <h3>Seguimientos</h3>
+            <div *ngIf="idProgram">
+
+              <div class="row my-3">
+              <div class="col-md-4">
+                <label >Avance del programa</label>
               </div>
+              <div class="col-md-8">
+                <div class="progress">
+                  <div
+                    class="progress-bar bg-success"
+                    role="progressbar"
+                    [style.width]="porcentaje+'%'"
+                    aria-valuenow="0"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    {{porcentaje}}%
+                  </div>
+                </div>
+              </div>
+            </div>
 
               <div class="col-md-12" id="seguimientos">
                 <div class="card mt-0">
@@ -182,34 +224,39 @@
                     Seleccione un programa para visualizar los seguimientos.
                   </p>
 
-                  <div class="col-md-12 pt-3">
-                    <table class="table" *ngIf="seguimientos.length > 0">
-                      <thead>
-                        <tr>
-                          <th class="tituloSeguimiento">Fecha ultimo seguimiento</th>
-                          <th class="tituloSeguimiento">Descripción</th>
-                          <th class="tituloSeguimiento">Tutor</th>
-                          <th class="tituloSeguimiento"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of seguimientos">
-                          <td style="width: 100px">
-                            {{ item.fecha_ultimoseguimiento }}
-                          </td>
-                          <td style="width: 200px">{{ item.descripcion }}</td>
-                          <td style="width: 100px">
-                            {{ item.users_permissions_user.username}}
-                          </td>
-                          <td
-                            (click)="openDialog(item.descripcion, item.id)"
-                            style="width: 50px; cursor: pointer"
-                          >
-                            <i class="material-icons text-primary mx-2">edit</i>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <div class="col-md-12 pt-3">
+                      <table class="table" *ngIf="seguimientos.length > 0">
+                        <thead>
+                          <tr>
+                            <th class="tituloSeguimiento">
+                              Fecha ultimo seguimiento
+                            </th>
+                            <th class="tituloSeguimiento">Descripción</th>
+                            <th class="tituloSeguimiento">Tutor</th>
+                            <th class="tituloSeguimiento"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of seguimientos">
+                            <td style="width: 100px">
+                              {{ item.fecha_ultimoseguimiento }}
+                            </td>
+                            <td style="width: 200px">{{ item.descripcion }}</td>
+                            <td style="width: 100px">
+                              {{ item.users_permissions_user.username }}
+                            </td>
+                            <td
+                              (click)="openDialog(item.descripcion, item.id)"
+                              style="width: 50px; cursor: pointer"
+                            >
+                              <i class="material-icons text-primary mx-2"
+                                >edit</i
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -228,7 +275,10 @@
                     id="desc"
                     rows="4"
                   ></textarea>
-                  <span style="color: red;" *ngIf="userForm.get('descripcion').hasError('maxlength')" >
+                  <span
+                    style="color: red"
+                    *ngIf="userForm.get('descripcion').hasError('maxlength')"
+                  >
                     La descripción debe contener maximo 500 carácteres
                   </span>
                 </div>
@@ -265,25 +315,45 @@
             {{ userForm.get("apellido").value }}
           </h4>
           <h5 class="card-title text-left text-gray">Profesión:</h5>
-          <h4 *ngIf="profileInfo" class="card-text text-left">{{ profileInfo.profesion }}</h4>
+          <h4 *ngIf="profileInfo" class="card-text text-left">
+            {{ profileInfo.profesion }}
+          </h4>
           <h5 class="card-title text-left text-gray">Ocupación:</h5>
-          <h4 *ngIf="profileInfo" class="card-text text-left">{{ profileInfo.ocupacion }}</h4>
+          <h4 *ngIf="profileInfo" class="card-text text-left">
+            {{ profileInfo.ocupacion }}
+          </h4>
           <h5 class="card-title text-left text-gray">Habilidades:</h5>
-          <textarea *ngIf="profileInfo" rows="4" class="form-control" disabled>{{
-            profileInfo.habilidades
-          }}</textarea>
+          <textarea
+            *ngIf="profileInfo"
+            rows="4"
+            class="form-control"
+            disabled
+            >{{ profileInfo.habilidades }}</textarea
+          >
           <h5 class="card-title text-left text-gray mt-3">Intereses:</h5>
-          <textarea *ngIf="profileInfo" rows="5" class="form-control" disabled>{{
-            profileInfo.intereses
-          }}</textarea>
+          <textarea
+            *ngIf="profileInfo"
+            rows="5"
+            class="form-control"
+            disabled
+            >{{ profileInfo.intereses }}</textarea
+          >
           <h5 class="card-title text-left text-gray mt-3">Tipo de proyecto:</h5>
-          <textarea  *ngIf="profileInfo" rows="3" class="form-control" disabled>{{
-            profileInfo.tipoProyecto
-          }}</textarea>
+          <textarea
+            *ngIf="profileInfo"
+            rows="3"
+            class="form-control"
+            disabled
+            >{{ profileInfo.tipoProyecto }}</textarea
+          >
           <h5 class="card-title text-left text-gray mt-3">Acerca de:</h5>
-          <textarea *ngIf="profileInfo" rows="5" class="form-control" disabled>{{
-            profileInfo.acercaDe
-          }}</textarea>
+          <textarea
+            *ngIf="profileInfo"
+            rows="5"
+            class="form-control"
+            disabled
+            >{{ profileInfo.acercaDe }}</textarea
+          >
         </div>
       </div>
     </div>

@@ -70,7 +70,7 @@ export class CreacionUsuarioComponent implements OnInit {
       });
     }
 
-    /*if (user.confirmPassword === user.password) {
+    if (user.confirmPassword === user.password) {
       user.estado = true;
       this.userSrv
         .createUser(this.userForm.value)
@@ -132,7 +132,7 @@ export class CreacionUsuarioComponent implements OnInit {
         confirmButtonText: 'Ok',
         timer: 4000,
       });
-    } */
+    }
   }
 
   async onFileSelect(event): Promise<any> {
