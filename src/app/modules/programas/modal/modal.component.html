@@ -1,4 +1,15 @@
 <div class="container-fluid">
+  <div class="text-right align-self-center" *ngIf="data.showProgram">
+    <a
+      title="Cerrar"
+      class="btn btn-danger btn-fab btn-fab-mini"
+      mat-button
+      mat-dialog-close
+    >
+      <i class="material-icons">close</i>
+    </a>
+  </div>
+
   <h3 *ngIf="data.showVideos || data.showImages || data.showFiles">
     Añade tus recursos.
   </h3>
@@ -8,7 +19,7 @@
     Por favor ingrese el email para restablecer su contraseña.
   </h3>
 
-  <div class="row mx-2 my-3">
+  <div *ngIf="!data.showProgram" class="row mx-2 my-3">
     <div
       *ngIf="data.showVideos"
       class="tab-pane active rounded table-responsive"
@@ -193,25 +204,25 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div *ngIf="data.showProgram">
-      <div class="">
-        <div class="form-group">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th style="width: 300px" scope="col">Nombre programa</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let program of data.programas; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td style="width: 300px">{{ program }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <div *ngIf="data.showProgram">
+    <div>
+      <div class="form-group">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th style="width: 300px" scope="col">Nombre programa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let program of data.programas; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td style="width: 300px">{{ program }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

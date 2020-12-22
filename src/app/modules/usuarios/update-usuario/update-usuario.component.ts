@@ -33,6 +33,7 @@ export class UpdateUsuarioComponent implements OnInit {
   datenow: string = moment().format('YYYY-MM-DD');
   user;
   porcentaje = 0;
+  userGestion;
 
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +72,7 @@ export class UpdateUsuarioComponent implements OnInit {
             this.profilePicture = `${environment.URLAPI}${resp.profile.url}`;
           }
           const user = new User(resp);
+          this.userGestion = resp;
           this.userForm.patchValue(user);
           return this.userSrv.getProfileUser(id);
         })

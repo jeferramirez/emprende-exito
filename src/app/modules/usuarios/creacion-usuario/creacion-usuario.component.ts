@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 import { switchMap } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-creacion-usuario',
@@ -18,6 +19,7 @@ export class CreacionUsuarioComponent implements OnInit {
   file: any;
   previewimage: any;
   rol;
+  datenow: string = moment().format('YYYY-MM-DD');
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +43,7 @@ export class CreacionUsuarioComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       estado: [false],
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
-      fechaNacimiento: [''],
+      fechaNacimiento: [this.datenow],
       sexo: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.pattern(/^[1-9]\d{6}$/)]],
