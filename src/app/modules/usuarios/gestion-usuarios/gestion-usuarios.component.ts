@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { combineLatest } from 'rxjs';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -118,7 +119,10 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
           userMap = userMap.filter((user: any) => user.rol === 'Emprendedor');
         }
 
-        this.dataSource = new MatTableDataSource(userMap);
+        const sort = _.orderBy( userMap , ['created_at'], ['desc'] );
+
+        // console.log(sort)
+        this.dataSource = new MatTableDataSource(sort);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
