@@ -119,7 +119,7 @@ export class ListaReportesComponent implements OnInit {
   }
 
   downloadReportStatus(): void {
-    this.reporteSrv.reporteUsuario().subscribe((resp) => {
+      const resp = [...this.dataSourceStatus.filteredData];
       let csvContent =
         'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;INTERESES;HABILIDADES;TIPO_PROYECTO;PROFESION;OCUPACION;FECHA_ULTIMO_SEGUIMIENTO' +
         '\r\n';
@@ -137,11 +137,10 @@ export class ListaReportesComponent implements OnInit {
       // aquí le damos nombre al archivo
       save.download = 'REPORTE_ESTADO' + '.csv';
       save.click();
-    });
   }
 
   downloadEnrollment(): void {
-    this.reporteSrv.reporteMatricula().subscribe((resp) => {
+      const resp = [...this.dataSourceEnrollment.filteredData];
       let csvContent =
         'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;FECHA_DE_MATRICULA' +
         '\r\n';
@@ -163,53 +162,23 @@ export class ListaReportesComponent implements OnInit {
       // aquí le damos nombre al archivo
       save.download = 'REPORTE_MATRICULA' + '.csv';
       save.click();
-    });
   }
 
   downloadPrograms(): void {
-    this.reporteSrv
-      .reporteActividad()
-      .pipe(
-        switchMap((actividades) => {
-          const reporte = this.getProgressProgram(actividades);
-          return combineLatest([...reporte]);
-        })
-      )
-      .subscribe((resp) => {
-        this.actividades = resp.map((actividad: any) => {
-          return {
-            id: actividad.users_permissions_user.id,
-            nombres: actividad.users_permissions_user.nombre,
-            apellidos: actividad.users_permissions_user.apellido,
-            email: actividad.users_permissions_user.email,
-            programa: actividad.programa.nombre,
-            idprograma: actividad.programa.id,
-            estado: actividad.users_permissions_user.id ? 'Activo' : 'Inactivo',
-            progreso:
-              actividad.progreso.porcentaje == null
-                ? '0'
-                : actividad.progreso.porcentaje,
-          };
-        });
-
-        let csvContent =
-          'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;AVANCE_GENERAL_DEL_PROGRAMA' +
-          '\r\n';
-        this.actividades.forEach((rowArray) => {
+    const resp = [...this.dataSourcePrograms.filteredData];
+    let csvContent ='ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;AVANCE_GENERAL_DEL_PROGRAMA' + '\r\n';
+    resp.forEach((rowArray) => {
           let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email};${rowArray.estado};${rowArray.programa};${rowArray.progreso}%`;
           csvContent += row + '\r\n';
-        });
-
-        const csvFile = new Blob([csvContent], { type: 'text/csv' });
-
-        const url = window.URL.createObjectURL(csvFile);
-        const save = document.createElement('a');
-        save.href = url;
-        save.target = '_blank';
-        // aquí le damos nombre al archivo
-        save.download = 'REPORTE_ACTIVIDAD' + '.csv';
-        save.click();
-      });
+    });
+    const csvFile = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(csvFile);
+    const save = document.createElement('a');
+    save.href = url;
+    save.target = '_blank';
+    // aquí le damos nombre al archivo
+    save.download = 'REPORTE_ACTIVIDAD' + '.csv';
+    save.click();
   }
 
   getProgressProgram(actividades): any {
