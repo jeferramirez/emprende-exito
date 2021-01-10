@@ -161,7 +161,6 @@ export class UpdateUsuarioComponent implements OnInit {
     this.idProgram = idProgram;
     this.seguimientoSrv.getSeguimientoByProgram(idProgram, this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
-      console.log(resp)
       if (this.seguimientos.length > 0) {
         // setear fechas
         const ultimoSeg = this.seguimientos[this.seguimientos.length - 1];
