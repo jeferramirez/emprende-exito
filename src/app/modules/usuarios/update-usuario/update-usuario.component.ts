@@ -161,6 +161,7 @@ export class UpdateUsuarioComponent implements OnInit {
     this.idProgram = idProgram;
     this.seguimientoSrv.getSeguimientoByProgram(idProgram, this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
+      console.log(resp)
       if (this.seguimientos.length > 0) {
         // setear fechas
         const ultimoSeg = this.seguimientos[this.seguimientos.length - 1];
@@ -172,7 +173,7 @@ export class UpdateUsuarioComponent implements OnInit {
           .setValue(ultimoSeg.fecha_proximoseguimiento);
       }
 
-      this.seguimientos = _.orderBy( this.seguimientos , ['fechaUltimoSeguimiento'], ['desc'] );
+      this.seguimientos = _.orderBy( this.seguimientos , ['fecha_ultimoseguimiento'], ['desc'] );
     });
     this.setPorcentaje();
   }

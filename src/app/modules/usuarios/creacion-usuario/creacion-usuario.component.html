@@ -132,6 +132,7 @@
                         formControlName="telefono"
                         type="text"
                         class="form-control"
+                        maxlength="7"
 
                       />
                       <span style="color: red;" *ngIf="this.userForm.get('telefono').hasError('pattern') ">
@@ -147,6 +148,7 @@
                         formControlName="celular"
                         type="text"
                         class="form-control"
+                        maxlength="10"
                       />
                       <span class="material-icons form-control-feedback">clear</span>
 

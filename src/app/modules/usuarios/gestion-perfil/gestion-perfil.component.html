@@ -129,6 +129,7 @@
                         formControlName="telefono"
                         type="text"
                         class="form-control"
+                        maxlength="7"
                       />
                       <span style="color: red;" *ngIf="this.userForm.get('telefono').hasError('pattern') ">
                         Este campo sólo permite números
@@ -142,6 +143,7 @@
                         formControlName="celular"
                         type="text"
                         class="form-control"
+                        maxlength="10"
                       />
                       <span style="color: red;" *ngIf="this.userForm.get('celular').hasError('pattern') ">
                         Este campo sólo permite números
