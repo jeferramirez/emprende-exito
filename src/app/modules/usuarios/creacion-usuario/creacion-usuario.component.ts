@@ -43,7 +43,7 @@ export class CreacionUsuarioComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       estado: [false],
       apellido: ['', [Validators.required, Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
-      fechaNacimiento: [this.datenow],
+      fechaNacimiento: [''],
       sexo: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.pattern(/^[1-9]\d{6}$/)]],
@@ -74,6 +74,11 @@ export class CreacionUsuarioComponent implements OnInit {
 
     if (user.confirmPassword === user.password) {
       user.estado = true;
+
+      if(this.userForm.get('fechaNacimiento').value == '' || !this.userForm.get('fechaNacimiento').value){
+        delete this.userForm.value.fechaNacimiento;
+      }
+
       this.userSrv
         .createUser(this.userForm.value)
         .pipe(

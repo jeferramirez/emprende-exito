@@ -36,6 +36,7 @@ export class GestionPerfilComponent implements OnInit {
     this.setUser();
     this.getProfileUser();
     this.rol = this.generalSrv.getRolUser();
+    this.haspermissions();
   }
 
   initForm(): void {
@@ -254,6 +255,12 @@ export class GestionPerfilComponent implements OnInit {
       return throwError(new Error(
         'Contraseña actual incorrecta'
       ));
+    }
+  }
+
+  haspermissions(): void {
+    if (this.rol != 'Mentor') {
+      this.userForm.get('username').disable();
     }
   }
 }
