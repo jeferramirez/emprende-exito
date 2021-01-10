@@ -88,6 +88,7 @@
                     formControlName="telefono"
                     type="text"
                     class="form-control"
+                    maxlength="7"
                   />
                   <span
                     style="color: red"
@@ -105,6 +106,7 @@
                     formControlName="celular"
                     type="text"
                     class="form-control"
+                    maxlength="10"
                   />
                   <span
                     style="color: red"
@@ -256,7 +258,7 @@
                           </td>
                           <td style="width: 200px">{{ item.descripcion }}</td>
                           <td style="width: 100px">
-                            {{ item.users_permissions_user.username }}
+                            {{ item.create_user.nombre }}
                           </td>
                           <td style="width: 50px; cursor: pointer">
                             <a
