@@ -54,7 +54,7 @@
                   />
                 </mat-form-field>
                 <div class="table-users mat-elevation-z8">
-                  <table mat-table [dataSource]="dataSourceStatus" matSort>
+                  <table mat-table [dataSource]="dataSourceStatus"  #sortstatus="matSort"  matSort>
 
                     <ng-container matColumnDef="nombres">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -137,7 +137,7 @@
                       </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="fechaUltimoSeg">
+                    <ng-container matColumnDef="fechaSeguimiento">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Fecha de ultimo seguimiento
                       </th>
@@ -178,7 +178,7 @@
                   />
                 </mat-form-field>
                 <div class="table-users mat-elevation-z8">
-                  <table mat-table [dataSource]="dataSourceEnrollment" matSort>
+                  <table mat-table [dataSource]="dataSourceEnrollment" #sorterollment="matSort" matSort>
                     <ng-container matColumnDef="nombres">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Nombres
@@ -224,7 +224,7 @@
                       </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="fechaMatricula">
+                    <ng-container matColumnDef="fecha_matricula">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Fecha de matrícula
                       </th>
@@ -265,7 +265,7 @@
                   />
                 </mat-form-field>
                 <div class="table-users mat-elevation-z8">
-                  <table mat-table [dataSource]="dataSourcePrograms" matSort>
+                  <table mat-table [dataSource]="dataSourcePrograms"  #sortprogram="matSort" matSort>
 
                     <ng-container matColumnDef="nombres">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>

@@ -24,7 +24,7 @@ export class ListaReportesComponent implements OnInit {
     'tipoProyecto',
     'profesion',
     'ocupacion',
-    'fechaUltimoSeg',
+    'fechaSeguimiento',
   ];
   fieldsEnrollment: string[] = [
     'nombres',
@@ -32,7 +32,7 @@ export class ListaReportesComponent implements OnInit {
     'email',
     'programa',
     'estado',
-    'fechaMatricula',
+    'fecha_matricula',
   ];
   fieldsPrograms: string[] = [
     'nombres',
@@ -48,8 +48,14 @@ export class ListaReportesComponent implements OnInit {
   dataSourceEnrollment: MatTableDataSource<any>;
   dataSourcePrograms: MatTableDataSource<any>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('pagstatus') pagstatus: MatPaginator;
+  @ViewChild('sortstatus') sortstatus: MatSort;
+
+  @ViewChild('pagenrollment') pagenrollment: MatPaginator;
+  @ViewChild('sorterollment') sorterollment: MatSort;
+
+  @ViewChild('pagprogram') pagprogram: MatPaginator;
+  @ViewChild('sortprogram') sortprogram: MatSort;
 
   constructor(
     private reporteSrv: ReportesService,
@@ -80,12 +86,14 @@ export class ListaReportesComponent implements OnInit {
   reportStatus(): void {
     this.reporteSrv.reporteUsuario().subscribe((users) => {
       this.dataSourceStatus = new MatTableDataSource(users);
+      this.dataSourceStatus.sort = this.sortstatus
     });
   }
 
   reportEnrollment(): void {
     this.reporteSrv.reporteMatricula().subscribe((resp) => {
       this.dataSourceEnrollment = new MatTableDataSource(resp);
+      this.dataSourceEnrollment.sort = this.sorterollment;
     });
   }
 
@@ -115,6 +123,7 @@ export class ListaReportesComponent implements OnInit {
           };
         });
         this.dataSourcePrograms = new MatTableDataSource(this.actividades);
+        this.dataSourcePrograms.sort = this.sortprogram;
       });
   }
 
