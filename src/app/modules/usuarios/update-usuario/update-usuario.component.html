@@ -187,79 +187,103 @@
                     type="date"
                     class="form-control"
                     min="{{ datenow }}"
+                    data-date-format="YYYY/MM/DD"
                   />
                 </div>
               </div>
             </div>
 
             <div *ngIf="idProgram">
-
               <div class="row my-3">
-              <div class="col-md-4">
-                <label >Avance del programa</label>
-              </div>
-              <div class="col-md-8">
-                <div class="progress">
-                  <div
-                    class="progress-bar bg-success"
-                    role="progressbar"
-                    [style.width]="porcentaje+'%'"
-                    aria-valuenow="0"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  >
-                    {{porcentaje}}%
-                  </div>
+                <div class="col-md-4">
+                  <label>Avance del programa</label>
                 </div>
-              </div>
-            </div>
-
-              <div class="col-md-12" id="seguimientos">
-                <div class="card mt-0">
-                  <p style="color: red;" class="text-center" *ngIf="seguimientos.length === 0 && userForm.get('programa').value">
-                    El usuario no registra ningún seguimiento para el programa seleccionado.
-                  </p>
-
-                  <p style="color: red;" class="text-center" *ngIf="!userForm.get('programa').value">
-                    Seleccione un programa para visualizar los seguimientos.
-                  </p>
-
-                    <div class="col-md-12 pt-3">
-                      <table class="table" *ngIf="seguimientos.length > 0">
-                        <thead>
-                          <tr>
-                            <th class="tituloSeguimiento">
-                              Fecha ultimo seguimiento
-                            </th>
-                            <th class="tituloSeguimiento">Descripción</th>
-                            <th class="tituloSeguimiento">Tutor</th>
-                            <th class="tituloSeguimiento"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item of seguimientos">
-                            <td style="width: 100px">
-                              {{ item.fecha_ultimoseguimiento }}
-                            </td>
-                            <td style="width: 200px">{{ item.descripcion }}</td>
-                            <td style="width: 100px">
-                              {{ item.users_permissions_user.username }}
-                            </td>
-                            <td
-                              (click)="openDialog(item.descripcion, item.id)"
-                              style="width: 50px; cursor: pointer"
-                            >
-                              <i class="material-icons text-primary mx-2"
-                                >edit</i
-                              >
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                <div class="col-md-8">
+                  <div class="progress">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      [style.width]="porcentaje + '%'"
+                      aria-valuenow="0"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      {{ porcentaje }}%
                     </div>
                   </div>
                 </div>
               </div>
+
+              <div class="col-md-12" id="seguimientos">
+                <label>Seguimientos</label>
+                <div class="card mt-0">
+                  <p
+                    style="color: red"
+                    class="text-center"
+                    *ngIf="
+                      seguimientos.length === 0 &&
+                      userForm.get('programa').value
+                    "
+                  >
+                    El usuario no registra ningún seguimiento para el programa
+                    seleccionado.
+                  </p>
+
+                  <p
+                    style="color: red"
+                    class="text-center"
+                    *ngIf="!userForm.get('programa').value"
+                  >
+                    Seleccione un programa para visualizar los seguimientos.
+                  </p>
+
+                  <div class="col-md-12 pt-3">
+                    <table class="table" *ngIf="seguimientos.length > 0">
+                      <thead>
+                        <tr>
+                          <th class="tituloSeguimiento">
+                            Fecha ultimo seguimiento
+                          </th>
+                          <th class="tituloSeguimiento">Descripción</th>
+                          <th class="tituloSeguimiento">Tutor</th>
+                          <th class="tituloSeguimiento"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of seguimientos">
+                          <td style="width: 100px">
+                            {{ item.fecha_ultimoseguimiento }}
+                          </td>
+                          <td style="width: 200px">{{ item.descripcion }}</td>
+                          <td style="width: 100px">
+                            {{ item.users_permissions_user.username }}
+                          </td>
+                          <td style="width: 50px; cursor: pointer">
+                            <a
+                              (click)="openDialog(item.descripcion, item.id)"
+                              title="Editar seguimiento"
+                            >
+                              <i class="material-icons text-primary mx-2"
+                                >edit</i
+                              >
+                            </a>
+
+                            <a
+                              (click)="deleteSeguimiento(item.id)"
+                              title="Eliminar seguimiento"
+                            >
+                              <i class="material-icons text-danger mx-2"
+                                >delete</i
+                              >
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div *ngIf="programas.length > 0" class="row">
               <div class="col-md-12">
@@ -307,7 +331,7 @@
           />
         </div>
         <div class="card-body">
-          <h4 class="card-text text-center">{{userGestion?.rol}}</h4>
+          <h4 class="card-text text-center">{{ userGestion?.rol }}</h4>
           <h5 class="card-title text-left text-gray">Nombre:</h5>
           <h4 class="card-title text-left">
             {{ userForm.get("nombre").value }}

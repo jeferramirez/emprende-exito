@@ -27,4 +27,8 @@ export class SeguimientoService {
     return this.http.put(`${environment.URLAPI}/ficha-seguimientos/${idUser}`, seguimiento);
   }
 
+  deleteSeguimiento(id: any): Observable<any> {
+    return this.http.delete(`${environment.URLAPI}/ficha-seguimientos/${id}`);
+  }
+
 }

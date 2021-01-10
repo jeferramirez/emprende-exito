@@ -213,4 +213,42 @@ export class UpdateUsuarioComponent implements OnInit {
       });
   }
 
-}
+  deleteSeguimiento(id): void {
+      Swal.fire({
+        title: '¿Está seguro de eliminar el seguimiento?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.seguimientoSrv
+            .deleteSeguimiento(id)
+            .subscribe(
+              (resp) => {
+                Swal.fire({
+                  title: '¡Éxito!',
+                  text: 'Seguimiento eliminado.',
+                  icon: 'success',
+                  confirmButtonText: 'Ok',
+                  timer: 3000,
+                });
+                this.getSeguimientos(this.idProgram);
+              },
+              (error) => {
+                Swal.fire({
+                  title: '¡Error!',
+                  text: 'No se logró eliminar el seguimiento.',
+                  icon: 'error',
+                  confirmButtonText: 'Ok',
+                  timer: 3000,
+                });
+              }
+            );
+        }
+      });
+    }
+  }
+
