@@ -15,6 +15,7 @@ import { ProgramsService } from '../../../services/programs.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../programas/modal/modal.component';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-update-usuario',
@@ -160,7 +161,6 @@ export class UpdateUsuarioComponent implements OnInit {
     this.idProgram = idProgram;
     this.seguimientoSrv.getSeguimientoByProgram(idProgram, this.idUser).subscribe((resp) => {
       this.seguimientos = resp;
-
       if (this.seguimientos.length > 0) {
         // setear fechas
         const ultimoSeg = this.seguimientos[this.seguimientos.length - 1];
@@ -171,6 +171,8 @@ export class UpdateUsuarioComponent implements OnInit {
           .get('fechaProximoSeguimiento')
           .setValue(ultimoSeg.fecha_proximoseguimiento);
       }
+
+      this.seguimientos = _.orderBy( this.seguimientos , ['fechaUltimoSeguimiento'], ['desc'] );
     });
     this.setPorcentaje();
   }
