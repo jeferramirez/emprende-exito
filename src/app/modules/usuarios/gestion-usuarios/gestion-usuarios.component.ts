@@ -11,9 +11,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 import { combineLatest } from 'rxjs';
 import * as _ from 'lodash';
+import {SelectionModel} from '@angular/cdk/collections';
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 @Component({
   selector: 'app-gestion-usuarios',
@@ -22,6 +29,7 @@ import * as _ from 'lodash';
 })
 export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
+    'select',
     'usuario',
     'nombre',
     'apellido',
@@ -36,6 +44,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<any>;
   rol;
   programas;
+  selection = new SelectionModel<PeriodicElement>(true, []);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -50,10 +59,11 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.rol = this.generalSrv.getRolUser();
+    this.getUser();
   }
 
   ngAfterViewInit(): void {
-    this.getUser();
+    //this.getUser();
   }
 
   applyFilter(event: Event): void {
@@ -150,4 +160,26 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
       },
     });
   }
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: PeriodicElement): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
 }

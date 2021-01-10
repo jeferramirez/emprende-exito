@@ -16,9 +16,19 @@ td, th {
   background: #19537c1f;
   cursor: pointer;
 }
+
 .mat-header-cell, .mat-footer-cell, .mat-cell {
   min-width: 120px;
   text-align: left;
+}
+
+.tableCenter {
+  min-width: 120px;
+  text-align: center;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #89b021;
 }
 
 .table-users {
