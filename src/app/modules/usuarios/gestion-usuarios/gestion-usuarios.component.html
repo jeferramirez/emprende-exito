@@ -21,7 +21,8 @@
               >
                 <i class="material-icons">person_add</i>
               </a>
-
+              
+              <!--
               <a
                 title="Eliminar usuario"
                 class="btn btn-danger btn-fab btn-fab-mini btn-round"
@@ -29,6 +30,7 @@
               >
                 <i class="material-icons">person_remove</i>
               </a>
+            -->
 
               <a
                 title="Inactivar usuario"
@@ -45,9 +47,6 @@
               >
                 <i class="material-icons">how_to_reg</i>
               </a>
-
-
-
             </div>
           </div>
         </div>
@@ -62,7 +61,10 @@
             />
           </mat-form-field>
 
-          <div *ngIf="dataSource?.data.length > 0" class="table-users mat-elevation-z8">
+          <div
+            *ngIf="dataSource?.data.length > 0"
+            class="table-users mat-elevation-z8"
+          >
             <table mat-table [dataSource]="dataSource" matSort>
               <!-- Checkbox Column -->
               <ng-container matColumnDef="select" *ngIf="rol === 'Mentor'">
