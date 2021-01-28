@@ -3,7 +3,7 @@ import { ModalComponent } from './../../programas/modal/modal.component';
 import { MatriculaService } from './../../../services/matricula.service';
 import { map, switchMap } from 'rxjs/operators';
 import { GeneralService } from './../../../services/general.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -45,7 +45,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   rol;
   programas;
   selection = new SelectionModel<PeriodicElement>(true, []);
-
+  removeTabKeyListener;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -55,6 +55,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     private generalSrv: GeneralService,
     private matriculaSrv: MatriculaService,
     public dialog: MatDialog,
+    private renderer : Renderer2
   ) {}
 
   ngOnInit(): void {
@@ -180,6 +181,18 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+
+
+  disableKeyTab() {
+    const element = document.querySelector('#casa');
+    this.removeTabKeyListener = this.renderer.listen(element, 'keydown', (event) => {
+      console.log(element)
+      if (event.keyCode === 9) {
+        event.preventDefault();
+      }
+    });
   }
 
 }
