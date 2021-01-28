@@ -21,19 +21,31 @@
               >
                 <i class="material-icons">person_add</i>
               </a>
-
+              
+              <!--
               <a
                 title="Eliminar usuario"
                 class="btn btn-danger btn-fab btn-fab-mini btn-round"
+                (click)="deleteUsers()"
               >
                 <i class="material-icons">person_remove</i>
               </a>
+            -->
 
               <a
                 title="Inactivar usuario"
+                (click)="offUsers()"
                 class="btn btn-warning btn-fab btn-fab-mini btn-round"
               >
                 <i class="material-icons">person_off</i>
+              </a>
+
+              <a
+                title="Activar usuario"
+                (click)="onUsers()"
+                class="btn btn-info btn-fab btn-fab-mini btn-round"
+              >
+                <i class="material-icons">how_to_reg</i>
               </a>
             </div>
           </div>
@@ -49,10 +61,13 @@
             />
           </mat-form-field>
 
-          <div *ngIf="dataSource?.data.length > 0" class="table-users mat-elevation-z8">
+          <div
+            *ngIf="dataSource?.data.length > 0"
+            class="table-users mat-elevation-z8"
+          >
             <table mat-table [dataSource]="dataSource" matSort>
               <!-- Checkbox Column -->
-              <ng-container matColumnDef="select">
+              <ng-container matColumnDef="select" *ngIf="rol === 'Mentor'">
                 <th mat-header-cell *matHeaderCellDef class="tableCenter">
                   <mat-checkbox
                     (change)="$event ? masterToggle() : null"

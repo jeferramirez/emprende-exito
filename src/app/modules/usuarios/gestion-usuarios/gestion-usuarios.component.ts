@@ -11,11 +11,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, forkJoin } from 'rxjs';
 import * as _ from 'lodash';
 import {SelectionModel} from '@angular/cdk/collections';
 
 export interface PeriodicElement {
+  id: any,
   name: string;
   position: number;
   weight: number;
@@ -61,6 +62,10 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.rol = this.generalSrv.getRolUser();
     this.getUser();
+
+    if( this.rol != 'Mentor'){
+      this.displayedColumns.shift();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -183,6 +188,7 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
+<<<<<<< HEAD
 
 
   disableKeyTab() {
@@ -195,4 +201,159 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     });
   }
 
+=======
+  offUsers(){
+    if(this.selection.selected.length <= 0){
+      Swal.fire({
+        title: '¡Información!',
+        text: 'Debe seleccionar al menos un usuario.',
+        icon: 'info',
+        confirmButtonText: 'Ok',
+        timer: 5000,
+      });
+    }else{
+      Swal.fire({
+        title: '¿Está seguro de inactivar los usuarios seleccionados?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, inactivar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          const userOff = [...this.selection.selected];
+          const observables =  [];
+
+          userOff.map( (user) => {
+            observables.push(this.userSrv.updateUser({...user, estado: false},user.id));
+          });
+
+          forkJoin( observables ).subscribe( resp => {
+            Swal.fire({
+              title: '¡Éxito!',
+              text: 'Usuarios inactivados.',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+              timer: 5000,
+            });
+            this.getUser();
+          }, (error) => {
+            Swal.fire({
+              title: '¡Error!',
+              text: 'No se logró inactivar los usuarios seleccionados.',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              timer: 5000,
+            });
+          });
+        }
+      });
+    }
+  }
+
+  onUsers(){
+    if(this.selection.selected.length <= 0){
+      Swal.fire({
+        title: '¡Información!',
+        text: 'Debe seleccionar al menos un usuario.',
+        icon: 'info',
+        confirmButtonText: 'Ok',
+        timer: 5000,
+      });
+    }else{
+      Swal.fire({
+        title: '¿Está seguro de activar los usuarios seleccionados?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, activar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          const userOn = [...this.selection.selected];
+          const observables =  [];
+
+          userOn.map( (user) => {
+            observables.push(this.userSrv.updateUser({...user, estado: true},user.id));
+          });
+
+          forkJoin( observables ).subscribe( resp => {
+            Swal.fire({
+              title: '¡Éxito!',
+              text: 'Usuario(s) activo(s).',
+              icon: 'success',
+              confirmButtonText: 'Ok',
+              timer: 5000,
+            });
+            this.getUser();
+          }, (error) => {
+            Swal.fire({
+              title: '¡Error!',
+              text: 'No se logró activar los usuarios seleccionados.',
+              icon: 'error',
+              confirmButtonText: 'Ok',
+              timer: 5000,
+            });
+          });
+        }
+      });
+    }
+  }
+
+  deleteUsers(){
+    if(this.selection.selected.length <= 0){
+      Swal.fire({
+        title: '¡Información!',
+        text: 'Debe seleccionar al menos un usuario.',
+        icon: 'info',
+        confirmButtonText: 'Ok',
+        timer: 5000,
+      });
+    }else{
+      Swal.fire({
+        title: '¿Está seguro de eliminar los usuarios seleccionados?',
+        text: 'Esta acción no se puede revertir.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+            const userDelete = [...this.selection.selected];
+            const observables =  [];
+
+            userDelete.map( (user) => {
+              observables.push(this.userSrv.deleteUser(user.id));
+              console.log(user.id);
+            });
+
+            forkJoin( observables ).subscribe( resp => {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: 'Usuario(s) eliminado(s).',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                timer: 5000,
+              });
+              this.getUser();
+            }, (error) => {
+              Swal.fire({
+                title: '¡Error!',
+                text: 'No se logró eliminar los usuarios seleccionados.',
+                icon: 'error',
+                confirmButtonText: 'Ok',
+                timer: 5000,
+              });
+            });
+        }
+      });
+    }
+  }
+>>>>>>> 5a426b88e10646ad5f1e05658dc91cfa39c23687
 }
