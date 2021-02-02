@@ -10,6 +10,7 @@ export class ProgressService {
   constructor(private http: HttpClient) {}
 
   createProgress(id: any): Observable<any> {
+    console.log('crear progreso')
     return this.http.get(`${environment.URLAPI}/createProgreso/${id}`);
   }
 

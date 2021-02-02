@@ -188,20 +188,6 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
 
-<<<<<<< HEAD
-
-
-  disableKeyTab() {
-    const element = document.querySelector('#casa');
-    this.removeTabKeyListener = this.renderer.listen(element, 'keydown', (event) => {
-      console.log(element)
-      if (event.keyCode === 9) {
-        event.preventDefault();
-      }
-    });
-  }
-
-=======
   offUsers(){
     if(this.selection.selected.length <= 0){
       Swal.fire({
@@ -355,5 +341,4 @@ export class GestionUsuariosComponent implements OnInit, AfterViewInit {
       });
     }
   }
->>>>>>> 5a426b88e10646ad5f1e05658dc91cfa39c23687
 }
