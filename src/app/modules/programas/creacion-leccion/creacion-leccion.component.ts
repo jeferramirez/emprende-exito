@@ -31,7 +31,7 @@ export class CreacionLeccionComponent implements OnInit {
 
   createLessonForm(): void {
     this.lessonForm = this.fb.group({
-      nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-Z 0-9 áéíóú ÁÉÍÓÚ ñÑ]*$')]],
+      nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       imagen: ['', [Validators.required]]
     });
