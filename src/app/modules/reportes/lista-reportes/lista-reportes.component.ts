@@ -32,7 +32,7 @@ export class ListaReportesComponent implements OnInit {
     'email',
     'programa',
     'estado',
-    'fecha_matricula',
+    'fechaMatricula',
   ];
   fieldsPrograms: string[] = [
     'nombres',
@@ -44,7 +44,14 @@ export class ListaReportesComponent implements OnInit {
   ];
   actividades;
   filterValues = {};
+  filterValuesPrgms = {};
+  filterValuesEnrollment = {};
+
+  //
   filterSelectObj = [];
+  filterSelectPrgrms = [];
+  filterSelectEnrollment = [];
+
 
   dataSourceStatus: MatTableDataSource<any>;
   dataSourceEnrollment: MatTableDataSource<any>;
@@ -62,10 +69,50 @@ export class ListaReportesComponent implements OnInit {
   constructor(
     private reporteSrv: ReportesService,
     private progressSrv: ProgressService
-  ) {}
+  ) {
+    this.filterSelectObj = [
+      {
+        name: 'FECHA SEGUIMIENTO',
+        columnProp: 'fechaSeguimiento',
+        options: []
+      },
+      {
+        name: 'ESTADO',
+        columnProp: 'estado',
+        options: []
+      },
+    ];
+
+    this.filterSelectPrgrms = [
+      {
+        name: 'PROGRAMA',
+        columnProp: 'programa',
+        options: []
+      },
+      {
+        name: 'PROGRESO',
+        columnProp: 'progreso',
+        options: []
+      },
+    ];
+
+    this.filterSelectEnrollment = [
+      {
+        name: 'PROGRAMA',
+        columnProp: 'programa',
+        options: []
+      },
+      {
+        name: 'FECHA MATRICULA',
+        columnProp: 'fechaMatricula',
+        options: []
+      },
+    ];
+  }
+
+
 
   ngOnInit(): void {
-    this.dataSourceStatus.filterPredicate = this.createFilter();
 
     this.reportStatus();
     this.reportEnrollment();
@@ -91,13 +138,29 @@ export class ListaReportesComponent implements OnInit {
     this.reporteSrv.reporteUsuario().subscribe((users) => {
       this.dataSourceStatus = new MatTableDataSource(users);
       this.dataSourceStatus.sort = this.sortstatus
+      this.dataSourceStatus.filterPredicate = this.createFilter();
+      this.filterSelectObj.filter((o) => {
+        o.options = this.getFilterObject(users, o.columnProp);
+      });
     });
   }
 
   reportEnrollment(): void {
-    this.reporteSrv.reporteMatricula().subscribe((resp) => {
-      this.dataSourceEnrollment = new MatTableDataSource(resp);
+    this.reporteSrv.reporteMatricula().subscribe((resp: any []) => {
+      const map = resp.map(({...element}) => {
+        return {
+          ...element,
+          fechaMatricula: moment(element.fecha_matricula).format('YYYY-MM-DD')
+        };
+      });
+
+      this.dataSourceEnrollment = new MatTableDataSource(map);
       this.dataSourceEnrollment.sort = this.sorterollment;
+      this.dataSourceEnrollment.filterPredicate = this.createFilter();
+
+      this.filterSelectEnrollment.filter((o) => {
+        o.options = this.getFilterObject(map, o.columnProp);
+      });
     });
   }
 
@@ -128,61 +191,64 @@ export class ListaReportesComponent implements OnInit {
         });
         this.dataSourcePrograms = new MatTableDataSource(this.actividades);
         this.dataSourcePrograms.sort = this.sortprogram;
+        this.dataSourcePrograms.filterPredicate = this.createFilter();
+        this.filterSelectPrgrms.filter((o) => {
+          o.options = this.getFilterObject(this.actividades, o.columnProp);
+        });
       });
   }
 
   downloadReportStatus(): void {
-      const resp = [...this.dataSourceStatus.filteredData];
-      let csvContent =
-        'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;INTERESES;HABILIDADES;TIPO_PROYECTO;PROFESION;OCUPACION;FECHA_ULTIMO_SEGUIMIENTO' +
-        '\r\n';
-      resp.forEach((rowArray) => {
-        let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email};${rowArray.estado};${rowArray.intereses};${rowArray.habilidades};${rowArray.tipoProyecto};${rowArray.profesion};${rowArray.ocupacion};${rowArray.fechaSeguimiento}`;
-        csvContent += row + '\r\n';
-      });
+    const resp = [...this.dataSourceStatus.filteredData];
+    let csvContent =
+      'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;INTERESES;HABILIDADES;TIPO_PROYECTO;PROFESION;OCUPACION;FECHA_ULTIMO_SEGUIMIENTO' +
+      '\r\n';
+    resp.forEach((rowArray) => {
+      let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email};${rowArray.estado};${rowArray.intereses};${rowArray.habilidades};${rowArray.tipoProyecto};${rowArray.profesion};${rowArray.ocupacion};${rowArray.fechaSeguimiento}`;
+      csvContent += row + '\r\n';
+    });
 
-      const csvFile = new Blob([csvContent], { type: 'text/csv' });
+    const csvFile = new Blob([csvContent], { type: 'text/csv' });
 
-      const url = window.URL.createObjectURL(csvFile);
-      const save = document.createElement('a');
-      save.href = url;
-      save.target = '_blank';
-      // aquí le damos nombre al archivo
-      save.download = 'REPORTE_ESTADO' + '.csv';
-      save.click();
+    const url = window.URL.createObjectURL(csvFile);
+    const save = document.createElement('a');
+    save.href = url;
+    save.target = '_blank';
+    // aquí le damos nombre al archivo
+    save.download = 'REPORTE_ESTADO' + '.csv';
+    save.click();
   }
 
   downloadEnrollment(): void {
-      const resp = [...this.dataSourceEnrollment.filteredData];
-      let csvContent =
-        'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;FECHA_DE_MATRICULA' +
-        '\r\n';
-      resp.forEach((rowArray) => {
-        let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${
-          rowArray.email
+    const resp = [...this.dataSourceEnrollment.filteredData];
+    let csvContent =
+      'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;FECHA_DE_MATRICULA' +
+      '\r\n';
+    resp.forEach((rowArray) => {
+      let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email
         };${rowArray.estado};${rowArray.programa};${moment(
           rowArray.fecha_matricula
         ).format('DD/MM/YYYY HH:MM')}`;
-        csvContent += row + '\r\n';
-      });
+      csvContent += row + '\r\n';
+    });
 
-      const csvFile = new Blob([csvContent], { type: 'text/csv' });
+    const csvFile = new Blob([csvContent], { type: 'text/csv' });
 
-      const url = window.URL.createObjectURL(csvFile);
-      const save = document.createElement('a');
-      save.href = url;
-      save.target = '_blank';
-      // aquí le damos nombre al archivo
-      save.download = 'REPORTE_MATRICULA' + '.csv';
-      save.click();
+    const url = window.URL.createObjectURL(csvFile);
+    const save = document.createElement('a');
+    save.href = url;
+    save.target = '_blank';
+    // aquí le damos nombre al archivo
+    save.download = 'REPORTE_MATRICULA' + '.csv';
+    save.click();
   }
 
   downloadPrograms(): void {
     const resp = [...this.dataSourcePrograms.filteredData];
-    let csvContent ='ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;AVANCE_GENERAL_DEL_PROGRAMA' + '\r\n';
+    let csvContent = 'ID;NOMBRES;APELLIDOS;EMAIL;ESTADO;PROGRAMA;AVANCE_GENERAL_DEL_PROGRAMA' + '\r\n';
     resp.forEach((rowArray) => {
-          let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email};${rowArray.estado};${rowArray.programa};${rowArray.progreso}%`;
-          csvContent += row + '\r\n';
+      let row = `${rowArray.id};${rowArray.nombres};${rowArray.apellidos};${rowArray.email};${rowArray.estado};${rowArray.programa};${rowArray.progreso}%`;
+      csvContent += row + '\r\n';
     });
     const csvFile = new Blob([csvContent], { type: 'text/csv' });
     const url = window.URL.createObjectURL(csvFile);
@@ -219,14 +285,15 @@ export class ListaReportesComponent implements OnInit {
         }
       }
 
-      console.log(searchTerms);
 
       let nameSearch = () => {
         let found = false;
         if (isFilterSet) {
           for (const col in searchTerms) {
             searchTerms[col].trim().toLowerCase().split(' ').forEach(word => {
-              if (data[col].toString().toLowerCase().indexOf(word) != -1 && isFilterSet) {
+
+
+              if (data[col].split(' ').join('').toString().toLowerCase() == word && isFilterSet) {
                 found = true
               }
             });
@@ -253,19 +320,54 @@ export class ListaReportesComponent implements OnInit {
   }
 
   // Called on Filter change
-  filterChange(filter, event) {
+  filterChange(filter, event, name) {
     //let filterValues = {}
-    this.filterValues[filter.columnProp] = event.target.value.trim().toLowerCase()
-    this.dataSourceStatus.filter = JSON.stringify(this.filterValues)
+
+    let value: string = event.target.value;
+    value = value.split(' ').join('');
+    value = value.trim().toLowerCase();
+    if( name === 'filterstatus') {
+      this.filterValues[filter.columnProp] = event.target.value.trim().toLowerCase();
+      this.dataSourceStatus.filter = JSON.stringify(this.filterValues);
+    }
+
+    if( name === 'filterprogram') {
+      this.filterValuesPrgms[filter.columnProp] = value;
+      this.dataSourcePrograms.filter = JSON.stringify(this.filterValuesPrgms);
+    }
+
+    if( name === 'filterenrollment') {
+      this.filterValuesEnrollment[filter.columnProp] =value;
+      this.dataSourceEnrollment.filter = JSON.stringify(this.filterValuesEnrollment);
+    }
   }
 
-    // Reset table filters
-    resetFilters() {
+  // Reset table filters
+  resetFilters(name) {
+
+    if (name === 'filterstatus') {
       this.filterValues = {}
       this.filterSelectObj.forEach((value, key) => {
         value.modelValue = undefined;
       })
       this.dataSourceStatus.filter = "";
+
     }
+    if (name === 'filterprogram') {
+      this.filterValuesPrgms = {}
+      this.filterSelectPrgrms.forEach((value, key) => {
+        value.modelValue = undefined;
+      })
+      this.dataSourcePrograms.filter = "";
+    }
+
+    if (name === 'filterenrollment') {
+      this.filterValuesEnrollment = {}
+      this.filterSelectEnrollment.forEach((value, key) => {
+        value.modelValue = undefined;
+      })
+      this.dataSourceEnrollment.filter = "";
+    }
+  }
 
 }

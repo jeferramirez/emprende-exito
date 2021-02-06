@@ -44,15 +44,23 @@
           <div class="tab-content">
             <div class="tab-pane active" id="estado">
               <div class="card-body table-responsive">
-                <mat-form-field>
-                  <mat-label>Filtrar</mat-label>
-                  <input
-                    matInput
-                    (keydown)="applyFilterStatus($event)"
-                    placeholder="Busqueda..."
-                    #input
-                  />
-                </mat-form-field>
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let filter of filterSelectObj">
+                    <mat-form-field  style="margin-left: 15px;">
+                      <mat-label>Filter {{filter.name}}</mat-label>
+                      <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+                        (change)="filterChange(filter,$event, 'filterstatus')">
+                        <option value="">-- Select {{filter.name}} --</option>
+                        <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+                      </select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2">
+                    <button (click)="resetFilters('filterstatus')" class="btn btn-danger mr-2" mat-button >
+                      Reset
+                    </button>
+                  </div>
+                </div>
                 <div class="table-users mat-elevation-z8">
                   <table mat-table [dataSource]="dataSourceStatus"  #sortstatus="matSort"  matSort>
 
@@ -168,15 +176,23 @@
             </div>
             <div class="tab-pane" id="matricula">
               <div class="card-body table-responsive">
-                <mat-form-field>
-                  <mat-label>Filtrar</mat-label>
-                  <input
-                    matInput
-                    (keydown)="applyFilterEnrollment($event)"
-                    placeholder="Busqueda..."
-                    #input
-                  />
-                </mat-form-field>
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let filter of filterSelectEnrollment">
+                    <mat-form-field  style="margin-left: 15px;">
+                      <mat-label>Filter {{filter.name}}</mat-label>
+                      <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+                        (change)="filterChange(filter,$event, 'filterenrollment')">
+                        <option value="">-- Select {{filter.name}} --</option>
+                        <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+                      </select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2">
+                    <button (click)="resetFilters('filterenrollment')" class="btn btn-danger mr-2" mat-button >
+                      Reset
+                    </button>
+                  </div>
+                </div>
                 <div class="table-users mat-elevation-z8">
                   <table mat-table [dataSource]="dataSourceEnrollment" #sorterollment="matSort" matSort>
                     <ng-container matColumnDef="nombres">
@@ -224,12 +240,12 @@
                       </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="fecha_matricula">
+                    <ng-container matColumnDef="fechaMatricula">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header>
                         Fecha de matrícula
                       </th>
                       <td mat-cell *matCellDef="let row">
-                        {{ row.fecha_matricula | date: 'yyyy-MM-dd'}}
+                        {{ row.fechaMatricula}}
                       </td>
                     </ng-container>
 
@@ -255,15 +271,23 @@
             </div>
             <div class="tab-pane" id="programas">
               <div class="card-body table-responsive">
-                <mat-form-field>
-                  <mat-label>Filtrar</mat-label>
-                  <input
-                    matInput
-                    (keydown)="applyFilterPrograms($event)"
-                    placeholder="Busqueda..."
-                    #input
-                  />
-                </mat-form-field>
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let filter of filterSelectPrgrms">
+                    <mat-form-field  style="margin-left: 15px;">
+                      <mat-label>Filter {{filter.name}}</mat-label>
+                      <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+                        (change)="filterChange(filter,$event, 'filterprogram')">
+                        <option value="">-- Select {{filter.name}} --</option>
+                        <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+                      </select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-2">
+                    <button (click)="resetFilters('filterprogram')" class="btn btn-danger mr-2" mat-button >
+                      Reset
+                    </button>
+                  </div>
+                </div>
                 <div class="table-users mat-elevation-z8">
                   <table mat-table [dataSource]="dataSourcePrograms"  #sortprogram="matSort" matSort>
 
