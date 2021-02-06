@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../programas/modal/modal.component';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-update-usuario',
@@ -61,6 +62,13 @@ export class UpdateUsuarioComponent implements OnInit {
   getPrograms(): void {
     this.matriculaSrv.getUserMatricula(this.idUser).subscribe((resp) => {
       this.programas = resp;
+
+      if(this.programas.length > 0){
+        this.userForm.get('programa').setValidators([Validators.required]);
+        this.userForm.get('fechaProximoSeguimiento').setValidators([Validators.required]);
+        this.userForm.get('descripcion').setValidators([Validators.required, Validators.maxLength(500)]);
+      }
+
     });
   }
 
@@ -89,16 +97,16 @@ export class UpdateUsuarioComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('^[a-zA-Z 0-9]*$')],
       ],
-      fechaProximoSeguimiento: ['', [Validators.required]],
+      fechaProximoSeguimiento: [''],
       fechaUltimoSeguimiento: [this.datenow],
-      descripcion: ['', [Validators.required, Validators.maxLength(500)]],
+      descripcion: [''],
       id: [''],
       email: ['', [Validators.email]],
       nombre: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
       telefono: ['', [Validators.pattern(/^[1-9]\d{6}$/)]],
       celular: ['', [Validators.pattern(/^[1-9]\d{9}$/)]],
       apellido: ['', [Validators.pattern('^[a-zA-Z áéíóú ÁÉÍÓÚ Ññ ]*$')]],
-      programa: ['', [Validators.required]],
+      programa: [''],
       estado: [],
     });
   }
@@ -119,17 +127,13 @@ export class UpdateUsuarioComponent implements OnInit {
         this.userSrv
           .updateUser(user, user.id)
           .pipe(
-            switchMap(() =>
-              this.seguimientoSrv.createSeguimiento({
-                descripcion: this.userForm.get('descripcion').value,
-                fecha_proximoseguimiento: moment(this.userForm.get(
-                  'fechaProximoSeguimiento').value).add(1, 'days').toDate(),
-                fecha_ultimoseguimiento: moment(this.userForm.get(
-                  'fechaUltimoSeguimiento').value).add(1, 'days').toDate(),
-                users_permissions_user: this.idUser,
-                create_user: this.user.user.id,
-                programa: this.userForm.get('programa').value,
-              })
+            switchMap(() => {
+              if(this.programas.length > 0){
+                return this.createSeguimiento();
+              }
+
+              return of(null);
+            }              
             )
           )
           .subscribe(
@@ -155,6 +159,19 @@ export class UpdateUsuarioComponent implements OnInit {
           );
       }
     });
+  }
+
+  createSeguimiento(): Observable<any> {
+    return this.seguimientoSrv.createSeguimiento({
+      descripcion: this.userForm.get('descripcion').value,
+      fecha_proximoseguimiento: moment(this.userForm.get(
+        'fechaProximoSeguimiento').value).add(1, 'days').toDate(),
+      fecha_ultimoseguimiento: moment(this.userForm.get(
+        'fechaUltimoSeguimiento').value).add(1, 'days').toDate(),
+      users_permissions_user: this.idUser,
+      create_user: this.user.user.id,
+      programa: this.userForm.get('programa').value,
+    })
   }
 
   getSeguimientos( idProgram: string ): void {

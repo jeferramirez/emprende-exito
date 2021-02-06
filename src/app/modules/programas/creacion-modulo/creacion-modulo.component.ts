@@ -35,7 +35,7 @@ export class CreacionModuloComponent implements OnInit {
 
   createModuleForm(): void {
     this.moduleForm = this.fb.group({
-      nombre: ['', [Validators.required,  Validators.pattern('^[a-zA-Z 0-9 áéíóú ÁÉÍÓÚ ñÑ]*$')]],
+      nombre: ['', [Validators.required,]],
       descripcion: ['', [Validators.required]],
       imagen: ['', [Validators.required]],
       users_permissions_user: ['', [Validators.required]],
