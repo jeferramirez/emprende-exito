@@ -187,7 +187,7 @@ export class ListaReportesComponent implements OnInit {
             progreso:
               actividad.progreso.porcentaje == null
                 ? '0'
-                : actividad.progreso.porcentaje,
+                : String(actividad.progreso.porcentaje),
           };
         });
         this.dataSourcePrograms = new MatTableDataSource(this.actividades);
@@ -319,8 +319,6 @@ export class ListaReportesComponent implements OnInit {
   filterChange(filter, event, name) {
     //let filterValues = {}
     let value: string = event.target.value;
-    // value = value.split(' ').join('');
-    // value = value.trim().toLowerCase();
     if (name === 'filterstatus') {
       this.filterValues[filter.columnProp]= value;
       this.dataSourceStatus.filter = JSON.stringify(this.filterValues);
