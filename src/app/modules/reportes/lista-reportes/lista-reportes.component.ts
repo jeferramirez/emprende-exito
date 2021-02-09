@@ -318,30 +318,22 @@ export class ListaReportesComponent implements OnInit {
   // Called on Filter change
   filterChange(filter, event, name) {
     //let filterValues = {}
-
     let value: string = event.target.value;
     // value = value.split(' ').join('');
     // value = value.trim().toLowerCase();
     if (name === 'filterstatus') {
-      this.filterValues[filter.columnProp] = event.target.value.trim().toLowerCase();
+      this.filterValues[filter.columnProp]= value;
       this.dataSourceStatus.filter = JSON.stringify(this.filterValues);
     }
 
     if (name === 'filterprogram') {
       this.filterValuesPrgms[filter.columnProp] = value;
       this.dataSourcePrograms.filter = JSON.stringify(this.filterValuesPrgms);
-
-
     }
 
     if (name === 'filterenrollment') {
       this.filterValuesEnrollment[filter.columnProp] = value;
-      //this.dataSourceEnrollment.filter = JSON.stringify(this.filterValuesEnrollment);
-      console.log(this.filterValuesEnrollment)
-      console.log(this.dataSourceEnrollment.data)
-      const result = _.filter(this.dataSourceEnrollment.data, this.filterValuesEnrollment);
-      this.dataSourceEnrollment.filteredData = result;
-      console.log(result)
+      this.dataSourceEnrollment.filter = JSON.stringify(this.filterValuesEnrollment);
     }
   }
 
