@@ -57,7 +57,7 @@ export class GestionMatriculasComponent implements OnInit {
             timer: 5000,
           });
 
-          registrados.push( find )
+         // registrados.push( find )
 
         }
       });
@@ -113,7 +113,7 @@ export class GestionMatriculasComponent implements OnInit {
       this.userSrv.getUsers()
     ).subscribe(([programas, usuarios]) => {
       this.programas = programas;
-      this.usuarios = usuarios.filter(usuario => usuario.rol === 'Emprendedor');
+      this.usuarios = usuarios.filter(usuario => usuario.rol === 'Emprendedor' && usuario.estado );
       this.usuarios = this.usuarios.map(usuario => ({ ...usuario, checked: false }));
       this.cacheUser = this.usuarios;
     });

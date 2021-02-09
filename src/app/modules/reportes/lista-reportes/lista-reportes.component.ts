@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 import { combineLatest } from 'rxjs';
 
 @Component({
@@ -146,8 +147,8 @@ export class ListaReportesComponent implements OnInit {
   }
 
   reportEnrollment(): void {
-    this.reporteSrv.reporteMatricula().subscribe((resp: any []) => {
-      const map = resp.map(({...element}) => {
+    this.reporteSrv.reporteMatricula().subscribe((resp: any[]) => {
+      const map = resp.map(({ ...element }) => {
         return {
           ...element,
           fechaMatricula: moment(element.fecha_matricula).format('YYYY-MM-DD')
@@ -274,7 +275,7 @@ export class ListaReportesComponent implements OnInit {
   //
 
   createFilter() {
-    let filterFunction = function (data: any, filter: string): boolean {
+    let filterFunction = function (row: any [], filter: string): boolean {
       let searchTerms = JSON.parse(filter);
       let isFilterSet = false;
       for (const col in searchTerms) {
@@ -284,20 +285,15 @@ export class ListaReportesComponent implements OnInit {
           delete searchTerms[col];
         }
       }
-
-
       let nameSearch = () => {
         let found = false;
         if (isFilterSet) {
-          for (const col in searchTerms) {
-            searchTerms[col].trim().toLowerCase().split(' ').forEach(word => {
-
-
-              if (data[col].split(' ').join('').toString().toLowerCase() == word && isFilterSet) {
-                found = true
-              }
-            });
-          }
+         const result: any [] =  _.filter([row], searchTerms );
+         if (result.length > 0) {
+          found = true;
+         } else {
+          found = false;
+         }
           return found
         } else {
           return true;
@@ -324,21 +320,28 @@ export class ListaReportesComponent implements OnInit {
     //let filterValues = {}
 
     let value: string = event.target.value;
-    value = value.split(' ').join('');
-    value = value.trim().toLowerCase();
-    if( name === 'filterstatus') {
+    // value = value.split(' ').join('');
+    // value = value.trim().toLowerCase();
+    if (name === 'filterstatus') {
       this.filterValues[filter.columnProp] = event.target.value.trim().toLowerCase();
       this.dataSourceStatus.filter = JSON.stringify(this.filterValues);
     }
 
-    if( name === 'filterprogram') {
+    if (name === 'filterprogram') {
       this.filterValuesPrgms[filter.columnProp] = value;
       this.dataSourcePrograms.filter = JSON.stringify(this.filterValuesPrgms);
+
+
     }
 
-    if( name === 'filterenrollment') {
-      this.filterValuesEnrollment[filter.columnProp] =value;
-      this.dataSourceEnrollment.filter = JSON.stringify(this.filterValuesEnrollment);
+    if (name === 'filterenrollment') {
+      this.filterValuesEnrollment[filter.columnProp] = value;
+      //this.dataSourceEnrollment.filter = JSON.stringify(this.filterValuesEnrollment);
+      console.log(this.filterValuesEnrollment)
+      console.log(this.dataSourceEnrollment.data)
+      const result = _.filter(this.dataSourceEnrollment.data, this.filterValuesEnrollment);
+      this.dataSourceEnrollment.filteredData = result;
+      console.log(result)
     }
   }
 
