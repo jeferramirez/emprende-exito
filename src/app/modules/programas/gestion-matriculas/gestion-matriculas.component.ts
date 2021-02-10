@@ -176,7 +176,7 @@ export class GestionMatriculasComponent implements OnInit {
         apellido: matricula.users_permissions_user.apellido,
         id: matricula.users_permissions_user.id,
         id_matricula: matricula.id,
-        fechamatricula: matricula.fechamatricula
+        fechamatricula: moment(matricula.created_at).format('YYYY-MM-DD')
       }));
   }
 
