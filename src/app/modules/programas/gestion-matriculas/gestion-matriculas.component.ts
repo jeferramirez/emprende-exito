@@ -70,7 +70,7 @@ export class GestionMatriculasComponent implements OnInit {
       this.currentmatricula.forEach(matricula => {
         const newmatricula = {
           users_permissions_user: matricula.id,
-          fechamatricula:  moment (moment().toDate()).add(1, 'days').toDate(),
+          fechamatricula:  moment().toDate(),
           programa: this.selectProgram
         };
 
