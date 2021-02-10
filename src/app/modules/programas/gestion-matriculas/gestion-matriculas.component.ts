@@ -70,7 +70,7 @@ export class GestionMatriculasComponent implements OnInit {
       this.currentmatricula.forEach(matricula => {
         const newmatricula = {
           users_permissions_user: matricula.id,
-          fechamatricula:  moment().toDate(),
+          fechamatricula:  moment (moment().toDate()).add(1, 'days').toDate(),
           programa: this.selectProgram
         };
 
@@ -187,10 +187,11 @@ export class GestionMatriculasComponent implements OnInit {
   onFilter(filterValue: string): void {
     const value = filterValue.trim().toLowerCase();
     if (filterValue === '') {
-      this.usuarios = this.cacheUser;
+      this.usuarios = [...this.cacheUser];
     } else {
-      this.usuarios = this.usuarios.filter(user => {
-        if (user.nombre.trim().toLowerCase().includes(value) || user.apellido.trim().toLowerCase().includes(value)) {
+      this.usuarios = [...this.cacheUser].filter(user => {
+        if (user.nombre.trim().toLowerCase().indexOf(value) == 0
+         || user.apellido.trim().toLowerCase().indexOf(value) == 0) {
           return user;
         }
       });

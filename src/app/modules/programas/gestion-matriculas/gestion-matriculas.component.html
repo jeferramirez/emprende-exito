@@ -27,6 +27,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Buscar..."
+                    (input)="onFilter($event.target.value)"
 
                   />
                 </div>
